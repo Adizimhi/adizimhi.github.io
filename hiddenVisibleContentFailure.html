@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Failure Examples</title>
+</head>
+<body>
+    <h1>Hidden Visible Content - Failures</h1>
+
+    <h2>Example 1: Using `aria-hidden="true"` on visible content</h2>
+    <p aria-hidden="true">This text is visible but not accessible to assistive technologies.</p>
+
+    <h2>Example 2: Hiding visible content using `display: none`</h2>
+    <div style="display: none;">This content is hidden from assistive technologies.</div>
+
+    <h2>Example 3: Using `visibility: hidden` on visible elements</h2>
+    <div style="visibility: hidden;">This content is visible but inaccessible.</div>
+
+    <h2>Example 4: Providing no alternative for icon fonts</h2>
+    <span class="icon">★</span>
+
+    <h2>Example 5: Using `aria-hidden="true"` on a visible button</h2>
+    <button aria-hidden="true">Click Me</button>
+
+    <h2>Example 6: Hiding visible headings with CSS</h2>
+    <h1 style="display: none;">Hidden Heading</h1>
+
+</body>
+</html>
