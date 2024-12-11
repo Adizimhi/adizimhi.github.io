@@ -1,17 +1,106 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Main Page</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Rules</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 1.5rem 1rem;
+        }
+        header h1 {
+            margin: 0;
+        }
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            color: #555;
+        }
+        p {
+            text-align: center;
+            margin: 1rem 0 2rem;
+            color: #666;
+        }
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+        }
+        .button-container a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            text-align: center;
+            text-decoration: none;
+            font-size: 1rem;
+            color: white;
+            border: 2px solid transparent;
+            border-radius: 6px;
+            transition: all 0.3s ease-in-out;
+        }
+        /* Button styles */
+        .button-success {
+            background-color: #28a745;
+            border-color: #218838;
+        }
+        .button-success:hover {
+            background-color: #218838;
+        }
+        .button-failure {
+            background-color: #dc3545;
+            border-color: #bd2130;
+        }
+        .button-failure:hover {
+            background-color: #bd2130;
+        }
+        .button-info {
+            background-color: #007bff;
+            border-color: #0056b3;
+        }
+        .button-info:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Accessibility rules- Successes and Failures</h1>
-    <p>
-        Explore examples of implementing the sucesses types of rules in page and some failres
-    </p>
-    <ul>
-        <li><a href="hiddenVisibleContentSuccess.html">hiddenVisibleContent-successes</a></li>
-        <li><a href="hiddenVisibleContentFailure.html">hiddenVisibleContent-Failures</a></li>
-         <li><a href="emptyLinksSuccesses.html">emptyLinks-Successes</a></li>
-    </ul>
+    <header>
+        <h1>Accessibility Rules</h1>
+    </header>
+    <main>
+        <h2>Explore Successes and Failures</h2>
+        <p>Browse examples of successful implementations and common failures for accessibility rules.</p>
+        <div class="button-container">
+            <a href="hiddenVisibleContentSuccess.html" class="button-success">Hidden Visible Content - Successes</a>
+            <a href="hiddenVisibleContentFailure.html" class="button-failure">Hidden Visible Content - Failures</a>
+            <a href="emptyLinksSuccesses.html" class="button-info">Empty Links - Successes</a>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 Accessibility Examples. All rights reserved.</p>
+    </footer>
 </body>
 </html>
+
