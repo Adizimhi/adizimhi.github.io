@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untagged Headings - Success Examples</title>
+</head>
+<body>
+    <h1>Untagged Headings - Success Examples</h1>
+
+    <h2>Example 1: Proper Use of Semantic Heading Tags</h2>
+    <h1>Main Title</h1>
+    <h2>Subtitle</h2>
+    <h3>Section Title</h3>
+    <p>This is regular text content.</p>
+
+    <h2>Example 2: Visually Hidden Heading for Accessibility</h2>
+    <h2 class="visually-hidden">Search Results</h2>
+    <ul>
+        <li>Result 1</li>
+        <li>Result 2</li>
+    </ul>
+    <style>
+        .visually-hidden {
+            position: absolute;
+            left: -9999px;
+            top: -9999px;
+        }
+    </style>
+
+    <h2>Example 3: Heading Styled with CSS but Tagged Properly</h2>
+    <h2 style="font-size: 24px; color: blue;">Properly Tagged Heading</h2>
+
+    <h2>Example 4: Using ARIA Roles for Non-Semantic Headings</h2>
+    <div role="heading" aria-level="2">Custom Styled Heading</div>
+
+    <h2>Example 5: Dynamic Heading with JavaScript</h2>
+    <div role="heading" aria-level="2" id="dynamicHeading"></div>
+    <script>
+        document.getElementById('dynamicHeading').innerText = 'Dynamic Heading Text';
+    </script>
+
+    <h2>Example 6: Correct Hierarchical Heading Structure</h2>
+    <h1>Page Title</h1>
+    <h2>Section 1</h2>
+    <h3>Subsection 1.1</h3>
+    <h2>Section 2</h2>
+</body>
+</html>
