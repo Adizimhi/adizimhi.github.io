@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Empty Links - Failures</title>
+</head>
+<body>
+    <h1>Empty Links - Failure Examples</h1>
+
+    <h2>Example 1: Link without text or `aria-label`</h2>
+    <a href="https://example.com"></a>
+
+    <h2>Example 2: Link with only whitespace</h2>
+    <a href="https://example.com"> </a>
+
+    <h2>Example 3: Link with placeholder or non-descriptive text</h2>
+    <a href="https://example.com">Click here</a>
+
+    <h2>Example 4: Link with invalid or missing `href`</h2>
+    <a></a>
+
+    <h2>Example 5: Decorative link without being hidden from assistive technologies</h2>
+    <a href="#"><span>🔗</span></a>
+
+    <h2>Example 6: Links used incorrectly for non-interactive purposes</h2>
+    <a href="https://example.com">
+        <div>This should not be a link</div>
+    </a>
+
+</body>
+</html>
