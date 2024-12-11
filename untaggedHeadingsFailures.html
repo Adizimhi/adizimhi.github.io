@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untagged Headings - Failure Examples</title>
+    <title>Untagged Headings - Failures</title>
 </head>
 <body>
     <h1>Untagged Headings - Failure Examples</h1>
+
+    <p>Below are examples of text visually styled as headings but not tagged semantically, making them inaccessible to screen readers and assistive technologies.</p>
 
     <h2>Example 1: Using Plain Text Instead of Semantic Tags</h2>
     <div style="font-size: 24px; font-weight: bold;">This looks like a heading but isn’t tagged.</div>
@@ -24,11 +26,28 @@
     <h2></h2>
     <p>Text content follows an empty heading.</p>
 
-    <h2>Example 5: Overuse of ARIA Roles Without Native Tags</h2>
-    <div role="heading" aria-level="1">Title</div>
-    <div role="heading" aria-level="1">Another Title</div>
-
-    <h2>Example 6: Text with Inline Styling Only</h2>
+    <h2>Example 5: Text with Inline Styling Only</h2>
     <span style="font-size: 28px; font-weight: bold;">Looks like a heading, but isn't tagged semantically.</span>
+
+    <h2>Example 6: Div Styled as a Heading</h2>
+    <div style="font-size: 30px; font-weight: bold;">Styled Heading</div>
+
+    <h2>Example 7: Image Styled as a Heading Without Text</h2>
+    <img src="heading-image.png" style="width: 100%; height: auto; font-size: 28px; font-weight: bold;" alt="">
+
+    <h2>Example 8: Bold Paragraph Styled as a Heading</h2>
+    <p style="font-weight: bold; font-size: 24px;">This is styled as a heading but not tagged semantically.</p>
+
+    <h2>Example 9: Missing Hierarchy in Headings</h2>
+    <h1>Main Title</h1>
+    <p>Introduction paragraph here.</p>
+    <h4>Subsection Title</h4>
+
+    <h2>Example 10: Span Styled as a Heading</h2>
+    <span style="display: block; font-size: 30px; font-weight: bold; color: blue;">Looks like a heading</span>
+
+    <h2>Example 11: Non-Semantic Container Styled as a Heading</h2>
+    <div style="font-size: 32px; font-weight: bold;">Heading styled using a div</div>
+
 </body>
 </html>
