@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Untagged Headings - Failure Examples</title>
+</head>
+<body>
+    <h1>Untagged Headings - Failure Examples</h1>
+
+    <h2>Example 1: Using Plain Text Instead of Semantic Tags</h2>
+    <div style="font-size: 24px; font-weight: bold;">This looks like a heading but isn’t tagged.</div>
+
+    <h2>Example 2: Skipping Heading Levels</h2>
+    <h1>Main Title</h1>
+    <h3>Subsection Title</h3>
+
+    <h2>Example 3: Using a List Item as a Heading</h2>
+    <ul>
+        <li style="font-size: 24px; font-weight: bold;">Visually Looks Like a Heading</li>
+    </ul>
+
+    <h2>Example 4: Empty Heading Tag</h2>
+    <h2></h2>
+    <p>Text content follows an empty heading.</p>
+
+    <h2>Example 5: Overuse of ARIA Roles Without Native Tags</h2>
+    <div role="heading" aria-level="1">Title</div>
+    <div role="heading" aria-level="1">Another Title</div>
+
+    <h2>Example 6: Text with Inline Styling Only</h2>
+    <span style="font-size: 28px; font-weight: bold;">Looks like a heading, but isn't tagged semantically.</span>
+</body>
+</html>
