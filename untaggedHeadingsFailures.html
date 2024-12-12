@@ -3,51 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untagged Headings - Failures</title>
+    <title>Untagged Headings - Success Examples</title>
 </head>
 <body>
-    <h1>Untagged Headings - Failure Examples</h1>
-
-    <p>Below are examples of text visually styled as headings but not tagged semantically, making them inaccessible to screen readers and assistive technologies.</p>
-
-    <h2>Example 1: Using Plain Text Instead of Semantic Tags</h2>
-    <div style="font-size: 24px; font-weight: bold;">This looks like a heading but isn’t tagged.</div>
-
-    <h2>Example 2: Skipping Heading Levels</h2>
-    <h1>Main Title</h1>
-    <h3>Subsection Title</h3>
-
-    <h2>Example 3: Using a List Item as a Heading</h2>
+    <h1>Untagged Headings - Success Examples</h1>
     <ul>
-        <li style="font-size: 24px; font-weight: bold;">Visually Looks Like a Heading</li>
+        <li class="list-item" id="untaggedHeadings-success-1">
+            <div class="itemContent">
+                <h1>Main Title</h1>
+                <h2>Subtitle</h2>
+                <h3>Section Title</h3>
+                <p>This is regular text content.</p>
+            </div>
+        </li>
+        <li class="list-item" id="untaggedHeadings-success-2">
+            <div class="itemContent">
+                <h2 class="visually-hidden">Search Results</h2>
+                <ul>
+                    <li>Result 1</li>
+                    <li>Result 2</li>
+                </ul>
+                <style>
+                    .visually-hidden {
+                        position: absolute;
+                        left: -9999px;
+                        top: -9999px;
+                    }
+                </style>
+            </div>
+        </li>
+        <li class="list-item" id="untaggedHeadings-success-3">
+            <div class="itemContent">
+                <h2 style="font-size: 24px; color: blue;">Properly Tagged Heading</h2>
+            </div>
+        </li>
+        <li class="list-item" id="untaggedHeadings-success-4">
+            <div class="itemContent">
+                <div role="heading" aria-level="2">Custom Styled Heading</div>
+            </div>
+        </li>
+        <li class="list-item" id="untaggedHeadings-success-5">
+            <div class="itemContent">
+                <div role="heading" aria-level="2" id="dynamicHeading"></div>
+                <script>
+                    document.getElementById('dynamicHeading').innerText = 'Dynamic Heading Text';
+                </script>
+            </div>
+        </li>
+        <li class="list-item" id="untaggedHeadings-success-6">
+            <div class="itemContent">
+                <h1>Page Title</h1>
+                <h2>Section 1</h2>
+                <h3>Subsection 1.1</h3>
+                <h2>Section 2</h2>
+            </div>
+        </li>
     </ul>
-
-    <h2>Example 4: Empty Heading Tag</h2>
-    <h2></h2>
-    <p>Text content follows an empty heading.</p>
-
-    <h2>Example 5: Text with Inline Styling Only</h2>
-    <span style="font-size: 28px; font-weight: bold;">Looks like a heading, but isn't tagged semantically.</span>
-
-    <h2>Example 6: Div Styled as a Heading</h2>
-    <div style="font-size: 30px; font-weight: bold;">Styled Heading</div>
-
-    <h2>Example 7: Image Styled as a Heading Without Text</h2>
-    <img src="heading-image.png" style="width: 100%; height: auto; font-size: 28px; font-weight: bold;" alt="">
-
-    <h2>Example 8: Bold Paragraph Styled as a Heading</h2>
-    <p style="font-weight: bold; font-size: 24px;">This is styled as a heading but not tagged semantically.</p>
-
-    <h2>Example 9: Missing Hierarchy in Headings</h2>
-    <h1>Main Title</h1>
-    <p>Introduction paragraph here.</p>
-    <h4>Subsection Title</h4>
-
-    <h2>Example 10: Span Styled as a Heading</h2>
-    <span style="display: block; font-size: 30px; font-weight: bold; color: blue;">Looks like a heading</span>
-
-    <h2>Example 11: Non-Semantic Container Styled as a Heading</h2>
-    <div style="font-size: 32px; font-weight: bold;">Heading styled using a div</div>
-
 </body>
 </html>
