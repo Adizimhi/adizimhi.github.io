@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Size - Failure Examples</title>
+    <style>
+        .small-font {
+            font-size: 10px;
+        }
+        .inline-small {
+            font-size: 11px;
+        }
+        .button-small {
+            font-size: 12px;
+        }
+        .label-small {
+            font-size: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Font Size - Failure Examples</h1>
+    <ul>
+        <li class="list-item" id="fontSize-failure-1">
+            <div class="itemContent">
+                <p class="small-font">This text is set to 10px, which is too small for many users to read comfortably.</p>
+            </div>
+        </li>
+        <li class="list-item" id="fontSize-failure-2">
+            <div class="itemContent">
+                <p style="font-size: 11px;">This inline-styled text is set to 11px, which is below the recommended minimum of 12px.</p>
+            </div>
+        </li>
+        <li class="list-item" id="fontSize-failure-3">
+            <div class="itemContent">
+                <button class="button-small">Submit</button>
+                <!-- Buttons with small text can be hard to interact with -->
+            </div>
+        </li>
+        <li class="list-item" id="fontSize-failure-4">
+            <div class="itemContent">
+                <label for="input1" class="label-small">Email:</label>
+                <input id="input1" type="email" style="font-size: 10px;">
+                <!-- Both label and input text are too small -->
+            </div>
+        </li>
+        <li class="list-item" id="fontSize-failure-5">
+            <div class="itemContent">
+                <p style="font-size: 8px; line-height: 1.2;">
+                    This paragraph is styled with a very small font size of 8px, making it almost illegible for users with low vision or poor contrast perception.
+                </p>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
