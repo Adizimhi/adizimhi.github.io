@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Window Link - Success Examples</title>
+</head>
+<body>
+    <h1>New Window Link - Success Examples</h1>
+    <ul>
+        <li class="list-item" id="newWindowLink-success-1">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" aria-label="Visit Example (opens in a new window)">Visit Example</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-success-2">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" aria-describedby="new-window-1">Visit Example</a>
+                <span id="new-window-1" class="sr-only">(opens in a new window)</span>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-success-3">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">
+                    Visit Example <span aria-hidden="true">(opens in a new window)</span>
+                </a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-success-4">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer" aria-label="Visit Example (opens in a new tab)">
+                    Visit Example
+                </a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-success-5">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">
+                    Visit Example <span class="visually-hidden">(opens in a new window)</span>
+                </a>
+                <style>
+                    .visually-hidden {
+                        position: absolute;
+                        width: 1px;
+                        height: 1px;
+                        padding: 0;
+                        margin: -1px;
+                        overflow: hidden;
+                        clip: rect(0, 0, 0, 0);
+                        white-space: nowrap;
+                        border: 0;
+                    }
+                </style>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-success-6">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" aria-label="Visit Example in a new tab">Visit Example</a>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
