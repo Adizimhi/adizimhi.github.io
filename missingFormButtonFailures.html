@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing Form Button - Failure Examples</title>
+</head>
+<body>
+    <h1>Missing Form Button - Failure Examples</h1>
+    <ul>
+        <li class="list-item" id="missingFormButton-failure-1">
+            <div class="itemContent">
+                <form>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name">
+                    <!-- No submit button -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-2">
+            <div class="itemContent">
+                <form>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email">
+                    <!-- Missing submit button, form cannot be submitted -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-3">
+            <div class="itemContent">
+                <form>
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password">
+                    <!-- Relying only on keyboard Enter, no explicit button -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-4">
+            <div class="itemContent">
+                <form>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message"></textarea>
+                    <!-- Missing submit mechanism -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-5">
+            <div class="itemContent">
+                <form>
+                    <label for="search">Search:</label>
+                    <input type="search" id="search" name="search">
+                    <!-- Expecting user to press Enter without guidance -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-6">
+            <div class="itemContent">
+                <form>
+                    <label for="phone">Phone:</label>
+                    <input type="tel" id="phone" name="phone">
+                    <!-- No visible or accessible way to submit -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-7">
+            <div class="itemContent">
+                <form>
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob">
+                    <!-- Missing action button -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-8">
+            <div class="itemContent">
+                <form>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="username">
+                    <label for="login-password">Password:</label>
+                    <input type="password" id="login-password" name="password">
+                    <!-- No submit button, form submission is inaccessible -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-9">
+            <div class="itemContent">
+                <form>
+                    <label for="feedback">Feedback:</label>
+                    <textarea id="feedback" name="feedback"></textarea>
+                    <!-- No "submit" button -->
+                </form>
+            </div>
+        </li>
+        <li class="list-item" id="missingFormButton-failure-10">
+            <div class="itemContent">
+                <form>
+                    <label for="newsletter">Newsletter Signup:</label>
+                    <input type="email" id="newsletter" name="newsletter">
+                    <!-- Users cannot submit without a button -->
+                </form>
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
