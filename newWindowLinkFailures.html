@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Window Link - Failure Examples</title>
+</head>
+<body>
+    <h1>New Window Link - Failure Examples</h1>
+    <ul>
+        <li class="list-item" id="newWindowLink-failure-1">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">Visit Example</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-2">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" rel="noopener noreferrer">Visit Example</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-3">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">Example</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-4">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">Click Here</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-5">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" rel="noopener">Read More</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-6">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">Learn More</a>
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-7">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">
+                    <span aria-hidden="true">Opens in a new window</span>
+                </a>
+                <!-- Visually implies new window but screen readers don't get the context -->
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-8">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">
+                    <img src="icon-new-window.png" alt="">
+                </a>
+                <!-- Relies only on an image with no text or accessible description -->
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-9">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank" title="Click to open example">
+                    Open Example
+                </a>
+                <!-- Relies on the title attribute which is not consistently accessible -->
+            </div>
+        </li>
+        <li class="list-item" id="newWindowLink-failure-10">
+            <div class="itemContent">
+                <a href="https://example.com" target="_blank">
+                    <span class="visually-hidden">(opens in a new window)</span>
+                </a>
+                <!-- The visually hidden text is present but there is no visible label for sighted users -->
+            </div>
+        </li>
+    </ul>
+</body>
+</html>
