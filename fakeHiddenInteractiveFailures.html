@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Hidden Interactive Failures</title>
+    <style>
+        .offscreen {
+            position: absolute;
+            left: -9999px;
+        }
+        .opacity-hidden {
+            opacity: 0;
+        }
+        .z-negative {
+            z-index: -1;
+        }
+        .clip-path-hidden {
+            clip-path: inset(100%);
+        }
+        .height-zero {
+            height: 0;
+            overflow: hidden;
+        }
+        .scale-zero {
+            transform: scale(0);
+        }
+    </style>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <li class="list-item" id="fakeHiddenInteractive-failure-1">
+                <button class="offscreen">Hidden Button</button>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-2">
+                <a href="#" class="opacity-hidden">Invisible Link</a>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-3">
+                <input type="text" class="z-negative" value="Hidden Input">
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-4">
+                <button class="clip-path-hidden">Clipped Button</button>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-5">
+                <select class="height-zero">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                </select>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-6">
+                <textarea class="scale-zero">Hidden Textarea</textarea>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-7">
+                <div tabindex="0" class="opacity-hidden">Focusable Div</div>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-8">
+                <button style="width: 0; height: 0; overflow: hidden;">Zero Size Button</button>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-9">
+                <a href="#" style="visibility: collapse;">Collapsed Link</a>
+            </li>
+
+            <li class="list-item" id="fakeHiddenInteractive-failure-10">
+                <button style="pointer-events: none;">Non-Interactive Button (Still Focusable)</button>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
