@@ -3,86 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popup Focus Failures (No Click Required)</title>
+    <title>Popup Focus Failures (More Examples)</title>
     <style>
         .popup {
             position: fixed;
-            top: 20%;
-            left: 30%;
-            width: 40%;
-            height: 30%;
+            top: 25%;
+            left: 35%;
+            width: 30%;
+            height: 20%;
             background: white;
-            border: 2px solid #ccc;
+            border: 2px solid #ddd;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: block; /* Popup shows immediately */
-            z-index: 1000;
-        }
-        .hidden {
-            display: none;
+            display: block; /* Popups visible on load */
+            z-index: 2000;
         }
     </style>
 </head>
 <body>
     <main role="main">
         <ul>
-            <li class="list-item" id="popupFocus-failure-1">
-                <div id="popup1" class="popup">
-                    <h2>Popup 1</h2>
-                    <p>No focus, user must manually navigate.</p>
+            <li class="list-item" id="popupFocus-failure-11">
+                <div id="popup11" class="popup">
+                    <h3>Reminder</h3>
+                    <p>Don't forget your appointment!</p>
+                    <button>Dismiss</button>
                 </div>
             </li>
 
-            <li class="list-item" id="popupFocus-failure-2">
-                <div id="popup2" class="popup">
-                    <h2>Popup 2</h2>
-                    <p>Focus stays on the main page, not the popup.</p>
+            <li class="list-item" id="popupFocus-failure-12">
+                <div id="popup12" class="popup">
+                    <h2>Session Timeout</h2>
+                    <p>Your session will expire soon.</p>
                 </div>
             </li>
 
-            <li class="list-item" id="popupFocus-failure-3">
-                <div id="popup3" class="popup">
-                    <p>Popup with buttons but no focus shift.</p>
-                    <button>OK</button>
-                    <button>Cancel</button>
-                </div>
-            </li>
-
-            <li class="list-item" id="popupFocus-failure-4">
-                <div id="popup4" class="popup">
-                    <input type="text" placeholder="Enter name">
-                </div>
-            </li>
-
-            <li class="list-item" id="popupFocus-failure-5">
-                <div id="popup5" class="popup">
+            <li class="list-item" id="popupFocus-failure-13">
+                <div id="popup13" class="popup">
+                    <p>Survey: Please answer this quick poll.</p>
                     <form>
-                        <label for="email">Email:</label>
-                        <input type="email" id="email">
+                        <input type="text" placeholder="Feedback">
                         <button>Submit</button>
                     </form>
                 </div>
             </li>
 
-            <li class="list-item" id="popupFocus-failure-6">
-                <div id="popup6" class="popup">
-                    <h2>Important Alert</h2>
-                    <p>Popup visible but keyboard focus not shifted.</p>
+            <li class="list-item" id="popupFocus-failure-14">
+                <div id="popup14" class="popup">
+                    <h2>Maintenance Notice</h2>
+                    <p>Scheduled maintenance starts at midnight.</p>
                 </div>
             </li>
-
-            <li class="list-item" id="popupFocus-failure-7">
-                <div id="popup7" class="popup">
-                    <h3>Warning</h3>
-                    <p>Focus remains behind this popup.</p>
-                </div>
-            </li>
-
-            <li class="list-item" id="popupFocus-failure-8">
-                <div id="popup8" class="popup">
-                    <p>This modal doesn't receive immediate focus.</p>
-                </div>
-            </li>
-
-            <li class="list-item" id="popupFocus-failure-9">
-                <div id="popup9" class="popup">
-                    <p>Form field available but keyboard focus
+        </ul>
+    </main>
+</body>
+</html>
