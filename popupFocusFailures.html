@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popup Focus Failures</title>
+    <title>Popup Focus Failures (No Click Required)</title>
     <style>
         .popup {
-            display: none;
             position: fixed;
             top: 20%;
             left: 30%;
@@ -15,9 +14,11 @@
             background: white;
             border: 2px solid #ccc;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: block; /* Popup shows immediately */
+            z-index: 1000;
         }
-        .show {
-            display: block;
+        .hidden {
+            display: none;
         }
     </style>
 </head>
@@ -25,78 +26,63 @@
     <main role="main">
         <ul>
             <li class="list-item" id="popupFocus-failure-1">
-                <button onclick="document.getElementById('popup1').classList.add('show')">Open Popup</button>
                 <div id="popup1" class="popup">
                     <h2>Popup 1</h2>
-                    <p>No focus received on open</p>
+                    <p>No focus, user must manually navigate.</p>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-2">
-                <a href="#" onclick="document.getElementById('popup2').classList.add('show')">Launch Modal</a>
                 <div id="popup2" class="popup">
                     <h2>Popup 2</h2>
-                    <p>Content inside modal, but focus stays on background.</p>
+                    <p>Focus stays on the main page, not the popup.</p>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-3">
-                <button onclick="document.getElementById('popup3').classList.add('show')">Show Popup</button>
                 <div id="popup3" class="popup">
-                    <button>Close</button>
+                    <p>Popup with buttons but no focus shift.</p>
+                    <button>OK</button>
+                    <button>Cancel</button>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-4">
-                <button onclick="showPopup('popup4')">Popup Without Focus</button>
                 <div id="popup4" class="popup">
-                    <p>Keyboard trap present.</p>
+                    <input type="text" placeholder="Enter name">
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-5">
-                <a href="#" onclick="openPopup('popup5')">Open Dialog</a>
                 <div id="popup5" class="popup">
-                    <p>Dialog opens but focus stays behind.</p>
+                    <form>
+                        <label for="email">Email:</label>
+                        <input type="email" id="email">
+                        <button>Submit</button>
+                    </form>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-6">
-                <button onclick="togglePopup('popup6')">Trigger Popup</button>
                 <div id="popup6" class="popup">
-                    <p>Popup opens but no focus shift.</p>
+                    <h2>Important Alert</h2>
+                    <p>Popup visible but keyboard focus not shifted.</p>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-7">
-                <a href="#" onclick="document.getElementById('popup7').classList.add('show')">Modal Trigger</a>
                 <div id="popup7" class="popup">
-                    <h3>Form inside, but no focus</h3>
-                    <input type="text" placeholder="Name">
+                    <h3>Warning</h3>
+                    <p>Focus remains behind this popup.</p>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-8">
-                <button onclick="show('popup8')">Popup Opens</button>
                 <div id="popup8" class="popup">
-                    <button>Submit</button>
+                    <p>This modal doesn't receive immediate focus.</p>
                 </div>
             </li>
 
             <li class="list-item" id="popupFocus-failure-9">
-                <button onclick="show('popup9')">Launch</button>
                 <div id="popup9" class="popup">
-                    <p>No focus shift.</p>
-                </div>
-            </li>
-
-            <li class="list-item" id="popupFocus-failure-10">
-                <a href="#" onclick="document.getElementById('popup10').classList.add('show')">Trigger</a>
-                <div id="popup10" class="popup">
-                    <h3>Popup but focus outside.</h3>
-                </div>
-            </li>
-        </ul>
-    </main>
-</body>
-</html>
+                    <p>Form field available but keyboard focus
