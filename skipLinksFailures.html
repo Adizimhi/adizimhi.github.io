@@ -3,99 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skip Link Failures</title>
+    <title>Skip Link Failures (Detectable)</title>
+    <style>
+        .skip-link-hidden {
+            position: absolute;
+            left: -9999px;
+            top: 10px;
+        }
+        .hidden-section {
+            display: none;
+        }
+        .skip-no-target {
+            position: absolute;
+            top: -40px;
+            left: 10px;
+        }
+    </style>
 </head>
 <body>
     <main role="main">
         <ul>
+            
             <!-- Failure 1: No Skip Link Present -->
             <li class="list-item" id="skipLink-failure-1">
                 <header>
                     <nav>
                         <ul>
                             <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
                             <li><a href="#">Services</a></li>
+                            <li><a href="#">About</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                     </nav>
                 </header>
                 <section>
                     <h1>Main Content</h1>
-                    <p>Users must navigate through the entire menu to reach this content.</p>
+                    <p>Users are forced to tab through all navigation items without a skip option.</p>
                 </section>
             </li>
 
-            <!-- Failure 2: Skip Link Redirects to a Non-Existent Section -->
+            <!-- Failure 2: Skip Link Redirects to Non-Existent Section -->
             <li class="list-item" id="skipLink-failure-2">
-                <a href="#nonexistent">Skip to Content</a>
-                <p>No element with ID "nonexistent" exists on the page.</p>
+                <a href="#noContent" class="skip-no-target">Skip to Content</a>
+                <p>This skip link points to a section that doesn't exist, leading nowhere.</p>
             </li>
 
-            <!-- Failure 3: Skip Link Hidden Improperly (Still Focusable but Invisible) -->
+            <!-- Failure 3: Skip Link Targets Hidden Section -->
             <li class="list-item" id="skipLink-failure-3">
-                <a href="#content" style="position: absolute; left: -9999px;">Skip to Content</a>
-                <section id="content">
-                    <h1>Main Section</h1>
-                    <p>Screen reader users may not know the skip link is available.</p>
-                </section>
-            </li>
-
-            <!-- Failure 4: Skip Link Appears Only on Hover -->
-            <li class="list-item" id="skipLink-failure-4">
-                <a href="#mainContent" style="display: none;" onfocus="this.style.display='block'">Skip to Content</a>
-                <section id="mainContent">
-                    <h1>Page Content</h1>
-                </section>
-            </li>
-
-            <!-- Failure 5: Skip Link Points to Unreachable Element -->
-            <li class="list-item" id="skipLink-failure-5">
-                <a href="#hiddenSection">Skip to Main Section</a>
-                <div id="hiddenSection" style="display: none;">
+                <a href="#hiddenContent" class="skip-link-hidden">Skip to Content</a>
+                <div id="hiddenContent" class="hidden-section">
                     <h1>Hidden Section</h1>
                 </div>
             </li>
 
-            <!-- Failure 6: Skip Link Inside Navigation (Defeats Purpose) -->
-            <li class="list-item" id="skipLink-failure-6">
+            <!-- Failure 4: Skip Link Inaccessible by CSS (Display None) -->
+            <li class="list-item" id="skipLink-failure-4">
+                <a href="#mainContent" style="display: none;">Skip to Content</a>
+                <section id="mainContent">
+                    <h1>Main Section</h1>
+                </section>
+            </li>
+
+            <!-- Failure 5: Skip Link Inside the Navigation -->
+            <li class="list-item" id="skipLink-failure-5">
                 <nav>
                     <a href="#mainContent">Skip to Content</a>
                 </nav>
+                <section id="mainContent">
+                    <h1>Main Area</h1>
+                </section>
+            </li>
+
+            <!-- Failure 6: Skip Link with Empty Href -->
+            <li class="list-item" id="skipLink-failure-6">
+                <a href="">Skip to Content</a>
+                <section>
+                    <h1>Content Area</h1>
+                </section>
+            </li>
+
+            <!-- Failure 7: JavaScript Skip Link (Non-functional if JavaScript Disabled) -->
+            <li class="list-item" id="skipLink-failure-7">
+                <a href="#" onclick="document.getElementById('mainContent').scrollIntoView(); return false;">Skip to Content</a>
+                <section id="mainContent">
+                    <h1>Main Content Section</h1>
+                </section>
+            </li>
+
+            <!-- Failure 8: Multiple Skip Links with Same Target -->
+            <li class="list-item" id="skipLink-failure-8">
+                <a href="#mainContent">Skip to Content</a>
+                <a href="#mainContent">Skip to Content (Duplicate)</a>
                 <section id="mainContent">
                     <h1>Main Content</h1>
                 </section>
             </li>
 
-            <!-- Failure 7: Skip Link Targets Footer -->
-            <li class="list-item" id="skipLink-failure-7">
+            <!-- Failure 9: Skip Link Targets Footer -->
+            <li class="list-item" id="skipLink-failure-9">
                 <a href="#footer">Skip to Footer</a>
                 <footer id="footer">
                     <p>Footer Section</p>
                 </footer>
             </li>
 
-            <!-- Failure 8: Skip Link Without Valid Href -->
-            <li class="list-item" id="skipLink-failure-8">
-                <a href="">Skip to Content</a>
-                <section>
-                    <h1>Main Section</h1>
-                </section>
-            </li>
-
-            <!-- Failure 9: Skip Link Partially Hidden by Overlapping Elements -->
-            <li class="list-item" id="skipLink-failure-9">
-                <a href="#mainContent" style="z-index: -1;">Skip to Content</a>
-                <section id="mainContent">
-                    <h1>Content Section</h1>
-                </section>
-            </li>
-
-            <!-- Failure 10: Skip Link with JavaScript Disabled -->
+            <!-- Failure 10: Overlapping Skip Link (Obscured by Content) -->
             <li class="list-item" id="skipLink-failure-10">
-                <a href="#" onclick="document.getElementById('mainContent').scrollIntoView(); return false;">Skip to Content</a>
+                <div style="position: absolute; top: 0; left: 0; width: 100%; height: 30px; background: rgba(0,0,0,0.8);"></div>
+                <a href="#mainContent" style="position: absolute; top: 5px; left: 5px;">Skip to Content</a>
                 <section id="mainContent">
-                    <h1>Main Area</h1>
+                    <h1>Main Content Section</h1>
                 </section>
             </li>
         </ul>
