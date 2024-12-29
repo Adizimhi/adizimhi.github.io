@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skip Link Failures</title>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Failure 1: No Skip Link Present -->
+            <li class="list-item" id="skipLink-failure-1">
+                <header>
+                    <nav>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Services</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <section>
+                    <h1>Main Content</h1>
+                    <p>Users must navigate through the entire menu to reach this content.</p>
+                </section>
+            </li>
+
+            <!-- Failure 2: Skip Link Redirects to a Non-Existent Section -->
+            <li class="list-item" id="skipLink-failure-2">
+                <a href="#nonexistent">Skip to Content</a>
+                <p>No element with ID "nonexistent" exists on the page.</p>
+            </li>
+
+            <!-- Failure 3: Skip Link Hidden Improperly (Still Focusable but Invisible) -->
+            <li class="list-item" id="skipLink-failure-3">
+                <a href="#content" style="position: absolute; left: -9999px;">Skip to Content</a>
+                <section id="content">
+                    <h1>Main Section</h1>
+                    <p>Screen reader users may not know the skip link is available.</p>
+                </section>
+            </li>
+
+            <!-- Failure 4: Skip Link Appears Only on Hover -->
+            <li class="list-item" id="skipLink-failure-4">
+                <a href="#mainContent" style="display: none;" onfocus="this.style.display='block'">Skip to Content</a>
+                <section id="mainContent">
+                    <h1>Page Content</h1>
+                </section>
+            </li>
+
+            <!-- Failure 5: Skip Link Points to Unreachable Element -->
+            <li class="list-item" id="skipLink-failure-5">
+                <a href="#hiddenSection">Skip to Main Section</a>
+                <div id="hiddenSection" style="display: none;">
+                    <h1>Hidden Section</h1>
+                </div>
+            </li>
+
+            <!-- Failure 6: Skip Link Inside Navigation (Defeats Purpose) -->
+            <li class="list-item" id="skipLink-failure-6">
+                <nav>
+                    <a href="#mainContent">Skip to Content</a>
+                </nav>
+                <section id="mainContent">
+                    <h1>Main Content</h1>
+                </section>
+            </li>
+
+            <!-- Failure 7: Skip Link Targets Footer -->
+            <li class="list-item" id="skipLink-failure-7">
+                <a href="#footer">Skip to Footer</a>
+                <footer id="footer">
+                    <p>Footer Section</p>
+                </footer>
+            </li>
+
+            <!-- Failure 8: Skip Link Without Valid Href -->
+            <li class="list-item" id="skipLink-failure-8">
+                <a href="">Skip to Content</a>
+                <section>
+                    <h1>Main Section</h1>
+                </section>
+            </li>
+
+            <!-- Failure 9: Skip Link Partially Hidden by Overlapping Elements -->
+            <li class="list-item" id="skipLink-failure-9">
+                <a href="#mainContent" style="z-index: -1;">Skip to Content</a>
+                <section id="mainContent">
+                    <h1>Content Section</h1>
+                </section>
+            </li>
+
+            <!-- Failure 10: Skip Link with JavaScript Disabled -->
+            <li class="list-item" id="skipLink-failure-10">
+                <a href="#" onclick="document.getElementById('mainContent').scrollIntoView(); return false;">Skip to Content</a>
+                <section id="mainContent">
+                    <h1>Main Area</h1>
+                </section>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
