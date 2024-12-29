@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Skip Links (Detectable)</title>
+    <title>Accessible Skip Links - Bypass Blocks</title>
     <style>
-        /* Skip Link - Initially Hidden but Visible on Focus */
+        /* Skip Links - Hidden by Default but Visible on Focus */
         .skip-link {
             position: absolute;
             top: 10px;
@@ -19,7 +19,7 @@
             transition: opacity 0.3s;
         }
 
-        /* Make Skip Link Visible When Focused */
+        /* Make Skip Links Visible on Focus */
         .skip-link:focus {
             opacity: 1;
             outline: 3px solid #ffbf47;
@@ -59,42 +59,70 @@
             padding: 50px;
             min-height: 800px;
         }
+
+        footer {
+            background: #111;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Skip Link (Anchor to Main Content) -->
+    <!-- Skip Links (Multiple Bypass Points) -->
     <a href="#mainContent" class="skip-link">Skip to Main Content</a>
+    <a href="#services" class="skip-link">Skip to Services</a>
+    <a href="#contact" class="skip-link">Skip to Contact</a>
+    <a href="#footer" class="skip-link">Skip to Footer</a>
 
-    <!-- Navigation Bar -->
+    <!-- Header and Navigation -->
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#" onclick="scrollToSection('mainContent')">Main Content</a></li>
+                <li><a href="#" onclick="scrollToSection('services')">Services</a></li>
+                <li><a href="#" onclick="scrollToSection('contact')">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Long Navigation and Other Content -->
+    <!-- Intro Section -->
     <section>
         <h1>Welcome to Our Website</h1>
         <p>This section contains introductory content and navigation links.</p>
     </section>
 
-    <!-- Main Content Section (Skip Link Target) -->
+    <!-- Main Content Section (Skip Target) -->
     <section id="mainContent">
         <h1>Main Content</h1>
         <p>This is the main area of the website where the core information is located.</p>
-        <p>Users who use the skip link will land here, bypassing the navigation.</p>
+        <p>Users who use the skip link will land here, bypassing the navigation and introductory content.</p>
     </section>
 
-    <!-- Footer Section -->
-    <footer>
+    <!-- Services Section (Skip Target) -->
+    <section id="services">
+        <h1>Our Services</h1>
+        <p>Explore the variety of services we offer. We provide tailored solutions to fit your needs.</p>
+    </section>
+
+    <!-- Contact Section (Skip Target) -->
+    <section id="contact">
+        <h1>Contact Us</h1>
+        <p>If you need to reach us, feel free to use the information provided below. We are happy to assist you.</p>
+    </section>
+
+    <!-- Footer (Skip Target) -->
+    <footer id="footer">
         <p>&copy; 2024 Accessible Website Inc.</p>
     </footer>
+
+    <script>
+        // Smooth Scroll to Section on Navigation Link Click
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
 
 </body>
 </html>
