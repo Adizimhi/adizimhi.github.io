@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Skip Links (Long Page)</title>
+    <title>Accessible Skip Links (Detectable)</title>
     <style>
+        /* Skip Link - Initially Hidden but Visible on Focus */
         .skip-link {
             position: absolute;
-            top: -40px;
-            left: 0;
+            top: 10px;
+            left: 10px;
             background: #005f99;
             color: white;
             padding: 10px;
-            z-index: 1000;
             text-decoration: none;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
+        /* Make Skip Link Visible When Focused */
         .skip-link:focus {
-            top: 10px;
+            opacity: 1;
+            outline: 3px solid #ffbf47;
         }
 
+        /* Basic Page Layout */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -35,6 +41,7 @@
 
         nav ul {
             list-style: none;
+            margin: 0;
             padding: 0;
         }
 
@@ -49,66 +56,42 @@
         }
 
         section {
-            height: 800px;
             padding: 50px;
-        }
-
-        .auth-warning {
-            color: red;
-            font-weight: bold;
+            min-height: 800px;
         }
     </style>
-    <script>
-        // Simulate Authentication Check
-        function scrollToSection(sectionId) {
-            // Simulate authentication - in real cases, replace with proper auth flow
-            const isAuthenticated = confirm("Authenticate to view this section?");
-            if (isAuthenticated) {
-                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert("Access denied. Please authenticate to proceed.");
-            }
-        }
-    </script>
 </head>
 <body>
 
-    <!-- Skip Links at Top -->
+    <!-- Skip Link (Anchor to Main Content) -->
     <a href="#mainContent" class="skip-link">Skip to Main Content</a>
-    <a href="#services" class="skip-link">Skip to Services</a>
-    <a href="#contact" class="skip-link">Skip to Contact</a>
 
+    <!-- Navigation Bar -->
     <header>
         <nav>
             <ul>
-                <li><a href="#" onclick="scrollToSection('mainContent')">Main Content</a></li>
-                <li><a href="#" onclick="scrollToSection('services')">Services</a></li>
-                <li><a href="#" onclick="scrollToSection('contact')">Contact</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Main Content Section -->
+    <!-- Long Navigation and Other Content -->
+    <section>
+        <h1>Welcome to Our Website</h1>
+        <p>This section contains introductory content and navigation links.</p>
+    </section>
+
+    <!-- Main Content Section (Skip Link Target) -->
     <section id="mainContent">
         <h1>Main Content</h1>
-        <p>Welcome to the main area of our website. This section contains essential information for visitors.</p>
-        <p>Keep scrolling for more details about our services and contact information.</p>
+        <p>This is the main area of the website where the core information is located.</p>
+        <p>Users who use the skip link will land here, bypassing the navigation.</p>
     </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <h1>Our Services</h1>
-        <p>Explore the variety of services we offer to our clients. We aim to provide top-quality solutions tailored to your needs.</p>
-        <p>Contact us for further information on how we can assist you.</p>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h1>Contact Us</h1>
-        <p>If you need to reach us, please use the information provided below. We are here to help and look forward to hearing from you.</p>
-        <p class="auth-warning">Some sections may require authentication to view.</p>
-    </section>
-
+    <!-- Footer Section -->
     <footer>
         <p>&copy; 2024 Accessible Website Inc.</p>
     </footer>
