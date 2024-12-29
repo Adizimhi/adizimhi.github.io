@@ -3,85 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Skip Links</title>
+    <title>Accessible Skip Links (Long Page)</title>
     <style>
         .skip-link {
             position: absolute;
             top: -40px;
             left: 0;
-            background: #000;
-            color: #fff;
+            background: #005f99;
+            color: white;
             padding: 10px;
             z-index: 1000;
+            text-decoration: none;
         }
+
         .skip-link:focus {
             top: 10px;
         }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background: #333;
+            color: white;
+            padding: 1rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        section {
+            height: 800px;
+            padding: 50px;
+        }
+
+        .auth-warning {
+            color: red;
+            font-weight: bold;
+        }
     </style>
+    <script>
+        // Simulate Authentication Check
+        function scrollToSection(sectionId) {
+            // Simulate authentication - in real cases, replace with proper auth flow
+            const isAuthenticated = confirm("Authenticate to view this section?");
+            if (isAuthenticated) {
+                document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert("Access denied. Please authenticate to proceed.");
+            }
+        }
+    </script>
 </head>
 <body>
-    <main role="main">
-        <ul>
-            <!-- Success 1: Properly Visible and Functional Skip Link -->
-            <li class="list-item" id="skipLink-success-1">
-                <a href="#mainContent" class="skip-link">Skip to Main Content</a>
-                <header>
-                    <nav>
-                        <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About</a></li>
-                        </ul>
-                    </nav>
-                </header>
-                <section id="mainContent">
-                    <h1>Main Section</h1>
-                </section>
-            </li>
 
-            <!-- Success 2: Skip Link Directs to Valid Section -->
-            <li class="list-item" id="skipLink-success-2">
-                <a href="#services" class="skip-link">Skip to Services</a>
-                <section id="services">
-                    <h1>Services</h1>
-                </section>
-            </li>
+    <!-- Skip Links at Top -->
+    <a href="#mainContent" class="skip-link">Skip to Main Content</a>
+    <a href="#services" class="skip-link">Skip to Services</a>
+    <a href="#contact" class="skip-link">Skip to Contact</a>
 
-            <!-- Success 3: Skip Link Targets Main Area -->
-            <li class="list-item" id="skipLink-success-3">
-                <a href="#content" class="skip-link">Skip to Content</a>
-                <section id="content">
-                    <h1>Page Content</h1>
-                </section>
-            </li>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#" onclick="scrollToSection('mainContent')">Main Content</a></li>
+                <li><a href="#" onclick="scrollToSection('services')">Services</a></li>
+                <li><a href="#" onclick="scrollToSection('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
-            <!-- Success 4: Multiple Skip Links for Different Sections -->
-            <li class="list-item" id="skipLink-success-4">
-                <a href="#main" class="skip-link">Skip to Main</a>
-                <a href="#footer" class="skip-link">Skip to Footer</a>
-                <section id="main">
-                    <h1>Main Section</h1>
-                </section>
-                <footer id="footer">
-                    <p>Footer Area</p>
-                </footer>
-            </li>
+    <!-- Main Content Section -->
+    <section id="mainContent">
+        <h1>Main Content</h1>
+        <p>Welcome to the main area of our website. This section contains essential information for visitors.</p>
+        <p>Keep scrolling for more details about our services and contact information.</p>
+    </section>
 
-            <!-- Success 5: Skip Link with Descriptive Text -->
-            <li class="list-item" id="skipLink-success-5">
-                <a href="#mainContent" class="skip-link">Skip the Navigation and Go to Main Content</a>
-                <section id="mainContent">
-                    <h1>Important Section</h1>
-                </section>
-            </li>
+    <!-- Services Section -->
+    <section id="services">
+        <h1>Our Services</h1>
+        <p>Explore the variety of services we offer to our clients. We aim to provide top-quality solutions tailored to your needs.</p>
+        <p>Contact us for further information on how we can assist you.</p>
+    </section>
 
-            <!-- Success 6: Skip Link with Screen Reader Instructions -->
-            <li class="list-item" id="skipLink-success-6">
-                <a href="#primaryContent" class="skip-link" aria-label="Skip navigation and move to primary content">Skip to Content</a>
-                <section id="primaryContent">
-                    <h1>Primary Section</h1>
-                </section>
-            </li>
-        </ul>
-    </main>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h1>Contact Us</h1>
+        <p>If you need to reach us, please use the information provided below. We are here to help and look forward to hearing from you.</p>
+        <p class="auth-warning">Some sections may require authentication to view.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Accessible Website Inc.</p>
+    </footer>
+
 </body>
 </html>
