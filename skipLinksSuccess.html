@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessible Skip Links</title>
+    <style>
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #000;
+            color: #fff;
+            padding: 10px;
+            z-index: 1000;
+        }
+        .skip-link:focus {
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Success 1: Properly Visible and Functional Skip Link -->
+            <li class="list-item" id="skipLink-success-1">
+                <a href="#mainContent" class="skip-link">Skip to Main Content</a>
+                <header>
+                    <nav>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                        </ul>
+                    </nav>
+                </header>
+                <section id="mainContent">
+                    <h1>Main Section</h1>
+                </section>
+            </li>
+
+            <!-- Success 2: Skip Link Directs to Valid Section -->
+            <li class="list-item" id="skipLink-success-2">
+                <a href="#services" class="skip-link">Skip to Services</a>
+                <section id="services">
+                    <h1>Services</h1>
+                </section>
+            </li>
+
+            <!-- Success 3: Skip Link Targets Main Area -->
+            <li class="list-item" id="skipLink-success-3">
+                <a href="#content" class="skip-link">Skip to Content</a>
+                <section id="content">
+                    <h1>Page Content</h1>
+                </section>
+            </li>
+
+            <!-- Success 4: Multiple Skip Links for Different Sections -->
+            <li class="list-item" id="skipLink-success-4">
+                <a href="#main" class="skip-link">Skip to Main</a>
+                <a href="#footer" class="skip-link">Skip to Footer</a>
+                <section id="main">
+                    <h1>Main Section</h1>
+                </section>
+                <footer id="footer">
+                    <p>Footer Area</p>
+                </footer>
+            </li>
+
+            <!-- Success 5: Skip Link with Descriptive Text -->
+            <li class="list-item" id="skipLink-success-5">
+                <a href="#mainContent" class="skip-link">Skip the Navigation and Go to Main Content</a>
+                <section id="mainContent">
+                    <h1>Important Section</h1>
+                </section>
+            </li>
+
+            <!-- Success 6: Skip Link with Screen Reader Instructions -->
+            <li class="list-item" id="skipLink-success-6">
+                <a href="#primaryContent" class="skip-link" aria-label="Skip navigation and move to primary content">Skip to Content</a>
+                <section id="primaryContent">
+                    <h1>Primary Section</h1>
+                </section>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
