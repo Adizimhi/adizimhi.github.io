@@ -3,51 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Carousel Pagination Success</title>
+    <title>Accessible Carousel</title>
+    <style>
+        .carousel {
+            width: 80%;
+            margin: 50px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .carousel img {
+            width: 100%;
+            display: block;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            border: none;
+            width: 20px;
+            height: 20px;
+            margin: 5px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        .pagination button[aria-current="true"] {
+            background-color: #007bff;
+        }
+
+        .pagination button:focus {
+            outline: 3px solid #ffbf47;
+        }
+    </style>
 </head>
 <body>
-    <main role="main">
-        <ul>
-            <!-- Success 1: Accessible pagination with aria-labels -->
-            <li class="list-item" id="carouselPagination-success-1">
-                <div class="carousel">
-                    <div class="pagination" role="tablist">
-                        <button aria-label="Go to slide 1" aria-current="true"></button>
-                        <button aria-label="Go to slide 2"></button>
-                        <button aria-label="Go to slide 3"></button>
-                    </div>
-                </div>
-            </li>
 
-            <!-- Success 2: Pagination buttons focusable -->
-            <li class="list-item" id="carouselPagination-success-2">
-                <div class="carousel">
-                    <div class="pagination">
-                        <button tabindex="0" aria-label="Go to slide 1"></button>
-                        <button tabindex="0" aria-label="Go to slide 2"></button>
-                    </div>
-                </div>
-            </li>
+    <!-- Accessible Carousel -->
+    <div class="carousel" aria-label="Image Carousel">
+        <div class="slides" id="carouselSlides" aria-live="polite">
+            <div class="slide" id="slide1" role="group" aria-roledescription="Slide" aria-label="1 of 3">
+                <img src="https://via.placeholder.com/800x400?text=Slide+1" alt="Description of Slide 1">
+            </div>
+            <div class="slide" id="slide2" role="group" aria-roledescription="Slide" aria-label="2 of 3">
+                <img src="https://via.placeholder.com/800x400?text=Slide+2" alt="Description of Slide 2">
+            </div>
+            <div class="slide" id="slide3" role="group" aria-roledescription="Slide" aria-label="3 of 3">
+                <img src="https://via.placeholder.com/800x400?text=Slide+3" alt="Description of Slide 3">
+            </div>
+        </div>
 
-            <!-- Success 3: Live region for slide announcements -->
-            <li class="list-item" id="carouselPagination-success-3">
-                <div class="carousel" aria-live="polite">
-                    <div class="slides">
-                        <div>Slide 1</div>
-                    </div>
-                </div>
-            </li>
+        <!-- Carousel Pagination -->
+        <div class="pagination" role="tablist" aria-label="Carousel Pagination">
+            <button aria-label="Go to slide 1" aria-controls="slide1" aria-current="true" role="tab"></button>
+            <button aria-label="Go to slide 2" aria-controls="slide2" role="tab"></button>
+            <button aria-label="Go to slide 3" aria-controls="slide3" role="tab"></button>
+        </div>
+    </div>
 
-            <!-- Success 4: Proper aria-current on active button -->
-            <li class="list-item" id="carouselPagination-success-4">
-                <div class="carousel">
-                    <div class="pagination">
-                        <button aria-current="true"></button>
-                        <button aria-current="false"></button>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </main>
+    <script>
+        const slides = document.querySelectorAll('.slide');
+        const buttons = document.querySelectorAll('.pagination button');
+
+        let currentIndex = 0;
+
+        buttons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        function updateCarousel() {
+            const slidesContainer = document.querySelector('.slides');
+            slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            // Update ARIA attributes
+            buttons.forEach((btn, idx) => {
+                btn.setAttribute('aria-current', idx === currentIndex ? 'true' : 'false');
+            });
+
+            slides.forEach((slide, idx) => {
+                slide.setAttribute('aria-hidden', idx !== currentIndex);
+            });
+
+            // Announce the visible slide
+            const liveRegion = document.getElementById('carouselSlides');
+            liveRegion.setAttribute('aria-label', `Slide ${currentIndex + 1} of ${slides.length}`);
+        }
+    </script>
+
 </body>
 </html>
