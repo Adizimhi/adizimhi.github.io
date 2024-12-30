@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Pagination Success</title>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Success 1: Accessible pagination with aria-labels -->
+            <li class="list-item" id="carouselPagination-success-1">
+                <div class="carousel">
+                    <div class="pagination" role="tablist">
+                        <button aria-label="Go to slide 1" aria-current="true"></button>
+                        <button aria-label="Go to slide 2"></button>
+                        <button aria-label="Go to slide 3"></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Success 2: Pagination buttons focusable -->
+            <li class="list-item" id="carouselPagination-success-2">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button tabindex="0" aria-label="Go to slide 1"></button>
+                        <button tabindex="0" aria-label="Go to slide 2"></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Success 3: Live region for slide announcements -->
+            <li class="list-item" id="carouselPagination-success-3">
+                <div class="carousel" aria-live="polite">
+                    <div class="slides">
+                        <div>Slide 1</div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Success 4: Proper aria-current on active button -->
+            <li class="list-item" id="carouselPagination-success-4">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button aria-current="true"></button>
+                        <button aria-current="false"></button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
