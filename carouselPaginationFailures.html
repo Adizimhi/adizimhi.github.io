@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carousel Pagination Failures</title>
+    <style>
+        .carousel {
+            width: 80%;
+            margin: 50px auto;
+        }
+
+        .slides {
+            display: flex;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            width: 15px;
+            height: 15px;
+            margin: 5px;
+            border-radius: 50%;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Failure 1: Pagination dots with no label or role -->
+            <li class="list-item" id="carouselPagination-failure-1">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button></button>
+                        <button></button>
+                        <button></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 2: Pagination buttons not focusable -->
+            <li class="list-item" id="carouselPagination-failure-2">
+                <div class="carousel">
+                    <div class="pagination">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 3: No aria-label or description on pagination buttons -->
+            <li class="list-item" id="carouselPagination-failure-3">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button tabindex="0"></button>
+                        <button tabindex="0"></button>
+                        <button tabindex="0"></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 4: Pagination buttons inside div with no interactive role -->
+            <li class="list-item" id="carouselPagination-failure-4">
+                <div class="carousel">
+                    <div class="pagination">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 5: No aria-live on slides for announcements -->
+            <li class="list-item" id="carouselPagination-failure-5">
+                <div class="carousel">
+                    <div class="slides">
+                        <div>Slide 1</div>
+                        <div>Slide 2</div>
+                        <div>Slide 3</div>
+                    </div>
+                    <div class="pagination">
+                        <button></button>
+                        <button></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 6: Duplicate aria-current on all buttons -->
+            <li class="list-item" id="carouselPagination-failure-6">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button aria-current="true"></button>
+                        <button aria-current="true"></button>
+                        <button aria-current="true"></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 7: Pagination buttons hidden from screen readers -->
+            <li class="list-item" id="carouselPagination-failure-7">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button aria-hidden="true"></button>
+                        <button aria-hidden="true"></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 8: Buttons with tabindex=-1, not focusable -->
+            <li class="list-item" id="carouselPagination-failure-8">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button tabindex="-1"></button>
+                        <button tabindex="-1"></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 9: No keyboard support for pagination -->
+            <li class="list-item" id="carouselPagination-failure-9">
+                <div class="carousel">
+                    <div class="pagination" role="presentation">
+                        <button></button>
+                        <button></button>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Failure 10: Pagination dots with misleading aria-labels -->
+            <li class="list-item" id="carouselPagination-failure-10">
+                <div class="carousel">
+                    <div class="pagination">
+                        <button aria-label="Slide 99"></button>
+                        <button aria-label="Slide 88"></button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
