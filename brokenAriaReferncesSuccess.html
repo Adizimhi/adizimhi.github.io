@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correct ARIA References</title>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Success 1: Correct aria-describedby pointing to a valid ID -->
+            <li class="list-item" id="brokenAria-success-1">
+                <input type="text" aria-describedby="description" placeholder="Enter text here">
+                <p id="description">This is a required field</p>
+            </li>
+
+            <!-- Success 2: Correct aria-labelledby pointing to a valid ID -->
+            <li class="list-item" id="brokenAria-success-2">
+                <button aria-labelledby="buttonLabel">Submit</button>
+                <span id="buttonLabel">Submit Form</span>
+            </li>
+
+            <!-- Success 3: Correct ID reference in aria-labelledby -->
+            <li class="list-item" id="brokenAria-success-3">
+                <span id="validID">Valid ID</span>
+                <input type="text" aria-labelledby="validID" placeholder="Enter your name">
+            </li>
+
+            <!-- Success 4: aria-describedby points to an existing ID -->
+            <li class="list-item" id="brokenAria-success-4">
+                <input type="password" aria-describedby="passwordHelp">
+                <p id="passwordHelp">Enter a strong password</p>
+            </li>
+
+            <!-- Success 5: Correct use of aria-describedby with visible content -->
+            <li class="list-item" id="brokenAria-success-5">
+                <input type="text" aria-describedby="helpText" placeholder="Enter name">
+                <div id="helpText">Please enter your full name</div>
+            </li>
+
+            <!-- Success 6: aria-labelledby references an existing element -->
+            <li class="list-item" id="brokenAria-success-6">
+                <button aria-labelledby="submitLabel">Submit</button>
+                <span id="submitLabel">Submit the form</span>
+            </li>
+
+            <!-- Success 7: Correct use of aria-describedby with visible, non-hidden element -->
+            <li class="list-item" id="brokenAria-success-7">
+                <input type="text" aria-describedby="validHelp" placeholder="Enter name">
+                <div id="validHelp">This is a valid helper text</div>
+            </li>
+
+            <!-- Success 8: Correct aria-labelledby with valid text -->
+            <li class="list-item" id="brokenAria-success-8">
+                <div id="validDescription">Description of the button</div>
+                <button aria-labelledby="validDescription">Click Me</button>
+            </li>
+
+            <!-- Success 9: Correct aria-describedby on form field -->
+            <li class="list-item" id="brokenAria-success-9">
+                <input type="number" aria-describedby="numberHelp" placeholder="Enter a number">
+                <div id="numberHelp">Only enter numeric values</div>
+            </li>
+
+            <!-- Success 10: Unique IDs for aria-labelledby -->
+            <li class="list-item" id="brokenAria-success-10">
+                <span id="label1">Label 1</span>
+                <span id="label2">Label 2</span>
+                <button aria-labelledby="label1 label2">Click Me</button>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
