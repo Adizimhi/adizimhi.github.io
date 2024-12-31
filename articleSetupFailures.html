@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Tag Failures</title>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Failure 1: Navigation links inside an article tag -->
+            <li class="list-item" id="articleTag-failure-1">
+                <article>
+                    <nav>
+                        <a href="#">Home</a>
+                        <a href="#">Services</a>
+                        <a href="#">Contact</a>
+                    </nav>
+                </article>
+            </li>
+
+            <!-- Failure 2: Sidebar content marked as an article -->
+            <li class="list-item" id="articleTag-failure-2">
+                <article>
+                    <aside>
+                        <p>Promotional Content</p>
+                    </aside>
+                </article>
+            </li>
+
+            <!-- Failure 3: Form inside an article -->
+            <li class="list-item" id="articleTag-failure-3">
+                <article>
+                    <form>
+                        <label for="email">Subscribe:</label>
+                        <input type="email" id="email">
+                        <button type="submit">Submit</button>
+                    </form>
+                </article>
+            </li>
+
+            <!-- Failure 4: Advertisement section -->
+            <li class="list-item" id="articleTag-failure-4">
+                <article>
+                    <p>Buy one, get one free! Limited time offer.</p>
+                </article>
+            </li>
+
+            <!-- Failure 5: Carousel wrapped in article -->
+            <li class="list-item" id="articleTag-failure-5">
+                <article>
+                    <div class="carousel">
+                        <img src="image1.jpg" alt="Promo 1">
+                        <img src="image2.jpg" alt="Promo 2">
+                    </div>
+                </article>
+            </li>
+
+            <!-- Failure 6: Video without supporting text -->
+            <li class="list-item" id="articleTag-failure-6">
+                <article>
+                    <video controls>
+                        <source src="promo.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </article>
+            </li>
+
+            <!-- Failure 7: Footer content wrapped as article -->
+            <li class="list-item" id="articleTag-failure-7">
+                <article>
+                    <footer>
+                        <p>&copy; 2024 My Website</p>
+                    </footer>
+                </article>
+            </li>
+
+            <!-- Failure 8: Search bar inside article -->
+            <li class="list-item" id="articleTag-failure-8">
+                <article>
+                    <input type="search" placeholder="Search...">
+                    <button>Search</button>
+                </article>
+            </li>
+
+            <!-- Failure 9: Breadcrumb navigation -->
+            <li class="list-item" id="articleTag-failure-9">
+                <article>
+                    <nav aria-label="breadcrumb">
+                        <a href="#">Home</a> > <a href="#">Blog</a> > <span>Current Post</span>
+                    </nav>
+                </article>
+            </li>
+
+            <!-- Failure 10: Simple announcement -->
+            <li class="list-item" id="articleTag-failure-10">
+                <article>
+                    <p>Our office will be closed this Friday for maintenance.</p>
+                </article>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
