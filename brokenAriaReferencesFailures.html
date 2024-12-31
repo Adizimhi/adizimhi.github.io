@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Broken ARIA Reference Failures</title>
+</head>
+<body>
+    <main role="main">
+        <ul>
+            <!-- Failure 1: aria-describedby pointing to a non-existent ID -->
+            <li class="list-item" id="brokenAria-failure-1">
+                <input type="text" aria-describedby="nonexistentID" placeholder="Enter text here">
+            </li>
+
+            <!-- Failure 2: aria-labelledby pointing to a non-existent ID -->
+            <li class="list-item" id="brokenAria-failure-2">
+                <button aria-labelledby="nonexistentLabel">Submit</button>
+            </li>
+
+            <!-- Failure 3: Incorrect ID reference in aria-labelledby -->
+            <li class="list-item" id="brokenAria-failure-3">
+                <span id="validID">Valid ID</span>
+                <input type="text" aria-labelledby="invalidID">
+            </li>
+
+            <!-- Failure 4: Missing referenced element for aria-describedby -->
+            <li class="list-item" id="brokenAria-failure-4">
+                <input type="password" aria-describedby="passwordHelp">
+                <p>Enter a strong password</p>
+            </li>
+
+            <!-- Failure 5: Incorrect use of aria-describedby with a non-visible element -->
+            <li class="list-item" id="brokenAria-failure-5">
+                <input type="text" aria-describedby="invisibleText">
+                <div id="invisibleText" style="display:none;">This is hidden</div>
+            </li>
+
+            <!-- Failure 6: Missing ID in referenced aria-labelledby -->
+            <li class="list-item" id="brokenAria-failure-6">
+                <button aria-labelledby="missingLabel">Submit</button>
+            </li>
+
+            <!-- Failure 7: Using aria-describedby with invalid ID -->
+            <li class="list-item" id="brokenAria-failure-7">
+                <input type="text" aria-describedby="invalidText" placeholder="Enter name">
+                <div id="invalidText"></div>
+            </li>
+
+            <!-- Failure 8: aria-labelledby pointing to a non-interactive element -->
+            <li class="list-item" id="brokenAria-failure-8">
+                <div id="someText">Some text here</div>
+                <button aria-labelledby="someText">Click me</button>
+            </li>
+
+            <!-- Failure 9: Missing corresponding element for aria-describedby -->
+            <li class="list-item" id="brokenAria-failure-9">
+                <input type="number" aria-describedby="invalidHelp" placeholder="Enter a number">
+            </li>
+
+            <!-- Failure 10: Broken aria-labelledby with duplicate ID -->
+            <li class="list-item" id="brokenAria-failure-10">
+                <span id="duplicateID">Label 1</span>
+                <span id="duplicateID">Label 2</span>
+                <button aria-labelledby="duplicateID">Click Me</button>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
