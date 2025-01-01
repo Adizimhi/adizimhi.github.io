@@ -14,35 +14,39 @@
     </style>
 </head>
 <body>
-    <h1>Hidden Visible Content - Failures</h1>
 
-    <!-- Example 1 - Focusable Paragraph with Aria-hidden -->
+    <!-- Example 1 - H1 Hidden from Screen Readers -->
+    <h1 aria-hidden="true" class="visible-element focus-outline" tabindex="0">
+        Hidden Visible Heading
+    </h1>
+
+    <!-- Example 2 - Focusable Paragraph with Aria-hidden -->
     <p class="visible-element focus-outline" aria-hidden="true" tabindex="0">
         This text is visible but hidden from screen readers.
     </p>
 
-    <!-- Example 2 - Button Hidden from Screen Readers -->
+    <!-- Example 3 - Button Hidden from Screen Readers -->
     <button aria-hidden="true" class="visible-element focus-outline" tabindex="0">
         Submit
     </button>
 
-    <!-- Example 3 - Focusable Icon Span with Aria-hidden -->
+    <!-- Example 4 - Focusable Icon Span with Aria-hidden -->
     <span aria-hidden="true" class="visible-element focus-outline" tabindex="0">
         ★ Important Info
     </span>
 
-    <!-- Example 4 - Focusable Div with Aria-hidden -->
+    <!-- Example 5 - Focusable Div with Aria-hidden -->
     <div aria-hidden="true" class="visible-element focus-outline" tabindex="0">
         Visible Div, hidden from screen readers.
     </div>
 
-    <!-- Example 5 - Section Hidden but Focusable -->
+    <!-- Example 6 - Section Hidden but Focusable -->
     <section aria-hidden="true" class="visible-element focus-outline" tabindex="0">
         <h2>Contact Information</h2>
         <p>Phone: (123) 456-7890</p>
     </section>
 
-    <!-- Example 6 - Image Focusable but Aria-hidden -->
+    <!-- Example 7 - Image with Aria-hidden -->
     <img src="example.jpg" aria-hidden="true" class="visible-element focus-outline" tabindex="0" alt="Descriptive image">
 
 </body>
