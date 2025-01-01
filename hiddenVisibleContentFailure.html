@@ -8,43 +8,42 @@
             color: black;
             font-size: 16px;
         }
+        .focus-outline:focus {
+            outline: 2px solid red;
+        }
     </style>
 </head>
 <body>
     <h1>Hidden Visible Content - Failures</h1>
 
-    <!-- Example 1 - Visible but Aria-hidden -->
-    <div class="list-item" id="hidden-visible-failure-1">
-        <p class="visible-element" aria-hidden="true">This text is visible but hidden from screen readers.</p>
-    </div>
+    <!-- Example 1 - Focusable Paragraph with Aria-hidden -->
+    <p class="visible-element focus-outline" aria-hidden="true" tabindex="0">
+        This text is visible but hidden from screen readers.
+    </p>
 
     <!-- Example 2 - Button Hidden from Screen Readers -->
-    <div class="list-item" id="hidden-visible-failure-2">
-        <button aria-hidden="true" class="visible-element">Submit</button>
+    <button aria-hidden="true" class="visible-element focus-outline" tabindex="0">
+        Submit
+    </button>
+
+    <!-- Example 3 - Focusable Icon Span with Aria-hidden -->
+    <span aria-hidden="true" class="visible-element focus-outline" tabindex="0">
+        ★ Important Info
+    </span>
+
+    <!-- Example 4 - Focusable Div with Aria-hidden -->
+    <div aria-hidden="true" class="visible-element focus-outline" tabindex="0">
+        Visible Div, hidden from screen readers.
     </div>
 
-    <!-- Example 3 - Icon Span Hidden with Aria -->
-    <div class="list-item" id="hidden-visible-failure-3">
-        <span aria-hidden="true" class="visible-element">★ Important Information</span>
-    </div>
+    <!-- Example 5 - Section Hidden but Focusable -->
+    <section aria-hidden="true" class="visible-element focus-outline" tabindex="0">
+        <h2>Contact Information</h2>
+        <p>Phone: (123) 456-7890</p>
+    </section>
 
-    <!-- Example 4 - Div with Aria-hidden -->
-    <div class="list-item" id="hidden-visible-failure-4">
-        <div aria-hidden="true" class="visible-element">Visible Div but hidden from assistive tech.</div>
-    </div>
-
-    <!-- Example 5 - Section Hidden but Visible -->
-    <div class="list-item" id="hidden-visible-failure-5">
-        <section aria-hidden="true" class="visible-element">
-            <h2>Contact Information</h2>
-            <p>Phone: (123) 456-7890</p>
-        </section>
-    </div>
-
-    <!-- Example 6 - Image with Aria-hidden -->
-    <div class="list-item" id="hidden-visible-failure-6">
-        <img src="example.jpg" aria-hidden="true" class="visible-element" alt="Descriptive image">
-    </div>
+    <!-- Example 6 - Image Focusable but Aria-hidden -->
+    <img src="example.jpg" aria-hidden="true" class="visible-element focus-outline" tabindex="0" alt="Descriptive image">
 
 </body>
 </html>
