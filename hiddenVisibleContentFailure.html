@@ -27,26 +27,37 @@
     </style>
 </head>
 <body>
-    <p><strong>Hidden Visible Content - Failures</strong></p>
+    <h1>Hidden Visible Content - Failures</h1>
 
-    <p><strong>Example 1: Using `aria-hidden="true"` on visible content</strong></p>
-    <p aria-hidden="true" tabindex="0">This paragraph is visible but not accessible to assistive technologies.</p>
+    <!-- Example 1 - Aria-hidden on Focusable Paragraph -->
+    <div class="list-item" id="hidden-visible-failure-1">
+        <p aria-hidden="true" tabindex="0">This paragraph is visible but not accessible to assistive technologies.</p>
+    </div>
 
-    <p><strong>Example 2: Hiding content visually but not from assistive tech</strong></p>
-    <p class="hidden-element" tabindex="0">This content is hidden visually but remains interactive.</p>
+    <!-- Example 2 - Hidden Element but Focusable -->
+    <div class="list-item" id="hidden-visible-failure-2">
+        <p class="hidden-element" tabindex="0" aria-hidden="true">This content is hidden visually but remains interactive.</p>
+    </div>
 
-    <p><strong>Example 3: Hiding with `visibility: hidden` but still focusable</strong></p>
-    <p style="visibility: hidden;" tabindex="0">This content is invisible but can still be focused.</p>
+    <!-- Example 3 - Visibility Hidden but Focusable -->
+    <div class="list-item" id="hidden-visible-failure-3">
+        <p style="visibility: hidden;" tabindex="0" aria-hidden="true">This content is invisible but can still be focused.</p>
+    </div>
 
-    <p><strong>Example 4: Icon without alternative text (Focusable)</strong></p>
-    <span class="icon hidden-element" tabindex="0">★</span>
+    <!-- Example 4 - Hidden Icon with Aria-hidden -->
+    <div class="list-item" id="hidden-visible-failure-4">
+        <span class="icon hidden-element" tabindex="0" aria-hidden="true">★</span>
+    </div>
 
-    <p><strong>Example 5: `aria-hidden="true"` on focusable button</strong></p>
-    <button aria-hidden="true" class="hidden-but-focusable">Click Me</button>
+    <!-- Example 5 - Hidden Button with Aria-hidden -->
+    <div class="list-item" id="hidden-visible-failure-5">
+        <button aria-hidden="true" class="hidden-but-focusable">Click Me</button>
+    </div>
 
-    <p><strong>Example 6: Hiding visible paragraphs (Focusable)</strong></p>
-    <p class="hidden-element" tabindex="0">Hidden Paragraph</p>
+    <!-- Example 6 - Hidden Paragraph with Focus -->
+    <div class="list-item" id="hidden-visible-failure-6">
+        <p class="hidden-element" tabindex="0" aria-hidden="true">Hidden Paragraph</p>
+    </div>
 
 </body>
 </html>
-
