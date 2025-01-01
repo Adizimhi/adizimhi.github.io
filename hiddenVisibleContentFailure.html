@@ -2,27 +2,51 @@
 <html>
 <head>
     <title>Failure Examples</title>
+    <style>
+        .hidden-element {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .hidden-but-focusable {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        .hidden-but-focusable:focus {
+            position: static;
+            left: 0;
+            width: auto;
+            height: auto;
+            overflow: visible;
+        }
+    </style>
 </head>
 <body>
-    <h1>Hidden Visible Content - Failures</h1>
+    <p><strong>Hidden Visible Content - Failures</strong></p>
 
-    <h2>Example 1: Using `aria-hidden="true"` on visible content</h2>
-    <p aria-hidden="true">This text is visible but not accessible to assistive technologies.</p>
+    <p><strong>Example 1: Using `aria-hidden="true"` on visible content</strong></p>
+    <p aria-hidden="true" tabindex="0">This paragraph is visible but not accessible to assistive technologies.</p>
 
-    <h2>Example 2: Hiding visible content using `display: none`</h2>
-    <div style="display: none;">This content is hidden from assistive technologies.</div>
+    <p><strong>Example 2: Hiding content visually but not from assistive tech</strong></p>
+    <p class="hidden-element" tabindex="0">This content is hidden visually but remains interactive.</p>
 
-    <h2>Example 3: Using `visibility: hidden` on visible elements</h2>
-    <div style="visibility: hidden;">This content is visible but inaccessible.</div>
+    <p><strong>Example 3: Hiding with `visibility: hidden` but still focusable</strong></p>
+    <p style="visibility: hidden;" tabindex="0">This content is invisible but can still be focused.</p>
 
-    <h2>Example 4: Providing no alternative for icon fonts</h2>
-    <span class="icon">★</span>
+    <p><strong>Example 4: Icon without alternative text (Focusable)</strong></p>
+    <span class="icon hidden-element" tabindex="0">★</span>
 
-    <h2>Example 5: Using `aria-hidden="true"` on a visible button</h2>
-    <button aria-hidden="true">Click Me</button>
+    <p><strong>Example 5: `aria-hidden="true"` on focusable button</strong></p>
+    <button aria-hidden="true" class="hidden-but-focusable">Click Me</button>
 
-    <h2>Example 6: Hiding visible headings with CSS</h2>
-    <h1 style="display: none;">Hidden Heading</h1>
+    <p><strong>Example 6: Hiding visible paragraphs (Focusable)</strong></p>
+    <p class="hidden-element" tabindex="0">Hidden Paragraph</p>
 
 </body>
 </html>
+
