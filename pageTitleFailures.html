@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Failure 1: Missing or Generic Title -->
+    <title>Untitled Document</title>
+
+    <meta charset="UTF-8">
+    <style>
+        .hidden-title {
+            position: absolute;
+            left: -9999px;
+        }
+        .focus-outline:focus {
+            outline: 2px solid red;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Failure 2: Aria-hidden on Visible Page Title -->
+    <h1 aria-hidden="true">Welcome to Our Website</h1>
+
+    <!-- Failure 3: Focusable but Hidden H1 -->
+    <h1 class="hidden-title focus-outline" tabindex="0">
+        Page Title - Not Read by Screen Readers
+    </h1>
+
+    <!-- Failure 4: Page Title in Hidden Section -->
+    <section aria-hidden="true">
+        <h1>Hidden Page Title</h1>
+    </section>
+
+    <!-- Failure 5: Title Inside Aria-hidden Banner -->
+    <div role="banner" aria-hidden="true">
+        <h1>Main Page Title</h1>
+    </div>
+
+    <!-- Failure 6: No H1 on Page -->
+    <p>Page has content, but no H1 or page title exists.</p>
+
+    <!-- Failure 7: Title in a Non-semantic Div (No H1) -->
+    <div class="visible-element">Main Page Heading (No H1 Used)</div>
+
+    <!-- Failure 8: Duplicate H1 Elements with Conflicting Titles -->
+    <h1>About Us</h1>
+    <h1>Contact Us</h1>
+
+    <!-- Failure 9: Title Text Replaced with Image (No Alt Text) -->
+    <h1><img src="title.png" alt=""></h1>
+
+    <!-- Failure 10: Misleading Title -->
+    <h1>Page Not Found</h1>
+    <p>But the page is actually About Us.</p>
+
+</body>
+</html>
