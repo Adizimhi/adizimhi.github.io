@@ -1,152 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Failure Examples for Table Headers with Borders</title>
-  <style>
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin-bottom: 20px;
-    }
-    th, td {
-      border: 1px solid #000;
-      padding: 8px;
-      text-align: left;
-    }
-  </style>
+	<title>Failed Example 2 with Borders</title>
+	<style>
+		table {
+			border-collapse: collapse;
+			width: 100%;
+			margin-bottom: 20px;
+		}
+		th, td {
+			border: 1px solid #000;
+			padding: 8px;
+			text-align: left;
+		}
+	</style>
 </head>
 <body>
-  <!-- Example 1: Missing scope="col" in column headers -->
-  <table>
-    <thead>
-      <tr>
-        <th rowspan="2">Name</th>
-        <th rowspan="2">ID</th>
-        <th colspan="2">Membership Dates</th>
-        <th rowspan="2">Balance</th>
-      </tr>
-      <tr>
-        <th>Joined</th>
-        <th>Canceled</th>
-      </tr>
-    </thead>
-  </table>
-
-  <!-- Example 2: Incorrect scope="row" on column headers -->
-  <table>
-    <thead>
-      <tr>
-        <th scope="row" rowspan="2">Name</th>
-        <th scope="row" rowspan="2">ID</th>
-        <th scope="row" colspan="2">Membership Dates</th>
-        <th scope="row" rowspan="2">Balance</th>
-      </tr>
-      <tr>
-        <th scope="row">Joined</th>
-        <th scope="row">Canceled</th>
-      </tr>
-    </thead>
-  </table>
-
-  <!-- Example 3: Missing scope from row headers -->
-  <table>
-    <tbody>
-      <tr>
-        <th>Margaret Nguyen</th>
-        <td>427311</td>
-        <td><time datetime="2010-06-03">June 3, 2010</time></td>
-        <td>n/a</td>
-        <td>0.00</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Example 4: Using scope="col" on row headers -->
-  <table>
-    <tbody>
-      <tr>
-        <th scope="col">Margaret Nguyen</th>
-        <td>427311</td>
-        <td><time datetime="2010-06-03">June 3, 2010</time></td>
-        <td>n/a</td>
-        <td>0.00</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Example 5: scope on a non-header cell -->
-  <table>
-    <tbody>
-      <tr>
-        <td scope="row">Margaret Nguyen</td>
-        <td>427311</td>
-        <td><time datetime="2010-06-03">June 3, 2010</time></td>
-        <td>n/a</td>
-        <td>0.00</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Example 6: Mixing incorrect and correct scopes -->
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">ID</th>
-        <th scope="row">Membership Dates</th>
-        <th scope="col">Balance</th>
-      </tr>
-    </thead>
-  </table>
-
-  <!-- Example 7: Duplicating scopes on the same cell -->
-  <table>
-    <thead>
-      <tr>
-        <th scope="col" scope="row">Name</th>
-        <th scope="col">ID</th>
-        <th scope="col">Membership Dates</th>
-        <th scope="col">Balance</th>
-      </tr>
-    </thead>
-  </table>
-
-  <!-- Example 8: Missing scope entirely from all headers -->
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>ID</th>
-        <th>Membership Dates</th>
-        <th>Balance</th>
-      </tr>
-    </thead>
-  </table>
-
-  <!-- Example 9: Incorrect nesting of scope with irrelevant tags -->
-  <table>
-    <thead>
-      <tr>
-        <th scope="col"><div>Name</div></th>
-        <th scope="col"><span>ID</span></th>
-        <th scope="row"><button>Membership Dates</button></th>
-        <th scope="col">Balance</th>
-      </tr>
-    </thead>
-  </table>
-
-  <!-- Example 10: Using scope on non-table elements -->
-  <div scope="col">Name</div>
-  <table>
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Membership Dates</th>
-        <th scope="col">Balance</th>
-      </tr>
-    </thead>
-  </table>
+	<table>
+		<tr>
+			<th id="headOfColumn1">Projects</th>
+			<th id="headOfColumn2">Objective</th>
+		</tr>
+	</table>
+	
+	<table>
+		<tr>
+			<td headers="headOfColumn1">15%</td>
+			<td headers="headOfColumn2">10%</td>
+		</tr>
+	</table>
 </body>
 </html>
