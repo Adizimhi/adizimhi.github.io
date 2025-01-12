@@ -9,18 +9,19 @@
         border-collapse: collapse;
         width: 100%;
       }
-      th,
       td {
         border: 1px solid black;
         padding: 8px;
         text-align: left;
       }
-      tr:first-child td {
-        font-weight: bold; /* Make the first row visually look like headers */
-        background-color: #F2F2F2; /* Highlight header row */
+      tr {
+        font-weight: bold; /* Make each row visually look bold */
       }
-      td {
-        font-weight: bold; /* Bold text inside each row */
+      tr:nth-child(odd) {
+        background-color: #F9F9F9; /* Alternate row colors */
+      }
+      tr:nth-child(even) {
+        background-color: #F2F2F2; /* Alternate row colors */
       }
     </style>
   </head>
@@ -28,44 +29,40 @@
     <table>
       <tbody>
         <tr>
-          <td id="headerOfColumn1">Projects</td>
-          <td id="headerOfColumn2">Objective</td>
+          <td>Project</td>
+          <td>Objective</td>
+          <td>Status</td>
+          <td>Deadline</td>
         </tr>
         <tr>
-          <td headers="headerOfColumn1">15%</td>
-          <td headers="headerOfColumn2">10%</td>
+          <td>Project A</td>
+          <td>Increase sales by 20%</td>
+          <td>In Progress</td>
+          <td>2025-03-15</td>
         </tr>
         <tr>
-          <td headers="headerOfColumn1">25%</td>
-          <td headers="headerOfColumn2">20%</td>
+          <td>Project B</td>
+          <td>Launch new product</td>
+          <td>Completed</td>
+          <td>2024-12-01</td>
         </tr>
         <tr>
-          <td headers="headerOfColumn1">35%</td>
-          <td headers="headerOfColumn2">30%</td>
+          <td>Project C</td>
+          <td>Improve customer retention</td>
+          <td>Pending</td>
+          <td>2025-06-30</td>
         </tr>
         <tr>
-          <td headers="headerOfColumn1">45%</td>
-          <td headers="headerOfColumn2">40%</td>
+          <td>Project D</td>
+          <td>Expand to new markets</td>
+          <td>In Progress</td>
+          <td>2025-09-01</td>
         </tr>
         <tr>
-          <td headers="headerOfColumn1">55%</td>
-          <td headers="headerOfColumn2">50%</td>
-        </tr>
-        <tr>
-          <td headers="headerOfColumn1">65%</td>
-          <td headers="headerOfColumn2">60%</td>
-        </tr>
-        <tr>
-          <td headers="headerOfColumn1">75%</td>
-          <td headers="headerOfColumn2">70%</td>
-        </tr>
-        <tr>
-          <td headers="headerOfColumn1">85%</td>
-          <td headers="headerOfColumn2">80%</td>
-        </tr>
-        <tr>
-          <td headers="headerOfColumn1">95%</td>
-          <td headers="headerOfColumn2">90%</td>
+          <td>Project E</td>
+          <td>Upgrade IT infrastructure</td>
+          <td>Completed</td>
+          <td>2025-01-31</td>
         </tr>
       </tbody>
     </table>
