@@ -1,35 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<title>Failed Example 2 with Borders and Row Header Rule Violation</title>
-	<style>
-		table {
-			border-collapse: collapse;
-			width: 100%;
-			margin-bottom: 20px;
-		}
-		th, td {
-			border: 1px solid #000;
-			padding: 8px;
-			text-align: left;
-		}
-	</style>
-</head>
-<body>
-	<!-- Column headers table -->
-	<table>
-		<tr>
-			<th id="headOfColumn1">Projects</th>
-			<th id="headOfColumn2">Objective</th>
-		</tr>
-	</table>
-	
-	<!-- Failing table: Missing headers or incorrect usage -->
-	<table>
-		<tr>
-			<td>15%</td> <!-- Missing 'headers' attribute -->
-			<td headers="headOfColumn1">10%</td> <!-- Incorrectly referencing a column header -->
-		</tr>
-	</table>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+      td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+      }
+      tr:first-child td {
+        font-weight: bold; /* Make the first row visually look like headers */
+        background-color: #F2F2F2; /* Highlight header row */
+      }
+    </style>
+  </head>
+  <body>
+    <style>
+      /* Add table borders */
+      table {
+        border-collapse: collapse; /* Ensures borders do not double */
+        width: 100%; /* Optional: Makes the table span the container width */
+      }
+      th,
+      td {
+        border: 1px solid black; /* Adds borders to table cells */
+        padding: 8px; /* Adds spacing inside the cells */
+        text-align: left; /* Aligns text to the left */
+      }
+      th {
+        background-color: #F2F2F2; /* Optional: Highlights the headers */
+      }
+    </style>
+    <table>
+      <tbody>
+        <tr>
+          <td id="headerOfColumn1">Projects</td>
+          <td id="headerOfColumn2">Objective</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">15%</td>
+          <td headers="headerOfColumn2">10%</td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="http://localhost:9000/index.umd.js"></script>
+    <iframe
+      role="presentation"
+      srcdoc='<html lang="en"></html>'
+      style="visibility: hidden; pointer-events: none; position: fixed"
+    ></iframe>
+  </body>
 </html>
