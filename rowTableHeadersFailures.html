@@ -9,6 +9,7 @@
         border-collapse: collapse;
         width: 100%;
       }
+      th,
       td {
         border: 1px solid black;
         padding: 8px;
@@ -18,25 +19,12 @@
         font-weight: bold; /* Make the first row visually look like headers */
         background-color: #F2F2F2; /* Highlight header row */
       }
+      td {
+        font-weight: bold; /* Bold text inside each row */
+      }
     </style>
   </head>
   <body>
-    <style>
-      /* Add table borders */
-      table {
-        border-collapse: collapse; /* Ensures borders do not double */
-        width: 100%; /* Optional: Makes the table span the container width */
-      }
-      th,
-      td {
-        border: 1px solid black; /* Adds borders to table cells */
-        padding: 8px; /* Adds spacing inside the cells */
-        text-align: left; /* Aligns text to the left */
-      }
-      th {
-        background-color: #F2F2F2; /* Optional: Highlights the headers */
-      }
-    </style>
     <table>
       <tbody>
         <tr>
@@ -47,13 +35,39 @@
           <td headers="headerOfColumn1">15%</td>
           <td headers="headerOfColumn2">10%</td>
         </tr>
+        <tr>
+          <td headers="headerOfColumn1">25%</td>
+          <td headers="headerOfColumn2">20%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">35%</td>
+          <td headers="headerOfColumn2">30%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">45%</td>
+          <td headers="headerOfColumn2">40%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">55%</td>
+          <td headers="headerOfColumn2">50%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">65%</td>
+          <td headers="headerOfColumn2">60%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">75%</td>
+          <td headers="headerOfColumn2">70%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">85%</td>
+          <td headers="headerOfColumn2">80%</td>
+        </tr>
+        <tr>
+          <td headers="headerOfColumn1">95%</td>
+          <td headers="headerOfColumn2">90%</td>
+        </tr>
       </tbody>
     </table>
-    <script src="http://localhost:9000/index.umd.js"></script>
-    <iframe
-      role="presentation"
-      srcdoc='<html lang="en"></html>'
-      style="visibility: hidden; pointer-events: none; position: fixed"
-    ></iframe>
   </body>
 </html>
