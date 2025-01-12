@@ -1,129 +1,152 @@
-<li class="list-item" id="rowTableHeaders-failure-1">
-    <table>
-        <tr>
-            <td>Product</td>
-            <td>Phone</td>
-        </tr>
-        <tr>
-            <td>Price</td>
-            <td>$699</td>
-        </tr>
-    </table>
-</li>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Failure Examples for Table Headers with Borders</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #000;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <!-- Example 1: Missing scope="col" in column headers -->
+  <table>
+    <thead>
+      <tr>
+        <th rowspan="2">Name</th>
+        <th rowspan="2">ID</th>
+        <th colspan="2">Membership Dates</th>
+        <th rowspan="2">Balance</th>
+      </tr>
+      <tr>
+        <th>Joined</th>
+        <th>Canceled</th>
+      </tr>
+    </thead>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-2">
-    <table>
-        <tr>
-            <td>Name</td>
-            <td>John Doe</td>
-        </tr>
-        <tr>
-            <td>Role</td>
-            <td>Manager</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 2: Incorrect scope="row" on column headers -->
+  <table>
+    <thead>
+      <tr>
+        <th scope="row" rowspan="2">Name</th>
+        <th scope="row" rowspan="2">ID</th>
+        <th scope="row" colspan="2">Membership Dates</th>
+        <th scope="row" rowspan="2">Balance</th>
+      </tr>
+      <tr>
+        <th scope="row">Joined</th>
+        <th scope="row">Canceled</th>
+      </tr>
+    </thead>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-3">
-    <table>
-        <tr>
-            <td>Department</td>
-            <td>HR</td>
-        </tr>
-        <tr>
-            <td>Employees</td>
-            <td>25</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 3: Missing scope from row headers -->
+  <table>
+    <tbody>
+      <tr>
+        <th>Margaret Nguyen</th>
+        <td>427311</td>
+        <td><time datetime="2010-06-03">June 3, 2010</time></td>
+        <td>n/a</td>
+        <td>0.00</td>
+      </tr>
+    </tbody>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-4">
-    <table>
-        <tr>
-            <td>Course</td>
-            <td>Math</td>
-        </tr>
-        <tr>
-            <td>Credits</td>
-            <td>3</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 4: Using scope="col" on row headers -->
+  <table>
+    <tbody>
+      <tr>
+        <th scope="col">Margaret Nguyen</th>
+        <td>427311</td>
+        <td><time datetime="2010-06-03">June 3, 2010</time></td>
+        <td>n/a</td>
+        <td>0.00</td>
+      </tr>
+    </tbody>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-5">
-    <table>
-        <tr>
-            <td>City</td>
-            <td>Paris</td>
-        </tr>
-        <tr>
-            <td>Population</td>
-            <td>2M</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 5: scope on a non-header cell -->
+  <table>
+    <tbody>
+      <tr>
+        <td scope="row">Margaret Nguyen</td>
+        <td>427311</td>
+        <td><time datetime="2010-06-03">June 3, 2010</time></td>
+        <td>n/a</td>
+        <td>0.00</td>
+      </tr>
+    </tbody>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-6">
-    <table>
-        <tr>
-            <td>Language</td>
-            <td>English</td>
-        </tr>
-        <tr>
-            <td>Level</td>
-            <td>Advanced</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 6: Mixing incorrect and correct scopes -->
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">ID</th>
+        <th scope="row">Membership Dates</th>
+        <th scope="col">Balance</th>
+      </tr>
+    </thead>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-7">
-    <table>
-        <tr>
-            <td>Item</td>
-            <td>Laptop</td>
-        </tr>
-        <tr>
-            <td>Warranty</td>
-            <td>2 Years</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 7: Duplicating scopes on the same cell -->
+  <table>
+    <thead>
+      <tr>
+        <th scope="col" scope="row">Name</th>
+        <th scope="col">ID</th>
+        <th scope="col">Membership Dates</th>
+        <th scope="col">Balance</th>
+      </tr>
+    </thead>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-8">
-    <table>
-        <tr>
-            <td>Subject</td>
-            <td>Science</td>
-        </tr>
-        <tr>
-            <td>Teacher</td>
-            <td>Mr. Smith</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 8: Missing scope entirely from all headers -->
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>ID</th>
+        <th>Membership Dates</th>
+        <th>Balance</th>
+      </tr>
+    </thead>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-9">
-    <table>
-        <tr>
-            <td>Device</td>
-            <td>Tablet</td>
-        </tr>
-        <tr>
-            <td>Battery</td>
-            <td>5000mAh</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 9: Incorrect nesting of scope with irrelevant tags -->
+  <table>
+    <thead>
+      <tr>
+        <th scope="col"><div>Name</div></th>
+        <th scope="col"><span>ID</span></th>
+        <th scope="row"><button>Membership Dates</button></th>
+        <th scope="col">Balance</th>
+      </tr>
+    </thead>
+  </table>
 
-<li class="list-item" id="rowTableHeaders-failure-10">
-    <table>
-        <tr>
-            <td>Car</td>
-            <td>SUV</td>
-        </tr>
-        <tr>
-            <td>Color</td>
-            <td>Red</td>
-        </tr>
-    </table>
-</li>
+  <!-- Example 10: Using scope on non-table elements -->
+  <div scope="col">Name</div>
+  <table>
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Membership Dates</th>
+        <th scope="col">Balance</th>
+      </tr>
+    </thead>
+  </table>
+</body>
+</html>
