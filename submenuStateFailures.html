@@ -3,48 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submenu State Failure Examples</title>
+    <title>Submenu State - Failures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .list-item {
+            margin: 10px 0;
+        }
+        .sub-menu {
+            display: none;
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        .sub-menu.active {
+            display: block;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".list-item > a").forEach(link => {
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    alert("This is a failure example. Submenu interaction is not functional.");
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <ul>
-        <li class="list-item" id="submenuState-failure-1">
-            <a href="#" aria-haspopup="true">Products</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-1">
+            <a href="#" aria-haspopup="true">Menu 1</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-2">
-            <a href="#">Services</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-2">
+            <a href="#">Menu 2</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-3">
-            <a href="#" aria-expanded="true">About Us</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-3">
+            <a href="#" aria-expanded="true">Menu 3</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-4">
-            <a href="#" aria-expanded="false">Contact</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-4">
+            <a href="#" aria-expanded="false">Menu 4</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-5">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Blog</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-5">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 5</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-6">
-            <a href="#" aria-haspopup="true" aria-expanded="true">Portfolio</a>
+        <li class="list-item" id="submenu-failure-6">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 6</a>
         </li>
-        <li class="list-item" id="submenuState-failure-7">
-            <a href="#">FAQs</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-7">
+            <a href="#">Menu 7</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-8">
-            <a href="#" aria-haspopup="false" aria-expanded="false">Gallery</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-8">
+            <a href="#" aria-haspopup="false" aria-expanded="false">Menu 8</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-9">
-            <a href="#" aria-expanded="false">Shop</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-9">
+            <a href="#" aria-expanded="false">Menu 9</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-failure-10">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Team</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-failure-10">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 10</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
     </ul>
 </body>
