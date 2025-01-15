@@ -3,33 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submenu State Success Examples</title>
+    <title>Submenu State - Success</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .list-item {
+            margin: 10px 0;
+        }
+        .sub-menu {
+            display: none;
+            margin-top: 5px;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+        }
+        .sub-menu.active {
+            display: block;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            cursor: pointer;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".list-item > a").forEach(link => {
+                link.addEventListener("click", (event) => {
+                    event.preventDefault();
+                    const isExpanded = link.getAttribute("aria-expanded") === "true";
+                    link.setAttribute("aria-expanded", !isExpanded);
+                    const submenu = link.nextElementSibling;
+                    if (submenu) {
+                        submenu.classList.toggle("active", !isExpanded);
+                    }
+                });
+            });
+        });
+    </script>
 </head>
 <body>
     <ul>
-        <li class="list-item" id="submenuState-success-1">
-            <a href="#" aria-expanded="false" aria-haspopup="true">Products</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-success-1">
+            <a href="#" aria-expanded="false" aria-haspopup="true">Menu 1</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-success-2">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Services</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-success-2">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 2</a>
+            <div class="sub-menu active">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-success-3">
-            <a href="#" aria-expanded="false" aria-haspopup="true">About Us</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-success-3">
+            <a href="#" aria-expanded="false" aria-haspopup="true">Menu 3</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-success-4">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Contact</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-success-4">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 4</a>
+            <div class="sub-menu active">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-success-5">
-            <a href="#" aria-expanded="false" aria-haspopup="true">Blog</a>
-            <div class="sub-menu" hidden>Submenu content here...</div>
+        <li class="list-item" id="submenu-success-5">
+            <a href="#" aria-expanded="false" aria-haspopup="true">Menu 5</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
-        <li class="list-item" id="submenuState-success-6">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Portfolio</a>
-            <div class="sub-menu">Submenu content here...</div>
+        <li class="list-item" id="submenu-success-6">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 6</a>
+            <div class="sub-menu active">Submenu Content</div>
+        </li>
+        <li class="list-item" id="submenu-success-7">
+            <a href="#" aria-expanded="false" aria-haspopup="true">Menu 7</a>
+            <div class="sub-menu">Submenu Content</div>
+        </li>
+        <li class="list-item" id="submenu-success-8">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 8</a>
+            <div class="sub-menu active">Submenu Content</div>
+        </li>
+        <li class="list-item" id="submenu-success-9">
+            <a href="#" aria-expanded="false" aria-haspopup="true">Menu 9</a>
+            <div class="sub-menu">Submenu Content</div>
+        </li>
+        <li class="list-item" id="submenu-success-10">
+            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 10</a>
+            <div class="sub-menu active">Submenu Content</div>
         </li>
     </ul>
 </body>
