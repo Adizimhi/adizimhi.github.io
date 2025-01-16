@@ -40,7 +40,7 @@
             document.querySelectorAll(".list-item > a").forEach(link => {
                 link.addEventListener("click", (event) => {
                     event.preventDefault();
-                    alert("This is a failure example. Submenu interaction is not functional.");
+                    alert("This is a failure example. Submenu interaction is not correctly implemented.");
                 });
             });
         });
@@ -49,42 +49,43 @@
 <body>
     <ul>
         <li class="list-item" id="submenu-failure-1">
-            <a href="#" aria-haspopup="true">Menu 1</a>
+            <a href="#" aria-expanded="true" aria-controls="menu1">Menu 1</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-2">
-            <a href="#">Menu 2</a>
+            <a href="#" aria-expanded="false">Menu 2</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-3">
-            <a href="#" aria-expanded="true">Menu 3</a>
+            <a href="#" aria-controls="menu3">Menu 3</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-4">
-            <a href="#" aria-expanded="false">Menu 4</a>
+            <a href="#">Menu 4</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-5">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 5</a>
+            <a href="#" aria-expanded="true">Menu 5</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-6">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 6</a>
+            <a href="#" aria-controls="menu6">Menu 6</a>
+            <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-7">
             <a href="#">Menu 7</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-8">
-            <a href="#" aria-haspopup="false" aria-expanded="false">Menu 8</a>
+            <a href="#" aria-expanded="false" aria-haspopup="false">Menu 8</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-9">
-            <a href="#" aria-expanded="false">Menu 9</a>
+            <a href="#">Menu 9</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
         <li class="list-item" id="submenu-failure-10">
-            <a href="#" aria-expanded="true" aria-haspopup="true">Menu 10</a>
+            <a href="#" aria-controls="menu10">Menu 10</a>
             <div class="sub-menu">Submenu Content</div>
         </li>
     </ul>
