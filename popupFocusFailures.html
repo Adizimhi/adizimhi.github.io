@@ -1,59 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popup Focus Failures (More Examples)</title>
-    <style>
-        .popup {
-            position: fixed;
-            top: 25%;
-            left: 35%;
-            width: 30%;
-            height: 20%;
-            background: white;
-            border: 2px solid #ddd;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: block; /* Popups visible on load */
-            z-index: 2000;
-        }
-    </style>
-</head>
-<body>
-    <main role="main">
-        <ul>
-            <li class="list-item" id="popupFocus-failure-11">
-                <div id="popup11" class="popup">
-                    <h3>Reminder</h3>
-                    <p>Don't forget your appointment!</p>
-                    <button>Dismiss</button>
-                </div>
-            </li>
+<div class="failure-example" id="popup-focus-failure-1">
+    <div class="popup">
+        <h2>Popup without Focus</h2>
+        <p>This popup does not receive focus.</p>
+        <button>Close</button>
+    </div>
+</div>
 
-            <li class="list-item" id="popupFocus-failure-12">
-                <div id="popup12" class="popup">
-                    <h2>Session Timeout</h2>
-                    <p>Your session will expire soon.</p>
-                </div>
-            </li>
+<div class="failure-example" id="popup-focus-failure-2">
+    <div class="popup" role="dialog">
+        <h2>Dialog without tabindex</h2>
+        <p>The dialog cannot receive focus directly.</p>
+        <button>Close</button>
+    </div>
+</div>
 
-            <li class="list-item" id="popupFocus-failure-13">
-                <div id="popup13" class="popup">
-                    <p>Survey: Please answer this quick poll.</p>
-                    <form>
-                        <input type="text" placeholder="Feedback">
-                        <button>Submit</button>
-                    </form>
-                </div>
-            </li>
+<div class="failure-example" id="popup-focus-failure-3">
+    <div class="popup" role="dialog">
+        <p>No tabindex, no focus management.</p>
+    </div>
+</div>
 
-            <li class="list-item" id="popupFocus-failure-14">
-                <div id="popup14" class="popup">
-                    <h2>Maintenance Notice</h2>
-                    <p>Scheduled maintenance starts at midnight.</p>
-                </div>
-            </li>
-        </ul>
-    </main>
-</body>
-</html>
+<div class="failure-example" id="popup-focus-failure-4">
+    <div class="popup" aria-modal="true">
+        <p>Popup appears, but focus is not managed.</p>
+    </div>
+</div>
+
+<div class="failure-example" id="popup-focus-failure-5">
+    <div class="popup" tabindex="-1">
+        <p>Tabindex is added but focus is not programmatically set.</p>
+    </div>
+</div>
+
+<div class="failure-example" id="popup-focus-failure-6">
+    <div class="popup">
+        <h2>Popup without ARIA roles</h2>
+        <button>Close</button>
+    </div>
+</div>
+
+<div class="failure-example" id="popup-focus-failure-7">
+    <div class="popup">
+        <p>No focus management at all.</p>
+    </div>
+</div>
+
+<div class="failure-example" id="popup-focus-failure-8">
+    <div class="popup">
+        <h2>Missing Accessibility Attributes</h2>
+    </div>
+</div>
+
+<div class="failure-example" id="popup-focus-failure-9">
+    <div class="popup" role="dialog">
+        <p>No script to move focus into the popup.</p>
+    </div>
+</div>
+
+<div class="failure-example" id="popup-focus-failure-10">
+    <div class="popup">
+        <h2>Popup with No Focus Control</h2>
+    </div>
+</div>
