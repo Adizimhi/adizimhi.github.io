@@ -1,23 +1,51 @@
-<div class="success-example" id="popup-focus-success-1">
-    <button id="open-popup-success-1">Open Popup</button>
-    <div id="popup-success-1" class="popup" tabindex="-1" role="dialog" aria-labelledby="popup-title-1" aria-modal="true" style="display: none;">
-        <h2 id="popup-title-1">Success Popup</h2>
-        <p>This popup traps focus correctly.</p>
-        <button id="close-popup-success-1">Close</button>
+<div class="success-example" id="popup-focus-success">
+    <button id="open-popup-success">Open Popup</button>
+
+    <!-- Popup -->
+    <div id="popup-success" class="popup" tabindex="-1" role="dialog" aria-labelledby="popup-title-success" aria-modal="true" style="display: none; position: fixed; top: 20%; left: 20%; width: 60%; background: white; border: 1px solid black; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+        <h2 id="popup-title-success">Accessible Popup</h2>
+        <p>You can navigate inside this popup using the keyboard.</p>
+        <button id="close-popup-success">Close</button>
     </div>
-    <script>
-        const popup1 = document.getElementById('popup-success-1');
-        const openButton1 = document.getElementById('open-popup-success-1');
-        const closeButton1 = document.getElementById('close-popup-success-1');
-
-        openButton1.addEventListener('click', () => {
-            popup1.style.display = 'block';
-            popup1.focus();
-        });
-
-        closeButton1.addEventListener('click', () => {
-            popup1.style.display = 'none';
-            openButton1.focus();
-        });
-    </script>
 </div>
+
+<script>
+    const openButtonSuccess = document.getElementById('open-popup-success');
+    const popupSuccess = document.getElementById('popup-success');
+    const closeButtonSuccess = document.getElementById('close-popup-success');
+
+    // Open popup and move focus inside
+    openButtonSuccess.addEventListener('click', () => {
+        popupSuccess.style.display = 'block';
+        popupSuccess.focus();
+    });
+
+    // Close popup and return focus to the button
+    closeButtonSuccess.addEventListener('click', () => {
+        popupSuccess.style.display = 'none';
+        openButtonSuccess.focus();
+    });
+
+    // Trap focus inside the popup
+    popupSuccess.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            const focusableElements = popupSuccess.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
+
+        // Close popup with Escape key
+        if (e.key === 'Escape') {
+            popupSuccess.style.display = 'none';
+            openButtonSuccess.focus();
+        }
+    });
+</script>
