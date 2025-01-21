@@ -1,80 +1,129 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Popup Focus Success</title>
-    <style>
-        .popup {
-            display: none;
-            position: fixed;
-            top: 20%;
-            left: 30%;
-            width: 40%;
-            height: 30%;
-            background: white;
-            border: 2px solid #ccc;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        .show {
-            display: block;
-        }
-    </style>
+<div class="success-example" id="popup-focus-success-1">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="popup-title" aria-modal="true">
+        <h2 id="popup-title">Popup Title</h2>
+        <p>This is a popup content.</p>
+        <button type="button">Close</button>
+    </div>
     <script>
-        function showPopup(popupId) {
-            const popup = document.getElementById(popupId);
-            popup.classList.add('show');
-            popup.setAttribute('tabindex', '-1');
-            popup.focus();
-        }
+        const popup = document.querySelector('#popup-focus-success-1 .popup');
+        popup.focus();
     </script>
-</head>
-<body>
-    <main role="main">
-        <ul>
-            <li class="list-item" id="popupFocus-success-1">
-                <button onclick="showPopup('popup1')">Open Popup</button>
-                <div id="popup1" class="popup">
-                    <h2>Popup 1</h2>
-                    <button>Close</button>
-                </div>
-            </li>
+</div>
 
-            <li class="list-item" id="popupFocus-success-2">
-                <button onclick="showPopup('popup2')">Launch Modal</button>
-                <div id="popup2" class="popup">
-                    <h2>Popup 2</h2>
-                </div>
-            </li>
+<div class="success-example" id="popup-focus-success-2">
+    <div class="popup" tabindex="-1" role="alertdialog" aria-labelledby="alert-title" aria-describedby="alert-message">
+        <h2 id="alert-title">Alert</h2>
+        <p id="alert-message">This is an important alert.</p>
+        <button type="button">Acknowledge</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-2 .popup');
+        popup.focus();
+    </script>
+</div>
 
-            <li class="list-item" id="popupFocus-success-3">
-                <button onclick="showPopup('popup3')">Show Popup</button>
-                <div id="popup3" class="popup">
-                    <p>Focus shifts here.</p>
-                </div>
-            </li>
+<div class="success-example" id="popup-focus-success-3">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="dialog-title" aria-modal="true">
+        <h2 id="dialog-title">Dialog Title</h2>
+        <form>
+            <label for="input">Input Field:</label>
+            <input type="text" id="input">
+            <button type="submit">Submit</button>
+        </form>
+        <button type="button">Close</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-3 .popup');
+        popup.focus();
+    </script>
+</div>
 
-            <li class="list-item" id="popupFocus-success-4">
-                <a href="#" onclick="showPopup('popup4')">Popup with Focus</a>
-                <div id="popup4" class="popup">
-                    <button>Submit</button>
-                </div>
-            </li>
+<div class="success-example" id="popup-focus-success-4">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-modal="true">
+        <h2 id="modal-title">Modal Title</h2>
+        <p>Modal content here.</p>
+        <a href="#" role="button">Learn More</a>
+        <button type="button">Close</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-4 .popup');
+        popup.focus();
+    </script>
+</div>
 
-            <li class="list-item" id="popupFocus-success-5">
-                <button onclick="showPopup('popup5')">Form Focus</button>
-                <div id="popup5" class="popup">
-                    <input type="text" placeholder="Enter name">
-                </div>
-            </li>
+<div class="success-example" id="popup-focus-success-5">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="popup-heading" aria-modal="true">
+        <h1 id="popup-heading">Welcome</h1>
+        <button type="button">Get Started</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-5 .popup');
+        popup.focus();
+    </script>
+</div>
 
-            <li class="list-item" id="popupFocus-success-6">
-                <button onclick="showPopup('popup6')">Dialog</button>
-                <div id="popup6" class="popup">
-                    <h2>Form</h2>
-                </div>
-            </li>
-        </ul>
-    </main>
-</body>
-</html>
+<div class="success-example" id="popup-focus-success-6">
+    <div class="popup" tabindex="-1" role="alertdialog" aria-labelledby="alert-title" aria-describedby="alert-desc">
+        <h3 id="alert-title">Attention</h3>
+        <p id="alert-desc">This is a critical message.</p>
+        <button type="button">Dismiss</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-6 .popup');
+        popup.focus();
+    </script>
+</div>
+
+<div class="success-example" id="popup-focus-success-7">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="confirmation-title" aria-modal="true">
+        <h2 id="confirmation-title">Confirmation</h2>
+        <p>Do you want to continue?</p>
+        <button type="button">Yes</button>
+        <button type="button">No</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-7 .popup');
+        popup.focus();
+    </script>
+</div>
+
+<div class="success-example" id="popup-focus-success-8">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="survey-title" aria-modal="true">
+        <h2 id="survey-title">Survey</h2>
+        <form>
+            <label for="feedback">Your Feedback:</label>
+            <textarea id="feedback"></textarea>
+            <button type="submit">Submit</button>
+        </form>
+        <button type="button">Close</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-8 .popup');
+        popup.focus();
+    </script>
+</div>
+
+<div class="success-example" id="popup-focus-success-9">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="chat-title" aria-modal="true">
+        <h2 id="chat-title">Chat with Us</h2>
+        <p>How can we help you?</p>
+        <input type="text" placeholder="Type your message">
+        <button type="button">Send</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-9 .popup');
+        popup.focus();
+    </script>
+</div>
+
+<div class="success-example" id="popup-focus-success-10">
+    <div class="popup" tabindex="-1" role="dialog" aria-labelledby="info-title" aria-modal="true">
+        <h2 id="info-title">Information</h2>
+        <p>Here is some important information.</p>
+        <button type="button">Got it</button>
+    </div>
+    <script>
+        const popup = document.querySelector('#popup-focus-success-10 .popup');
+        popup.focus();
+    </script>
+</div>
