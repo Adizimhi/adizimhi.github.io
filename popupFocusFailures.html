@@ -1,21 +1,26 @@
-<div class="failure-example" id="popup-focus-failure-1">
-    <button id="open-popup-failure-1">Open Popup</button>
-    <div id="popup-failure-1" class="popup" role="dialog" aria-labelledby="popup-title-failure-1" aria-modal="true" style="display: none;">
-        <h2 id="popup-title-failure-1">Failure Popup</h2>
-        <p>This popup does not manage focus.</p>
-        <button id="close-popup-failure-1">Close</button>
+<div class="failure-example" id="popup-focus-failure">
+    <button id="open-popup-failure">Open Popup</button>
+
+    <!-- Popup -->
+    <div id="popup-failure" class="popup" role="dialog" aria-labelledby="popup-title-failure" aria-modal="true" style="display: none; position: fixed; top: 20%; left: 20%; width: 60%; background: white; border: 1px solid black; padding: 20px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+        <h2 id="popup-title-failure">Inaccessible Popup</h2>
+        <p>This popup does not manage focus, so keyboard navigation may break.</p>
+        <button id="close-popup-failure">Close</button>
     </div>
-    <script>
-        const popupFail1 = document.getElementById('popup-failure-1');
-        const openButtonFail1 = document.getElementById('open-popup-failure-1');
-        const closeButtonFail1 = document.getElementById('close-popup-failure-1');
-
-        openButtonFail1.addEventListener('click', () => {
-            popupFail1.style.display = 'block';
-        });
-
-        closeButtonFail1.addEventListener('click', () => {
-            popupFail1.style.display = 'none';
-        });
-    </script>
 </div>
+
+<script>
+    const openButtonFailure = document.getElementById('open-popup-failure');
+    const popupFailure = document.getElementById('popup-failure');
+    const closeButtonFailure = document.getElementById('close-popup-failure');
+
+    // Open popup (no focus management)
+    openButtonFailure.addEventListener('click', () => {
+        popupFailure.style.display = 'block';
+    });
+
+    // Close popup (no focus return)
+    closeButtonFailure.addEventListener('click', () => {
+        popupFailure.style.display = 'none';
+    });
+</script>
