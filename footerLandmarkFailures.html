@@ -3,17 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inaccessible Footer Example</title>
+  <title>Failure Example</title>
 </head>
 <body>
-  <!-- Failure 1: Missing aria-label -->
-  <div role="contentinfo">
-    <p>This footer is missing an accessible name.</p>
+  <!-- Missing role="contentinfo" -->
+  <div aria-label="footer">
+    <p>This is the footer content for the page, but it lacks the contentinfo role.</p>
   </div>
 
-  <!-- Failure 2: Missing role="contentinfo" -->
-  <div>
-    <p>This footer is missing the contentinfo role.</p>
+  <!-- OR -->
+
+  <!-- Missing aria-label="footer" -->
+  <div role="contentinfo">
+    <p>This is the footer content for the page, but it lacks an accessible name.</p>
   </div>
 </body>
 </html>
