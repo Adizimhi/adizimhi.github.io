@@ -4,10 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Navigation Items - Failure Examples</title>
+  <style>
+    nav {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      background-color: #333;
+      padding: 10px;
+    }
+    nav div, nav p,span {
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      margin: 0 15px;
+    }
+    nav div:hover, nav p:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <div>Home</div>
+    <span>Home</span>
     <p>About</p>
     <div>Services</div>
     <p>Contact</p>
