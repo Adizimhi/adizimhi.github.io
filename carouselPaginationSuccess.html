@@ -30,6 +30,17 @@
             background: gray;
             border-radius: 50%;
             cursor: pointer;
+            position: relative;
+        }
+        .pagination-success .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
         }
         .active-dot {
             background: blue;
@@ -46,9 +57,15 @@
 
     <h3>Success Examples</h3>
     <div class="pagination-success">
-        <button type="button" aria-label="Slide 1" onclick="changeSlide(1)" class="active-dot">●</button>
-        <button type="button" aria-label="Slide 2" onclick="changeSlide(2)">●</button>
-        <button type="button" aria-label="Slide 3" onclick="changeSlide(3)">●</button>
+        <button type="button" aria-label="Slide 1" onclick="changeSlide(1)" class="active-dot">
+            <span class="sr-only">Slide 1</span>●
+        </button>
+        <button type="button" aria-label="Slide 2" onclick="changeSlide(2)">
+            <span class="sr-only">Slide 2</span>●
+        </button>
+        <button type="button" aria-label="Slide 3" onclick="changeSlide(3)">
+            <span class="sr-only">Slide 3</span>●
+        </button>
     </div>
 
     <script>
