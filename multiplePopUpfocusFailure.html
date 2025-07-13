@@ -99,3 +99,20 @@
 </div>
 
 <!-- Repeat the pattern for popups 11 to 15 -->
+
+<script>
+    // Open popup and manage focus for all popups
+    for (let i = 1; i <= 15; i++) {
+        const openButton = document.getElementById(`open-popup-failure-${i}`);
+        const popup = document.getElementById(`popup-failure-${i}`);
+        const closeButton = document.getElementById(`close-popup-failure-${i}`);
+
+        openButton.addEventListener('click', () => {
+            popup.style.display = 'block';
+        });
+
+        closeButton.addEventListener('click', () => {
+            popup.style.display = 'none';
+        });
+    }
+</script>
