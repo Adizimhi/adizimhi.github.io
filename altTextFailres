@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Images Without Alt Text</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 20px;
+    }
+    .list-item {
+      margin-bottom: 15px;
+    }
+    .itemContent {
+      display: flex;
+      align-items: center;
+    }
+    .itemContent img {
+      max-width: 100px;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Images Without Alt Text</h1>
+  <ul>
+    <li class="list-item" id="images-without-alt-text-1">
+      <div class="itemContent">
+        <img src="https://www.alamy.com/50-discount-text-effect-in-yellow-color-in-3d-look-image595110082.html" alt="">
+        <span>50% Discount Text Effect in Yellow Color in 3D Look</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-2">
+      <div class="itemContent">
+        <img src="https://pngtree.com/freepng/mega-offer-text-for-banner-vector-image_8689233.html" alt="">
+        <span>Mega Offer Text for Banner</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-3">
+      <div class="itemContent">
+        <img src="https://www.dreamstime.com/sales-promotion-text-effect-editable-eps-file-sales-promotion-text-effect-editable-vector-eps-file-image263391606" alt="">
+        <span>Sales Promotion Text Effect Editable EPS File</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-4">
+      <div class="itemContent">
+        <img src="https://pngtree.com/freepng/special-discount-red-text-box-vector-design-promotion-marketing-free-download_9250581.html" alt="">
+        <span>Special Discount Red Text Box Vector Design</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-5">
+      <div class="itemContent">
+        <img src="https://www.freepik.com/premium-psd/radiant-coupon-code-text-shimmers-neon-vibrant-purple-and-lavender-surrounded-by-kawaii-tickets_354514926.htm" alt="">
+        <span>Radiant Coupon Code Text Shimmers in Neon Vibrant Purple and Lavender</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-6">
+      <div class="itemContent">
+        <img src="https://www.alamy.com/50-discount-text-effect-design-in-3d-look-yellow-color-image575706297.html" alt="">
+        <span>50% Discount Text Effect Design in 3D Look</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-7">
+      <div class="itemContent">
+        <img src="https://www.vecteezy.com/vector-art/25695103-special-offer-text-effect-font-editable-typography-3d-text-vector-template" alt="">
+        <span>Special Offer Text Effect, Font Editable, Typography, 3D Text</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-8">
+      <div class="itemContent">
+        <img src="https://pngtree.com/freepng/red-and-black-sale-text-vector_9155701.html" alt="">
+        <span>Red and Black Sale Text Vector</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-9">
+      <div class="itemContent">
+        <img src="https://pngtree.com/freepng/promotion-text_6977337.html" alt="">
+        <span>Promotion Text</span>
+      </div>
+    </li>
+    <li class="list-item" id="images-without-alt-text-10">
+      <div class="itemContent">
+        <img src="https://in.pinterest.com/pin/premium-vector--997828861168381969/" alt="">
+        <span>3D Super Discount Offer Text Effect</span>
+      </div>
+    </li>
+  </ul>
+
+</body>
+</html>
