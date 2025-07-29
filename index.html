@@ -136,6 +136,27 @@
 	h.appendChild(s);
 }());
 </script>
-    
+    <script>
+(function () {
+    const isBot = () => {
+        const w = window;
+        const n = navigator;
+
+        return (
+            !('ontouchstart' in w) ||
+            /HeadlessChrome|Puppeteer|PhantomJS|crawler|bot|spider|node/.test(n.userAgent) ||
+            n.webdriver === true ||
+            !n.plugins || n.plugins.length === 0 ||
+            n.languages === ''
+        );
+    };
+
+    if (isBot()) {
+        document.body.innerHTML = '<h1 style="color:red; padding:2rem;">Access Denied — Bot Detected</h1>';
+        throw new Error('Bot blocked');
+    }
+})();
+</script>
+
 </body>
 </html>
