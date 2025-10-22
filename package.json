@@ -24,5 +24,8 @@
   "homepage": "https://github.com/codesandbox-app/static-template#readme",
   "devDependencies": {
     "serve": "^11.2.0"
+  },
+  "dependencies": {
+    "accessflow-mcp-server": "^1.0.6"
   }
 }
