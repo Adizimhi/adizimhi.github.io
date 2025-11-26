@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>brokenSubmenuIndication – Failure Examples</title>
+</head>
+<body>
+
+<ul class="failure-list">
+  <li class="list-item" id="brokenSubmenuIndication-failure-1">
+    <div class="itemContent">
+      <nav>
+        <button>Menu</button>
+        <ul>
+          <li><a href="#">Item A</a></li>
+        </ul>
+      </nav>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-2">
+    <div class="itemContent">
+      <button aria-controls="sub2">Options</button>
+      <ul id="sub2" hidden>
+        <li><a href="#">Choice</a></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-3">
+    <div class="itemContent">
+      <button aria-expanded="false">More</button>
+      <ul hidden>
+        <li><a href="#">Link 1</a></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-4">
+    <div class="itemContent">
+      <button aria-expanded="true">Settings</button>
+      <ul hidden>
+        <li><a href="#">Profile</a></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-5">
+    <div class="itemContent">
+      <button aria-haspopup="true">Actions</button>
+      <ul hidden>
+        <li><button>Run</button></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-6">
+    <div class="itemContent">
+      <nav>
+        <div class="menu-trigger">Menu</div>
+        <ul hidden>
+          <li><a href="#">Item</a></li>
+        </ul>
+      </nav>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-7">
+    <div class="itemContent">
+      <button aria-controls="wrongId">Menu</button>
+      <ul id="actualMenu">
+        <li><a href="#">Item</a></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-8">
+    <div class="itemContent">
+      <button aria-expanded="maybe" aria-controls="x1">More</button>
+      <ul id="x1">
+        <li><a href="#">A</a></li>
+      </ul>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-9">
+    <div class="itemContent">
+      <div role="menubar">
+        <button role="menuitem">Tools</button>
+        <div role="menu">
+          <a role="menuitem" href="#">Admin</a>
+        </div>
+      </div>
+    </div>
+  </li>
+
+  <li class="list-item" id="brokenSubmenuIndication-failure-10">
+    <div class="itemContent">
+      <button aria-expanded="false" aria-controls="sub10"></button>
+      <ul id="sub10" hidden>
+        <li><a href="#">Option</a></li>
+      </ul>
+    </div>
+  </li>
+</ul>
+
+</body>
+</html>
