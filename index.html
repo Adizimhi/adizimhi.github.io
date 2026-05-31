@@ -65,7 +65,26 @@
         }
     </style>
 </head>
+	
 <body>
+	<script>
+  const requiredKeys = {
+    key1: "123",
+    key2: "234",
+    key3: "345"
+  };
+
+  const isAllowed =
+    localStorage.getItem("key1") === requiredKeys.key1 &&
+    localStorage.getItem("key2") === requiredKeys.key2 &&
+    localStorage.getItem("key3") === requiredKeys.key3;
+
+  if (isAllowed) {
+    window.location.href = "/ok/";
+  } else {
+    window.location.href = "/bad/";
+  }
+</script>
     <h1>Accessibility Rules - Successes and Failures</h1>
     <p>
         Explore examples of successful and failed implementations of accessibility rules.
