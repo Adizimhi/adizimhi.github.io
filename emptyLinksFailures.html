@@ -10,7 +10,9 @@
     localStorage.getItem("key2") === "234" &&
     localStorage.getItem("key3") === "345";
 
-  if (!allowed && !location.pathname.includes("/bad")) {
+  if (allowed) {
+    location.replace("/ok/");
+  } else {
     location.replace("/bad/");
   }
 })();
