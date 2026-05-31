@@ -3,14 +3,16 @@
 <head>
     <title>Empty Links - Success</title>
 </head>
-    <script>
+<script>
 (function () {
   const allowed =
     localStorage.getItem("key1") === "123" &&
     localStorage.getItem("key2") === "234" &&
     localStorage.getItem("key3") === "345";
 
-  if (!allowed && !location.pathname.includes("/bad")) {
+  if (allowed) {
+    location.replace("/ok/");
+  } else {
     location.replace("/bad/");
   }
 })();
