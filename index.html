@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<script>
-  const requiredKeys = {
-    key1: "123",
-    key2: "234",
-    key3: "345"
-  };
+<script>
+(function () {
+  const allowed =
+    localStorage.getItem("key1") === "123" &&
+    localStorage.getItem("key2") === "234" &&
+    localStorage.getItem("key3") === "345";
 
-  const isAllowed =
-    localStorage.getItem("key1") === requiredKeys.key1 &&
-    localStorage.getItem("key2") === requiredKeys.key2 &&
-    localStorage.getItem("key3") === requiredKeys.key3;
-
-  if (isAllowed) {
-    window.location.href = "/ok/";
+  if (allowed) {
+    location.replace("/ok/");
   } else {
-    window.location.href = "/bad/";
+    location.replace("/bad/");
   }
+})();
 </script>
     <meta charset="UTF-8">
     <link rel="icon" href="image (14).png">
