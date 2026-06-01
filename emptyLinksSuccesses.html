@@ -3,18 +3,7 @@
 <head>
     <title>Empty Links - Success</title>
 </head>
-<script>
-(function () {
-  const allowed =
-    localStorage.getItem("key1") === "123" &&
-    localStorage.getItem("key2") === "234" &&
-    localStorage.getItem("key3") === "345";
 
-  if (!allowed && !location.pathname.includes("/bad")) {
-    location.replace("/bad/");
-  }
-})();
-</script>
 <body>
     <h1>Accessible Links - Success Examples</h1>
 
