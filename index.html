@@ -1,1 +1,162 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+(function () {
+const allowed =
+localStorage.getItem("key1") === "123" &&
+localStorage.getItem("key2") === "234" &&
+localStorage.getItem("key3") === "345";
+
+if (allowed) {
+location.replace("/ok/");
+} else {
+location.replace("/bad/");
+}
+})();
+</script>
+<meta charset="UTF-8">
+<link rel="icon" href="image (14).png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility Rules</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: #f4f4f9;
+color: #333;
+text-align: center;
+}
+h1 {
+margin: 1rem 0;
+color: #444;
+}
+p {
+margin: 1rem 0 2rem;
+color: #666;
+}
+ul {
+list-style: none;
+padding: 0;
+margin: 0 auto;
+max-width: 400px;
+}
+li {
+margin: 1rem 0;
+}
+a {
+display: inline-block;
+width: 100%;
+max-width: 300px;
+height: 50px;
+line-height: 50px;
+text-align: center;
+padding: 0;
+text-decoration: none;
+font-size: 1rem;
+font-weight: bold;
+color: white;
+border: 2px solid transparent;
+border-radius: 6px;
+transition: all 0.3s ease;
+box-sizing: border-box;
+}
+/* Button styles */
+.btn-success {
+background-color: #28a745;
+border-color: #1e7e34;
+}
+.btn-success:hover {
+background-color: #1e7e34;
+}
+.btn-failure {
+background-color: #dc3545;
+border-color: #bd2130;
+}
+.btn-failure:hover {
+background-color: #bd2130;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Accessibility Rules - Successes and Failures</h1>
+<p>
+Explore examples of successful and failed implementations of accessibility rules.
+</p>
+<ul>
+<li><a href="hiddenVisibleContentSuccess.html" class="btn-success">Hidden Visible Content - Successes</a></li>
+<li><a href="hiddenVisibleContentFailure.html" class="btn-failure">Hidden Visible Content - Failures</a></li>
+<li><a href="emptyLinksSuccesses.html" class="btn-success">Empty Links-Successes</a></li>
+<li><a href="emptyLinksFailures.html" class="btn-failure">Empty Links-Failures</a></li>
+<li><a href="untaggedHeadingsSuccess.html" class="btn-success">Untagged Headings -Successes</a></li>
+<li><a href="untaggedHeadingsFailures.html" class="btn-failure">Untagged Headings -Failures</a></li>
+<li><a href="newWindowLinkSuccess.html" class="btn-success">New Window link-Successes</a></li>
+<li><a href="newWindowLinkFailures.html" class="btn-failure">New Window link-Failures</a></li>
+<li><a href="fontSizeFailures.html" class="btn-failure">Font-Size -Failures</a></li>
+<li><a href="missingFormButtonFailures.html" class="btn-failure">missingFormButton-Failures</a></li>
+<li><a href="missingFormButtonSuccess.html" class="btn-success">missingFormButton-Successes</a></li>
+<li><a href="brokenListFailures.html" class="btn-failure">brokenListFailures-Failures</a></li>
+<li><a href="brokenListSuccess.html" class="btn-success">brokenListSuccess-Successes</a></li>
+<li><a href="fakeHiddenInteractiveFailures.html" class="btn-failure">fakeHiddenInteractive-Failures</a></li>
+<li><a href="fakeHiddenInteractiveSuccess.html" class="btn-success">fakeHiddenInteractive-Successes</a></li>
+<li><a href="popupFocusFailures.html" class="btn-failure">popupFocus-Failures</a></li>
+<li><a href="popupFocusSuccess.html" class="btn-success">popupFocus-Successes</a></li>
+<li><a href="headlessTablesFailures.html" class="btn-failure">headlessTables-Failures</a></li>
+<li><a href="headlessTablesSuccess.html" class="btn-success">headlessTables-Successes</a></li
+<li><a href="skipLinksFailures.html" class="btn-failure">skipLinks-Failures</a></li>
+<li><a href="skipLinksSuccess.html" class="btn-success">skipLinks-Successes</a></li
+<li><a href="carouselPaginationFailures.html" class="btn-failure">carouselPagination-Failures</a></li>
+<li><a href="carouselPaginationSuccess.html" class="btn-success">carouselPagination-Successes</a></li
+<li><a href="articleSetupFailures.html" class="btn-failure">articleSetup-Failures</a></li>
+<li><a href="articleSetupSuccess.html" class="btn-success">articleSetup-Successes</a></li
+<li><a href="brokenAriaReferencesFailures.html" class="btn-failure">brokenAriaReferences-Failures</a></li>
+<li><a href="brokenAriaReferncesSuccess.html" class="btn-success">brokenAriaReferences-Successes</a></li>
+<li><a href="pageTitleFailures.html" class="btn-failure">pageTitle-Failures</a></li>
+<li><a href="pageTitleSuccess.html" class="btn-success">pageTitle-Successes</a></li
+<li><a href="rowTableHeadersFailures.html" class="btn-failure">rowTableHeaders-Failures</a></li>
+<li><a href="rowTableHeadersSuccess.html" class="btn-success">rowTableHeaders-Successes</a></li>
+<li><a href="breadcrumbsFailures.html" class="btn-failure">breadcrumbs-Failures</a></li>
+<li><a href="breadcrumbsSuccess.html" class="btn-success">breadcrumbs-Successes</a></li>
+<li><a href="columnTableHeadersFailures.html" class="btn-failure">columnTableHeaders-Failures</a></li>
+<li><a href="columnTableHeadersSuccess.html" class="btn-success">columnTableHeaders-Successes</a></li
+<li><a href="footerLandmarkFailures.html" class="btn-failure">footerLandmark-Failures</a></li>
+<li><a href="footerLandmarkSuccess.html" class="btn-success">footerLandmark-Successes</a></li
+<li><a href="submenuStateFailures.html" class="btn-failure">submenuState-Failures</a></li>
+<li><a href="submenuStateSuccess.html" class="btn-success">submenuState-Successes</a></li
+<li><a href="tableLayoutsFailures.html" class="btn-failure">tableLayouts-Failures</a></li>
+<li><a href="tableLayoutsSuccess.html" class="btn-success">tableLayouts-Successes</a></li>
+<li><a href="viewportScalibilityFailures.html" class="btn-failure">viewportScalibilty-Failures</a></li>
+<li><a href="viewportScalibiltySuccess.html" class="btn-success">viewportScalibilty-Successes</a></li
+<li><a href="viewportScalibilityNonExist.html" class="btn-failure">viewportScalibilty-non-exist</a></li>
+<li><a href="searchFormTappingSuccess.html" class="btn-success">searchFormTapping-Successes</a></li>
+<li><a href="missingNavItemsFailures.html" class="btn-failure">missingNavItems-Failures</a></li>
+<li><a href="missingNavItemsSuccess.html" class="btn-success">missingNavItems-Successes</a></li
+<li><a href="loadAutoFocusFailures.html" class="btn-failure">loadAutoFocus-Failures</a></li>
+<li><a href="loadAutoFocusSuccess.html" class="btn-success">loadAutoFocus-Successes</a></li
+<li><a href="IncorrectMainLandmarkFailures.html" class="btn-failure">IncorrectMainLandmark-Failures</a></li>
+<li><a href="IncorrectMainLandmarkSuccess.html" class="btn-success">IncorrectMainLandmark-Successes</a></li
+<li><a href="multiplePopUpfocusFailure.html" class="btn-failure">Multiple popupFocus-Failures</a></li>
+<li><a href="altTextFailres.html" class="btn-failure">altTextFailres</a></li>
+<li><a href="brokenSubmenuIndicationFailures.html" class="btn-failure">brokenSubmenuIndication-Failures</a></li>
+<li><a href="brokenSubmenuIndicationSuccess.html" class="btn-success">lbrokenSubmenuIndication-Success</a></li
+<li><a href="embedder.html" class="btn-success">Scan your website and get accessiblity score</a></li>
+<li><a href="menuitemtests.html" class="btn-success">menuitemtests-Success</a></li
+
+
+</ul>
+<script>
+(function () {
+const s = document.createElement('script');
+const h = document.querySelector('head') || document.body;
+s.src = 'https://acsbapp.com/app-flow.js';
+s.async = true;
+h.appendChild(s);
+}());
+</script>
+	  <script> (function(){ var s = document.createElement('script'); var h = document.querySelector('head') || document.body; s.src = 'https://acsbapp.com/apps/app/dist/js/app.js'; s.async = true; s.onload = function(){ acsbJS.init(); }; h.appendChild(s); })(); </script> 
+</body>
+</html>
