@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <script>
-(function () {
-  const allowed =
-    localStorage.getItem("key1") === "123" &&
-    localStorage.getItem("key2") === "234" &&
-    localStorage.getItem("key3") === "345";
 
-  if (!allowed && !location.pathname.includes("/bad")) {
-    location.replace("/bad/");
-  }
-})();
-</script>
     <title>Failure Examples</title>
     <style>
         .visible-element {
