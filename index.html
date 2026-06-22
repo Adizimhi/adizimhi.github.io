@@ -1,46 +1,107 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <link rel="icon" href="image (14).png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Accessibility Rules</title>
+<title>Accessibility Rules Dashboard</title>
 
 <style>
-body {
-font-family: Arial, sans-serif;
-margin: 0;
-padding: 70px 0 0 0;
-background-color: #f4f4f9;
-color: #333;
-text-align: center;
-}
-
-.top-bar {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-z-index: 99999;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 12px 24px;
-background: #ffffff;
-box-shadow: 0 2px 8px rgba(0,0,0,.1);
+* {
 box-sizing: border-box;
 }
 
-.user-info {
-font-size: 16px;
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+background: #eef3ff;
+color: #1f2937;
+}
+
+.app {
+display: flex;
+min-height: 100vh;
+}
+
+.sidebar {
+width: 270px;
+background: #f6f8ff;
+border-right: 1px solid #d9e1f2;
+padding: 20px;
+position: fixed;
+top: 0;
+bottom: 0;
+overflow-y: auto;
+}
+
+.logo {
+font-size: 22px;
 font-weight: bold;
-color: #444;
+margin-bottom: 5px;
+}
+
+.subtitle {
+font-size: 13px;
+color: #718096;
+margin-bottom: 25px;
+}
+
+.nav-title {
+font-size: 13px;
+font-weight: bold;
+margin: 20px 0 10px;
+color: #4a5568;
+}
+
+.rule-link {
+display: block;
+padding: 10px 12px;
+margin-bottom: 6px;
+border-radius: 10px;
+text-decoration: none;
+color: #334155;
+font-size: 14px;
+}
+
+.rule-link:hover {
+background: #e4e9ff;
+}
+
+.main {
+margin-left: 270px;
+width: calc(100% - 270px);
+}
+
+.topbar {
+height: 70px;
+background: white;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 28px;
+box-shadow: 0 2px 10px rgba(0,0,0,.08);
+position: sticky;
+top: 0;
+z-index: 1000;
+}
+
+.search {
+width: 420px;
+max-width: 60%;
+padding: 13px 18px;
+border: 1px solid #d4dbea;
+border-radius: 8px;
+font-size: 15px;
+}
+
+.user-area {
+display: flex;
+align-items: center;
+gap: 14px;
+font-weight: bold;
 }
 
 .logout-btn {
-width: auto;
 background: #dc3545;
 color: white;
 border: none;
@@ -48,67 +109,134 @@ padding: 10px 18px;
 border-radius: 8px;
 cursor: pointer;
 font-weight: bold;
-transition: .3s;
 }
 
 .logout-btn:hover {
 background: #b02a37;
-transform: translateY(-2px);
 }
 
-.logout-btn:focus {
-outline: 3px solid #80bdff;
-outline-offset: 2px;
+.content {
+padding: 30px 34px;
 }
 
 h1 {
-margin: 1rem 0;
-color: #444;
-}
-p {
-margin: 1rem 0 2rem;
-color: #666;
-}
-ul {
-list-style: none;
-padding: 0;
-margin: 0 auto;
-max-width: 400px;
-}
-li {
-margin: 1rem 0;
-}
-a {
-display: inline-block;
-width: 100%;
-max-width: 300px;
-height: 50px;
-line-height: 50px;
-text-align: center;
-padding: 0;
-text-decoration: none;
-font-size: 1rem;
-font-weight: bold;
-color: white;
-border: 2px solid transparent;
-border-radius: 6px;
-transition: all 0.3s ease;
-box-sizing: border-box;
+font-size: 34px;
+margin: 0 0 8px;
 }
 
-.btn-success {
-background-color: #28a745;
-border-color: #1e7e34;
+.description {
+color: #64748b;
+margin-bottom: 30px;
 }
-.btn-success:hover {
-background-color: #1e7e34;
+
+.cards {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+gap: 18px;
+max-width: 800px;
+margin-bottom: 30px;
 }
-.btn-failure {
-background-color: #dc3545;
-border-color: #bd2130;
+
+.card {
+background: white;
+border-radius: 14px;
+padding: 22px;
+box-shadow: 0 8px 20px rgba(31,41,55,.08);
 }
-.btn-failure:hover {
-background-color: #bd2130;
+
+.card-number {
+font-size: 34px;
+font-weight: bold;
+color: #5468ff;
+}
+
+.card-label {
+font-weight: bold;
+margin-top: 8px;
+}
+
+.panel {
+background: white;
+border-radius: 14px;
+padding: 24px;
+box-shadow: 0 8px 20px rgba(31,41,55,.08);
+}
+
+.rules-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+gap: 16px;
+margin-top: 20px;
+}
+
+.rule-card {
+background: #f8fbff;
+border: 1px solid #dbe5f6;
+border-radius: 14px;
+padding: 16px;
+}
+
+.rule-card h2 {
+font-size: 17px;
+margin: 0 0 12px;
+}
+
+.actions {
+display: flex;
+gap: 10px;
+}
+
+.btn {
+flex: 1;
+text-align: center;
+text-decoration: none;
+padding: 10px;
+border-radius: 8px;
+color: white;
+font-weight: bold;
+font-size: 14px;
+}
+
+.success {
+background: #28a745;
+}
+
+.failure {
+background: #dc3545;
+}
+
+.hidden {
+display: none;
+}
+
+@media (max-width: 800px) {
+.sidebar {
+position: static;
+width: 100%;
+height: auto;
+}
+
+.app {
+display: block;
+}
+
+.main {
+margin-left: 0;
+width: 100%;
+}
+
+.topbar {
+height: auto;
+gap: 12px;
+flex-direction: column;
+align-items: stretch;
+padding: 16px;
+}
+
+.search {
+max-width: 100%;
+width: 100%;
+}
 }
 </style>
 </head>
@@ -117,119 +245,153 @@ background-color: #bd2130;
 
 <script>
 if (sessionStorage.getItem('loggedIn') !== 'true') {
-    window.location.href = 'login.html';
+window.location.href = 'login.html';
 }
 </script>
 
-<div class="top-bar">
-    <div class="user-info">
-        👤 <span id="loggedUser"></span>
-    </div>
+<div class="app">
 
-    <button id="logoutBtn" class="logout-btn" type="button">
-        Logout
-    </button>
+<aside class="sidebar">
+<div class="logo">AccessFlow</div>
+<div class="subtitle">QA Testing</div>
+
+<div class="nav-title">Dashboard</div>
+<a class="rule-link" href="index.html">Rule Library</a>
+
+<div class="nav-title">Engine Rules</div>
+<div id="sidebarRules"></div>
+</aside>
+
+<main class="main">
+
+<header class="topbar">
+<input id="searchInput" class="search" type="search" placeholder="Search rule by name...">
+
+<div class="user-area">
+<span>👤 <span id="loggedUser"></span></span>
+<button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+</div>
+</header>
+
+<section class="content">
+<h1>Rule Library</h1>
+<p class="description">Browse, test, and validate accessibility rule examples.</p>
+
+<div class="cards">
+<div class="card">
+<div class="card-number" id="totalRules">0</div>
+<div class="card-label">Total Rules</div>
 </div>
 
+<div class="card">
+<div class="card-number">✅</div>
+<div class="card-label">Success Examples</div>
+</div>
 
-<h1>Accessibility Rules - Successes and Failures</h1>
-<p>
-Explore examples of successful and failed implementations of accessibility rules.
-</p>
-<ul>
-<li><a href="hiddenVisibleContentSuccess.html" class="btn-success">Hidden Visible Content - Successes</a></li>
-<li><a href="hiddenVisibleContentFailure.html" class="btn-failure">Hidden Visible Content - Failures</a></li>
-<li><a href="emptyLinksSuccesses.html" class="btn-success">Empty Links-Successes</a></li>
-<li><a href="emptyLinksFailures.html" class="btn-failure">Empty Links-Failures</a></li>
-<li><a href="untaggedHeadingsSuccess.html" class="btn-success">Untagged Headings -Successes</a></li>
-<li><a href="untaggedHeadingsFailures.html" class="btn-failure">Untagged Headings -Failures</a></li>
-<li><a href="newWindowLinkSuccess.html" class="btn-success">New Window link-Successes</a></li>
-<li><a href="newWindowLinkFailures.html" class="btn-failure">New Window link-Failures</a></li>
-<li><a href="fontSizeFailures.html" class="btn-failure">Font-Size -Failures</a></li>
-<li><a href="missingFormButtonFailures.html" class="btn-failure">missingFormButton-Failures</a></li>
-<li><a href="missingFormButtonSuccess.html" class="btn-success">missingFormButton-Successes</a></li>
-<li><a href="brokenListFailures.html" class="btn-failure">brokenListFailures-Failures</a></li>
-<li><a href="brokenListSuccess.html" class="btn-success">brokenListSuccess-Successes</a></li>
-<li><a href="fakeHiddenInteractiveFailures.html" class="btn-failure">fakeHiddenInteractive-Failures</a></li>
-<li><a href="fakeHiddenInteractiveSuccess.html" class="btn-success">fakeHiddenInteractive-Successes</a></li>
-<li><a href="popupFocusFailures.html" class="btn-failure">popupFocus-Failures</a></li>
-<li><a href="popupFocusSuccess.html" class="btn-success">popupFocus-Successes</a></li>
-<li><a href="headlessTablesFailures.html" class="btn-failure">headlessTables-Failures</a></li>
-<li><a href="headlessTablesSuccess.html" class="btn-success">headlessTables-Successes</a></li
-<li><a href="skipLinksFailures.html" class="btn-failure">skipLinks-Failures</a></li>
-<li><a href="skipLinksSuccess.html" class="btn-success">skipLinks-Successes</a></li
-<li><a href="carouselPaginationFailures.html" class="btn-failure">carouselPagination-Failures</a></li>
-<li><a href="carouselPaginationSuccess.html" class="btn-success">carouselPagination-Successes</a></li
-<li><a href="articleSetupFailures.html" class="btn-failure">articleSetup-Failures</a></li>
-<li><a href="articleSetupSuccess.html" class="btn-success">articleSetup-Successes</a></li
-<li><a href="brokenAriaReferencesFailures.html" class="btn-failure">brokenAriaReferences-Failures</a></li>
-<li><a href="brokenAriaReferncesSuccess.html" class="btn-success">brokenAriaReferences-Successes</a></li>
-<li><a href="pageTitleFailures.html" class="btn-failure">pageTitle-Failures</a></li>
-<li><a href="pageTitleSuccess.html" class="btn-success">pageTitle-Successes</a></li
-<li><a href="rowTableHeadersFailures.html" class="btn-failure">rowTableHeaders-Failures</a></li>
-<li><a href="rowTableHeadersSuccess.html" class="btn-success">rowTableHeaders-Successes</a></li>
-<li><a href="breadcrumbsFailures.html" class="btn-failure">breadcrumbs-Failures</a></li>
-<li><a href="breadcrumbsSuccess.html" class="btn-success">breadcrumbs-Successes</a></li>
-<li><a href="columnTableHeadersFailures.html" class="btn-failure">columnTableHeaders-Failures</a></li>
-<li><a href="columnTableHeadersSuccess.html" class="btn-success">columnTableHeaders-Successes</a></li
-<li><a href="footerLandmarkFailures.html" class="btn-failure">footerLandmark-Failures</a></li>
-<li><a href="footerLandmarkSuccess.html" class="btn-success">footerLandmark-Successes</a></li
-<li><a href="submenuStateFailures.html" class="btn-failure">submenuState-Failures</a></li>
-<li><a href="submenuStateSuccess.html" class="btn-success">submenuState-Successes</a></li
-<li><a href="tableLayoutsFailures.html" class="btn-failure">tableLayouts-Failures</a></li>
-<li><a href="tableLayoutsSuccess.html" class="btn-success">tableLayouts-Successes</a></li>
-<li><a href="viewportScalibilityFailures.html" class="btn-failure">viewportScalibilty-Failures</a></li>
-<li><a href="viewportScalibiltySuccess.html" class="btn-success">viewportScalibilty-Successes</a></li
-<li><a href="viewportScalibilityNonExist.html" class="btn-failure">viewportScalibilty-non-exist</a></li>
-<li><a href="searchFormTappingSuccess.html" class="btn-success">searchFormTapping-Successes</a></li>
-<li><a href="missingNavItemsFailures.html" class="btn-failure">missingNavItems-Failures</a></li>
-<li><a href="missingNavItemsSuccess.html" class="btn-success">missingNavItems-Successes</a></li
-<li><a href="loadAutoFocusFailures.html" class="btn-failure">loadAutoFocus-Failures</a></li>
-<li><a href="loadAutoFocusSuccess.html" class="btn-success">loadAutoFocus-Successes</a></li
-<li><a href="IncorrectMainLandmarkFailures.html" class="btn-failure">IncorrectMainLandmark-Failures</a></li>
-<li><a href="IncorrectMainLandmarkSuccess.html" class="btn-success">IncorrectMainLandmark-Successes</a></li
-<li><a href="multiplePopUpfocusFailure.html" class="btn-failure">Multiple popupFocus-Failures</a></li>
-<li><a href="altTextFailres.html" class="btn-failure">altTextFailres</a></li>
-<li><a href="brokenSubmenuIndicationFailures.html" class="btn-failure">brokenSubmenuIndication-Failures</a></li>
-<li><a href="brokenSubmenuIndicationSuccess.html" class="btn-success">lbrokenSubmenuIndication-Success</a></li
-<li><a href="embedder.html" class="btn-success">Scan your website and get accessiblity score</a></li>
-<li><a href="menuitemtests.html" class="btn-success">menuitemtests-Success</a></li
+<div class="card">
+<div class="card-number">❌</div>
+<div class="card-label">Failure Examples</div>
+</div>
 
+<div class="card">
+<div class="card-number">🔎</div>
+<div class="card-label">Search Enabled</div>
+</div>
+</div>
 
-</ul>
-<script>
-(function () {
-const s = document.createElement('script');
-const h = document.querySelector('head') || document.body;
-s.src = 'https://acsbapp.com/app-flow.js';
-s.async = true;
-h.appendChild(s);
-}());
-</script>
+<div class="panel">
+<strong>Jump to Rule</strong>
+<div id="rulesGrid" class="rules-grid"></div>
+</div>
+</section>
+
+</main>
+</div>
 
 <script>
-(function(){
-var s = document.createElement('script');
-var h = document.querySelector('head') || document.body;
-s.src = 'https://acsbapp.com/apps/app/dist/js/app.js';
-s.async = true;
-s.onload = function(){ acsbJS.init(); };
-h.appendChild(s);
-})();
-</script>
+const rules = [
+{ name: 'Hidden Visible Content', success: 'hiddenVisibleContentSuccess.html', failure: 'hiddenVisibleContentFailure.html' },
+{ name: 'Empty Links', success: 'emptyLinksSuccesses.html', failure: 'emptyLinksFailures.html' },
+{ name: 'Untagged Headings', success: 'untaggedHeadingsSuccess.html', failure: 'untaggedHeadingsFailures.html' },
+{ name: 'New Window Link', success: 'newWindowLinkSuccess.html', failure: 'newWindowLinkFailures.html' },
+{ name: 'Font Size', failure: 'fontSizeFailures.html' },
+{ name: 'Missing Form Button', success: 'missingFormButtonSuccess.html', failure: 'missingFormButtonFailures.html' },
+{ name: 'Broken List', success: 'brokenListSuccess.html', failure: 'brokenListFailures.html' },
+{ name: 'Fake Hidden Interactive', success: 'fakeHiddenInteractiveSuccess.html', failure: 'fakeHiddenInteractiveFailures.html' },
+{ name: 'Popup Focus', success: 'popupFocusSuccess.html', failure: 'popupFocusFailures.html' },
+{ name: 'Headless Tables', success: 'headlessTablesSuccess.html', failure: 'headlessTablesFailures.html' },
+{ name: 'Skip Links', success: 'skipLinksSuccess.html', failure: 'skipLinksFailures.html' },
+{ name: 'Carousel Pagination', success: 'carouselPaginationSuccess.html', failure: 'carouselPaginationFailures.html' },
+{ name: 'Article Setup', success: 'articleSetupSuccess.html', failure: 'articleSetupFailures.html' },
+{ name: 'Broken Aria References', success: 'brokenAriaReferncesSuccess.html', failure: 'brokenAriaReferencesFailures.html' },
+{ name: 'Page Title', success: 'pageTitleSuccess.html', failure: 'pageTitleFailures.html' },
+{ name: 'Row Table Headers', success: 'rowTableHeadersSuccess.html', failure: 'rowTableHeadersFailures.html' },
+{ name: 'Breadcrumbs', success: 'breadcrumbsSuccess.html', failure: 'breadcrumbsFailures.html' },
+{ name: 'Column Table Headers', success: 'columnTableHeadersSuccess.html', failure: 'columnTableHeadersFailures.html' },
+{ name: 'Footer Landmark', success: 'footerLandmarkSuccess.html', failure: 'footerLandmarkFailures.html' },
+{ name: 'Submenu State', success: 'submenuStateSuccess.html', failure: 'submenuStateFailures.html' },
+{ name: 'Table Layouts', success: 'tableLayoutsSuccess.html', failure: 'tableLayoutsFailures.html' },
+{ name: 'Viewport Scalability', success: 'viewportScalibiltySuccess.html', failure: 'viewportScalibilityFailures.html' },
+{ name: 'Viewport Scalability Non Exist', failure: 'viewportScalibilityNonExist.html' },
+{ name: 'Search Form Tapping', success: 'searchFormTappingSuccess.html' },
+{ name: 'Missing Nav Items', success: 'missingNavItemsSuccess.html', failure: 'missingNavItemsFailures.html' },
+{ name: 'Load Auto Focus', success: 'loadAutoFocusSuccess.html', failure: 'loadAutoFocusFailures.html' },
+{ name: 'Incorrect Main Landmark', success: 'IncorrectMainLandmarkSuccess.html', failure: 'IncorrectMainLandmarkFailures.html' },
+{ name: 'Multiple Popup Focus', failure: 'multiplePopUpfocusFailure.html' },
+{ name: 'Alt Text', failure: 'altTextFailres.html' },
+{ name: 'Broken Submenu Indication', success: 'brokenSubmenuIndicationSuccess.html', failure: 'brokenSubmenuIndicationFailures.html' },
+{ name: 'Embedder', success: 'embedder.html' },
+{ name: 'Menu Item Tests', success: 'menuitemtests.html' }
+];
 
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('loggedUser').textContent =
-        localStorage.getItem('username') || 'Guest';
+const rulesGrid = document.getElementById('rulesGrid');
+const sidebarRules = document.getElementById('sidebarRules');
+const searchInput = document.getElementById('searchInput');
 
-    document.getElementById('logoutBtn').addEventListener('click', function () {
-        sessionStorage.removeItem('loggedIn');
-        window.location.href = 'login.html';
-    });
+document.getElementById('totalRules').textContent = rules.length;
+document.getElementById('loggedUser').textContent = localStorage.getItem('username') || 'Guest';
+
+function renderRules(filter = '') {
+rulesGrid.innerHTML = '';
+sidebarRules.innerHTML = '';
+
+const filteredRules = rules.filter(rule =>
+rule.name.toLowerCase().includes(filter.toLowerCase())
+);
+
+filteredRules.forEach(rule => {
+const card = document.createElement('div');
+card.className = 'rule-card';
+
+card.innerHTML = `
+<h2>${rule.name}</h2>
+<div class="actions">
+${rule.success ? `<a class="btn success" href="${rule.success}">Success</a>` : ''}
+${rule.failure ? `<a class="btn failure" href="${rule.failure}">Failure</a>` : ''}
+</div>
+`;
+
+rulesGrid.appendChild(card);
+
+const sideLink = document.createElement('a');
+sideLink.className = 'rule-link';
+sideLink.href = rule.success || rule.failure;
+sideLink.textContent = rule.name;
+sidebarRules.appendChild(sideLink);
 });
+}
+
+searchInput.addEventListener('input', function () {
+renderRules(this.value);
+});
+
+document.getElementById('logoutBtn').addEventListener('click', function () {
+sessionStorage.removeItem('loggedIn');
+window.location.href = 'login.html';
+});
+
+renderRules();
 </script>
 
 </body>
 </html>
-
