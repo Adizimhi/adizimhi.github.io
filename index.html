@@ -221,12 +221,14 @@ h.appendChild(s);
 </script>
 
 <script>
-document.getElementById('loggedUser').textContent =
-    localStorage.getItem('username') || 'Guest';
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('loggedUser').textContent =
+        localStorage.getItem('username') || 'Guest';
 
-document.getElementById('logoutBtn').addEventListener('click', function () {
-    sessionStorage.removeItem('loggedIn');
-    window.location.href = 'login.html';
+    document.getElementById('logoutBtn').addEventListener('click', function () {
+        sessionStorage.removeItem('loggedIn');
+        window.location.href = 'login.html';
+    });
 });
 </script>
 
