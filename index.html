@@ -243,11 +243,6 @@ width: 100%;
 
 <body>
 
-<script>
-if (sessionStorage.getItem('loggedIn') !== 'true') {
-window.location.href = 'login.html';
-}
-</script>
 
 <div class="app">
 
@@ -385,9 +380,6 @@ searchInput.addEventListener('input', function () {
 renderRules(this.value);
 });
 
-document.getElementById('logoutBtn').addEventListener('click', function () {
-sessionStorage.removeItem('loggedIn');
-window.location.href = 'login.html';
 });
 
 renderRules();
@@ -402,15 +394,6 @@ h.appendChild(s);
 }());
 </script>
 
-<script>
-(function(){
-var s = document.createElement('script');
-var h = document.querySelector('head') || document.body;
-s.src = 'https://acsbapp.com/apps/app/dist/js/app.js';
-s.async = true;
-s.onload = function(){ acsbJS.init(); };
-h.appendChild(s);
-})();
-</script>
+
 </body>
 </html>
