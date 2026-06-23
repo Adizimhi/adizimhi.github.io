@@ -328,7 +328,6 @@ const sidebarRules = document.getElementById('sidebarRules');
 const searchInput = document.getElementById('searchInput');
 
 document.getElementById('totalRules').textContent = rules.length;
-document.getElementById('loggedUser').textContent = localStorage.getItem('username') || 'Guest';
 
 function renderRules(filter = '') {
 rulesGrid.innerHTML = '';
@@ -364,10 +363,9 @@ searchInput.addEventListener('input', function () {
 renderRules(this.value);
 });
 
-});
-
 renderRules();
 </script>
+  
 <script>
 (function () {
 const s = document.createElement('script');
