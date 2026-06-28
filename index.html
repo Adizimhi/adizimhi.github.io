@@ -63,8 +63,11 @@ color: #334155;
 font-size: 14px;
 }
 
-.rule-link:hover {
+.rule-link:hover,
+.rule-link:focus {
 background: #e4e9ff;
+outline: 2px solid #5468ff;
+outline-offset: 2px;
 }
 
 .main {
@@ -85,23 +88,25 @@ top: 0;
 z-index: 1000;
 }
 
-.search {
+.search-wrapper {
 width: 420px;
 max-width: 60%;
+}
+
+.search-label {
+display: block;
+font-weight: bold;
+font-size: 14px;
+margin-bottom: 6px;
+}
+
+.search {
+width: 100%;
 padding: 13px 18px;
 border: 1px solid #d4dbea;
 border-radius: 8px;
 font-size: 15px;
 }
-
-.user-area {
-display: flex;
-align-items: center;
-gap: 14px;
-font-weight: bold;
-}
-
-
 
 .content {
 padding: 30px 34px;
@@ -185,6 +190,11 @@ font-weight: bold;
 font-size: 14px;
 }
 
+.btn:focus {
+outline: 3px solid #1f2937;
+outline-offset: 2px;
+}
+
 .success {
 background: #28a745;
 }
@@ -193,8 +203,16 @@ background: #28a745;
 background: #dc3545;
 }
 
-.hidden {
-display: none;
+.visually-hidden {
+position: absolute;
+width: 1px;
+height: 1px;
+padding: 0;
+margin: -1px;
+overflow: hidden;
+clip: rect(0, 0, 0, 0);
+white-space: nowrap;
+border: 0;
 }
 
 @media (max-width: 800px) {
@@ -221,7 +239,7 @@ align-items: stretch;
 padding: 16px;
 }
 
-.search {
+.search-wrapper {
 max-width: 100%;
 width: 100%;
 }
@@ -230,66 +248,76 @@ width: 100%;
 </head>
 
 <body>
-
-
 <div class="app">
 
-<aside class="sidebar">
+<aside class="sidebar" aria-label="Rules sidebar">
+<header>
 <div class="logo">AccessFlow</div>
-<div class="subtitle">QA Testing</div>
-
-<div class="nav-title">Dashboard</div>
-<a class="rule-link" href="index.html">Rule Library</a>
-
-<div class="nav-title">Engine Rules</div>
-<div id="sidebarRules"></div>
-</aside>
-
-<main class="main">
-
-<header class="topbar">
-<input id="searchInput" class="search" type="search" placeholder="Search rule by name...">
-
+<p class="subtitle">QA Testing</p>
 </header>
 
-<section class="content">
-<h1>Rule Library</h1>
+<nav aria-label="Dashboard navigation">
+<p class="nav-title">Dashboard</p>
+<a class="rule-link" href="index.html">Rule Library</a>
+</nav>
+
+<nav aria-label="Engine rules navigation">
+<p class="nav-title">Engine Rules</p>
+<div id="sidebarRules"></div>
+</nav>
+</aside>
+
+<div class="main">
+
+<header class="topbar">
+<form role="search" aria-label="Search accessibility rules">
+<div class="search-wrapper">
+<label class="search-label" for="searchInput">Search rule by name</label>
+<input id="searchInput" class="search" type="search" placeholder="Search rule by name..." autocomplete="off">
+</div>
+</form>
+</header>
+
+<main id="mainContent" class="content">
+<section aria-labelledby="pageTitle">
+<h1 id="pageTitle">Rule Library</h1>
 <p class="description">Browse, test, and validate accessibility rule examples.</p>
 
-<div class="cards">
-<div class="card">
+<section class="cards" aria-label="Dashboard summary">
+<article class="card">
 <div class="card-number" id="totalRules">0</div>
 <div class="card-label">Total Rules</div>
-</div>
+</article>
 
-<div class="card">
-<div class="card-number">✅</div>
+<article class="card">
+<div class="card-number" aria-label="Success examples">Success</div>
 <div class="card-label">Success Examples</div>
-</div>
+</article>
 
-<div class="card">
-<div class="card-number">❌</div>
+<article class="card">
+<div class="card-number" aria-label="Failure examples">Failure</div>
 <div class="card-label">Failure Examples</div>
-</div>
+</article>
 
-<div class="card">
-<div class="card-number">🔎</div>
+<article class="card">
+<div class="card-number" aria-label="Search enabled">Search</div>
 <div class="card-label">Search Enabled</div>
-</div>
-</div>
-
-<div class="panel">
-<strong>Jump to Rule</strong>
-<div id="rulesGrid" class="rules-grid"></div>
-</div>
+</article>
 </section>
 
+<section class="panel" aria-labelledby="jumpToRuleTitle">
+<h2 id="jumpToRuleTitle">Jump to Rule</h2>
+<div id="rulesGrid" class="rules-grid"></div>
+</section>
+</section>
 </main>
+
+</div>
 </div>
 
 <script>
 const rules = [
-{ name: 'Hiddeen Visible Content', success: 'hiddenVisibleContentSuccess.html', failure: 'hiddenVisibleContentFailure.html' },
+{ name: 'Hidden Visible Content', success: 'hiddenVisibleContentSuccess.html', failure: 'hiddenVisibleContentFailure.html' },
 { name: 'Empty Links', success: 'emptyLinksSuccesses.html', failure: 'emptyLinksFailures.html' },
 { name: 'Untagged Headings', success: 'untaggedHeadingsSuccess.html', failure: 'untaggedHeadingsFailures.html' },
 { name: 'New Window Link', success: 'newWindowLinkSuccess.html', failure: 'newWindowLinkFailures.html' },
@@ -326,8 +354,17 @@ const rules = [
 const rulesGrid = document.getElementById('rulesGrid');
 const sidebarRules = document.getElementById('sidebarRules');
 const searchInput = document.getElementById('searchInput');
+const totalRules = document.getElementById('totalRules');
 
-document.getElementById('totalRules').textContent = rules.length;
+totalRules.textContent = rules.length;
+
+function createSafeLink(className, href, text) {
+const link = document.createElement('a');
+link.className = className;
+link.href = href;
+link.textContent = text;
+return link;
+}
 
 function renderRules(filter = '') {
 rulesGrid.innerHTML = '';
@@ -338,25 +375,36 @@ rule.name.toLowerCase().includes(filter.toLowerCase())
 );
 
 filteredRules.forEach(rule => {
-const card = document.createElement('div');
-card.className = 'rule-card';
+const article = document.createElement('article');
+article.className = 'rule-card';
 
-card.innerHTML = `
-<h2>${rule.name}</h2>
-<div class="actions">
-${rule.success ? `<a class="btn success" href="${rule.success}">Success</a>` : ''}
-${rule.failure ? `<a class="btn failure" href="${rule.failure}">Failure</a>` : ''}
-</div>
-`;
+const title = document.createElement('h2');
+title.textContent = rule.name;
 
-rulesGrid.appendChild(card);
+const actions = document.createElement('div');
+actions.className = 'actions';
 
-const sideLink = document.createElement('a');
-sideLink.className = 'rule-link';
-sideLink.href = rule.success || rule.failure;
-sideLink.textContent = rule.name;
+if (rule.success) {
+actions.appendChild(createSafeLink('btn success', rule.success, 'Success'));
+}
+
+if (rule.failure) {
+actions.appendChild(createSafeLink('btn failure', rule.failure, 'Failure'));
+}
+
+article.appendChild(title);
+article.appendChild(actions);
+rulesGrid.appendChild(article);
+
+const sideLink = createSafeLink('rule-link', rule.success || rule.failure, rule.name);
 sidebarRules.appendChild(sideLink);
 });
+
+if (filteredRules.length === 0) {
+const emptyMessage = document.createElement('p');
+emptyMessage.textContent = 'No rules found.';
+rulesGrid.appendChild(emptyMessage);
+}
 }
 
 searchInput.addEventListener('input', function () {
@@ -364,16 +412,15 @@ renderRules(this.value);
 });
 
 renderRules();
-<script>
+
 (function () {
-	const s = document.createElement('script');
-	const h = document.querySelector('head') || document.body;
-	s.src = 'https://acsbapp.com/app-flow.js';
-	s.async = true;
-	h.appendChild(s);
+const script = document.createElement('script');
+const target = document.querySelector('head') || document.body;
+script.src = 'https://acsbapp.com/app-flow.js';
+script.async = true;
+target.appendChild(script);
 }());
 </script>
-
 
 </body>
 </html>
