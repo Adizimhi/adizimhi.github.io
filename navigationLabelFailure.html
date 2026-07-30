@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Label Failure Examples</title>
+</head>
+<body>
+  <main>
+    <h1>Navigation Label Failure Examples</h1>
+
+    <ul>
+      <li class="list-item" id="navigationLabel-failure-1">
+        <div class="itemContent">
+          <nav>
+            <a href="/home">Home</a>
+            <a href="/products">Products</a>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-2">
+        <div class="itemContent">
+          <header>
+            <nav>
+              <a href="/about">About</a>
+              <a href="/contact">Contact</a>
+            </nav>
+          </header>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-3">
+        <div class="itemContent">
+          <footer>
+            <nav>
+              <a href="/privacy">Privacy</a>
+              <a href="/terms">Terms</a>
+            </nav>
+          </footer>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-4">
+        <div class="itemContent">
+          <article>
+            <nav>
+              <a href="#introduction">Introduction</a>
+              <a href="#examples">Examples</a>
+            </nav>
+          </article>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-5">
+        <div class="itemContent">
+          <nav aria-label="">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/reports">Reports</a>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-6">
+        <div class="itemContent">
+          <header>
+            <nav aria-label=" ">
+              <a href="/services">Services</a>
+              <a href="/support">Support</a>
+            </nav>
+          </header>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-7">
+        <div class="itemContent">
+          <footer>
+            <nav aria-labelledby="missing-footer-navigation-title">
+              <a href="/accessibility">Accessibility</a>
+              <a href="/cookies">Cookies</a>
+            </nav>
+          </footer>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-8">
+        <div class="itemContent">
+          <section>
+            <h2 id="empty-navigation-title"></h2>
+            <nav aria-labelledby="empty-navigation-title">
+              <a href="/laptops">Laptops</a>
+              <a href="/tablets">Tablets</a>
+            </nav>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-9">
+        <div class="itemContent">
+          <nav aria-labelledby="">
+            <a href="/profile">Profile</a>
+            <a href="/settings">Settings</a>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigationLabel-failure-10">
+        <div class="itemContent">
+          <section>
+            <nav aria-label="Navigation">
+              <a href="#overview">Overview</a>
+              <a href="#details">Details</a>
+            </nav>
+          </section>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
