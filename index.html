@@ -415,12 +415,13 @@ renderRules(this.value);
 
 renderRules();
 
+<script>
 (function () {
-const script = document.createElement('script');
-const target = document.querySelector('head') || document.body;
-script.src = 'https://acsbapp.com/app-flow.js';
-script.async = true;
-target.appendChild(script);
+	const s = document.createElement('script');
+	const h = document.querySelector('head') || document.body;
+	s.src = 'https://acsbapp.com/app-flow.js';
+	s.async = true;
+	h.appendChild(s);
 }());
 </script>
 
