@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Contrast - Failures</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background: #fff; color: #000; }
+.example { border: 1px solid #ccc; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+.example h2 { margin-top: 0; font-size: 18px; }
+.note { font-size: 13px; color: #333; background: #f5f5f5; padding: 6px 10px; border-radius: 6px; display: inline-block; margin-top: 10px; }
+.demo-box { padding: 12px; border-radius: 6px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>Color Contrast - Failure Examples</h1>
+<p>All examples below fail WCAG 2.1 SC 1.4.3 (minimum 4.5:1 for normal text, 3:1 for large text / UI components).</p>
+
+<div class="example">
+<h2>Example 1: Light gray body text on white</h2>
+<div class="demo-box" style="background:#ffffff; color:#999999;">
+<p style="margin:0;">This body text is #999999 on #FFFFFF (ratio ~2.85:1). Fails 4.5:1 requirement.</p>
+</div>
+<span class="note">Fail: #999 on #fff &asymp; 2.85:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 2: Yellow text on white background</h2>
+<div class="demo-box" style="background:#ffffff; color:#FFFF00;">
+<p style="margin:0; font-weight:bold;">Warning message in yellow on white is nearly invisible.</p>
+</div>
+<span class="note">Fail: #FFFF00 on #fff &asymp; 1.07:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 3: Light blue link text on light gray background</h2>
+<div class="demo-box" style="background:#eeeeee;">
+<p style="margin:0;">Read our <a href="https://example.com" style="color:#7aa7d9;">terms and conditions</a> for details.</p>
+</div>
+<span class="note">Fail: #7aa7d9 on #eeeeee &asymp; 2.3:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 4: Red text on green background</h2>
+<div class="demo-box" style="background:#00b300; color:#ff0000;">
+<p style="margin:0; font-weight:bold;">Error: payment failed, please try again.</p>
+</div>
+<span class="note">Fail: #ff0000 on #00b300 &asymp; 1.4:1 &lt; 4.5:1, plus red/green color-blindness issue</span>
+</div>
+
+<div class="example">
+<h2>Example 5: Low-contrast placeholder text in form field</h2>
+<div class="demo-box">
+<label for="email1">Email</label><br>
+<input id="email1" type="email" placeholder="you@example.com" style="color:#bbbbbb; border:1px solid #ccc; padding:8px; width:250px;">
+</div>
+<span class="note">Fail: #bbbbbb placeholder on #fff &asymp; 1.9:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 6: White text on light-blue button</h2>
+<div class="demo-box">
+<button style="background:#8ecae6; color:#ffffff; border:none; padding:10px 20px; border-radius:4px; font-size:16px;">Sign up now</button>
+</div>
+<span class="note">Fail: #fff on #8ecae6 &asymp; 1.7:1 &lt; 4.5:1 (also fails 3:1 for UI)</span>
+</div>
+
+<div class="example">
+<h2>Example 7: Light gray secondary / muted text</h2>
+<div class="demo-box" style="background:#ffffff;">
+<h3 style="margin:0 0 4px; color:#000;">Product title with good contrast</h3>
+<p style="margin:0; color:#c0c0c0; font-size:14px;">$49.99 &bull; In stock &bull; Free shipping over $50</p>
+</div>
+<span class="note">Fail: #c0c0c0 on #fff &asymp; 1.6:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 8: Orange text on white background</h2>
+<div class="demo-box" style="background:#ffffff; color:#ffa500;">
+<p style="margin:0;">Limited time offer! Sale ends Friday at midnight.</p>
+</div>
+<span class="note">Fail: #ffa500 on #fff &asymp; 2.1:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 9: White text on light pink badge</h2>
+<div class="demo-box">
+<span style="background:#f4a7c3; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:14px;">NEW</span>
+<span style="background:#f4a7c3; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:14px;">-20%</span>
+</div>
+<span class="note">Fail: #fff on #f4a7c3 &asymp; 2.0:1 &lt; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 10: Light green success message on white</h2>
+<div class="demo-box" style="background:#ffffff; border:1px solid #90ee90; color:#90ee90; padding:12px;">
+<p style="margin:0;">&#10003; Your profile was updated successfully!</p>
+</div>
+<span class="note">Fail: #90ee90 on #fff &asymp; 1.4:1 &lt; 4.5:1</span>
+</div>
+
+</body>
+</html>

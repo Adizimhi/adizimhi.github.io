@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Color Contrast - Success</title>
+<style>
+body { font-family: Arial, sans-serif; margin: 20px; background: #fff; color: #000; }
+.example { border: 1px solid #ccc; border-radius: 8px; padding: 16px; margin-bottom: 20px; }
+.example h2 { margin-top: 0; font-size: 18px; }
+.note { font-size: 13px; color: #155724; background: #d4edda; padding: 6px 10px; border-radius: 6px; display: inline-block; margin-top: 10px; }
+.demo-box { padding: 12px; border-radius: 6px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>Color Contrast - Success Examples</h1>
+<p>All examples below pass WCAG 2.1 SC 1.4.3 (minimum 4.5:1 for normal text, 3:1 for large text / UI components).</p>
+
+<div class="example">
+<h2>Example 1: Black body text on white</h2>
+<div class="demo-box" style="background:#ffffff; color:#000000;">
+<p style="margin:0;">This body text is #000000 on #FFFFFF (ratio 21:1). Maximum contrast, passes AAA.</p>
+</div>
+<span class="note">Pass: #000 on #fff = 21:1 &ge; 7:1 (AAA)</span>
+</div>
+
+<div class="example">
+<h2>Example 2: White text on black background</h2>
+<div class="demo-box" style="background:#000000; color:#ffffff;">
+<p style="margin:0; font-weight:bold;">Important notice: offices are closed on Monday.</p>
+</div>
+<span class="note">Pass: #fff on #000 = 21:1 &ge; 7:1 (AAA)</span>
+</div>
+
+<div class="example">
+<h2>Example 3: Dark blue link text on white background</h2>
+<div class="demo-box" style="background:#ffffff;">
+<p style="margin:0;">Read our <a href="https://example.com" style="color:#0b3d91;">terms and conditions</a> for details.</p>
+</div>
+<span class="note">Pass: #0b3d91 on #fff &asymp; 10.2:1 &ge; 4.5:1, plus underline/ context distinguishes link</span>
+</div>
+
+<div class="example">
+<h2>Example 4: White text on dark green background</h2>
+<div class="demo-box" style="background:#1b5e20; color:#ffffff;">
+<p style="margin:0; font-weight:bold;">Success: your payment was completed.</p>
+</div>
+<span class="note">Pass: #fff on #1b5e20 &asymp; 9.2:1 &ge; 4.5:1, does not rely on color alone</span>
+</div>
+
+<div class="example">
+<h2>Example 5: Dark form label and input text</h2>
+<div class="demo-box">
+<label for="email1" style="color:#1a1a1a; font-weight:bold;">Email</label><br>
+<input id="email1" type="email" placeholder="you@example.com" style="color:#1a1a1a; border:2px solid #1a1a1a; padding:8px; width:250px;">
+</div>
+<span class="note">Pass: #1a1a1a on #fff &asymp; 17.4:1 &ge; 4.5:1, visible label + strong border</span>
+</div>
+
+<div class="example">
+<h2>Example 6: White text on dark-blue button</h2>
+<div class="demo-box">
+<button style="background:#0b3d91; color:#ffffff; border:none; padding:10px 20px; border-radius:4px; font-size:16px;">Sign up now</button>
+</div>
+<span class="note">Pass: #fff on #0b3d91 &asymp; 10.2:1 &ge; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 7: Dark gray secondary text on white</h2>
+<div class="demo-box" style="background:#ffffff;">
+<h3 style="margin:0 0 4px; color:#000;">Product title with good contrast</h3>
+<p style="margin:0; color:#424242; font-size:14px;">$49.99 &bull; In stock &bull; Free shipping over $50</p>
+</div>
+<span class="note">Pass: #424242 on #fff &asymp; 10:1 &ge; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 8: Dark brown / maroon text on light yellow background</h2>
+<div class="demo-box" style="background:#fff8e1; color:#5d4037;">
+<p style="margin:0;">Limited time offer! Sale ends Friday at midnight.</p>
+</div>
+<span class="note">Pass: #5d4037 on #fff8e1 &asymp; 8.4:1 &ge; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 9: White text on dark red badge</h2>
+<div class="demo-box">
+<span style="background:#b00020; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:14px;">NEW</span>
+<span style="background:#b00020; color:#ffffff; padding:4px 12px; border-radius:20px; font-size:14px;">-20%</span>
+</div>
+<span class="note">Pass: #fff on #b00020 &asymp; 7.3:1 &ge; 4.5:1</span>
+</div>
+
+<div class="example">
+<h2>Example 10: Dark green success message with icon and border</h2>
+<div class="demo-box" style="background:#e6f4ea; border:2px solid #1b5e20; color:#1b5e20; padding:12px;">
+<p style="margin:0;">&#10003; Your profile was updated successfully!</p>
+</div>
+<span class="note">Pass: #1b5e20 on #e6f4ea &asymp; 8:1 &ge; 4.5:1, icon + border so not color-alone</span>
+</div>
+
+</body>
+</html>
