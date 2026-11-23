@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Navigation Success 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status {
+      color: #333333;
+      font-size: 14px;
+    }
+
+    button {
+      width: fit-content;
+      padding: 8px 14px;
+      font: inherit;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    :focus-visible {
+      outline: 3px solid #e5a50a;
+      outline-offset: 2px;
+    }
+
+    .star-rating {
+      border: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      gap: 4px;
+    }
+
+    .star-rating legend {
+      margin-bottom: 6px;
+    }
+
+    .star-rating label {
+      font-size: 28px;
+      color: #bbbbbb;
+      cursor: pointer;
+    }
+
+    .star-rating input {
+      position: absolute;
+      opacity: 0;
+      width: 1px;
+      height: 1px;
+    }
+
+    .star-rating label.on {
+      color: #e5a50a;
+    }
+
+    .star-rating input:focus-visible + label {
+      outline: 3px solid #e5a50a;
+    }
+
+    [role="radiogroup"] {
+      display: flex;
+      gap: 8px;
+    }
+
+    .swatch {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      cursor: pointer;
+    }
+
+    .swatch[aria-checked="true"] {
+      border-color: #222222;
+    }
+
+    .listbox-wrapper {
+      display: grid;
+      gap: 6px;
+      width: 220px;
+    }
+
+    [role="listbox"] {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border: 1px solid #777777;
+      border-radius: 4px;
+    }
+
+    [role="option"] {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    [role="option"].active {
+      background: #e8f0fb;
+    }
+
+    [role="option"][aria-selected="true"] {
+      font-weight: bold;
+    }
+
+    dialog {
+      border: 1px solid #555555;
+      border-radius: 8px;
+      padding: 16px;
+      width: 300px;
+    }
+
+    [role="menu"] {
+      list-style: none;
+      margin: 4px 0 0;
+      padding: 6px 0;
+      border: 1px solid #777777;
+      width: 180px;
+      background: #ffffff;
+    }
+
+    [role="menuitem"] {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    [role="menuitem"]:focus {
+      background: #e8f0fb;
+      outline: none;
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .carousel .slide {
+      width: 260px;
+      height: 120px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .slider-track {
+      position: relative;
+      width: 300px;
+      height: 10px;
+      background: #d6d6d6;
+      border-radius: 5px;
+      margin: 12px 0;
+    }
+
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      width: 22px;
+      height: 22px;
+      background: #1a5fb4;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+
+    .card {
+      position: relative;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      padding: 16px;
+      width: 280px;
+    }
+
+    .card a::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
+
+    .card:hover,
+    .card:focus-within {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .hover-menu {
+      position: relative;
+      width: fit-content;
+    }
+
+    .hover-menu .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      list-style: none;
+      margin: 0;
+      padding: 8px 0;
+      background: #ffffff;
+      border: 1px solid #cccccc;
+      min-width: 180px;
+      z-index: 2;
+    }
+
+    .hover-menu:hover .submenu,
+    .hover-menu:focus-within .submenu {
+      display: block;
+    }
+
+    .hover-menu .submenu a {
+      display: block;
+      padding: 6px 12px;
+      color: #222222;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Keyboard Navigation Success 2</h1>
+
+    <ul class="list">
+      <li class="list-item" id="keyboard-navigation-success-11">
+        <div class="itemContent">
+          <h2>Star rating built on native radio buttons</h2>
+          <fieldset class="star-rating" id="kn-s11-rating">
+            <legend>Rate this recipe</legend>
+            <input type="radio" id="kn-s11-1" name="kn-s11" value="1"><label for="kn-s11-1" aria-label="1 star">★</label>
+            <input type="radio" id="kn-s11-2" name="kn-s11" value="2"><label for="kn-s11-2" aria-label="2 stars">★</label>
+            <input type="radio" id="kn-s11-3" name="kn-s11" value="3"><label for="kn-s11-3" aria-label="3 stars">★</label>
+            <input type="radio" id="kn-s11-4" name="kn-s11" value="4"><label for="kn-s11-4" aria-label="4 stars">★</label>
+            <input type="radio" id="kn-s11-5" name="kn-s11" value="5"><label for="kn-s11-5" aria-label="5 stars">★</label>
+          </fieldset>
+          <p class="status" id="kn-s11-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-12">
+        <div class="itemContent">
+          <h2>Color swatch radio group with roving tabindex</h2>
+          <p id="kn-s12-label">Choose a color</p>
+          <div role="radiogroup" aria-labelledby="kn-s12-label" id="kn-s12-group">
+            <div class="swatch" role="radio" aria-checked="true" tabindex="0" aria-label="Navy" style="background: #1c2c5b;"></div>
+            <div class="swatch" role="radio" aria-checked="false" tabindex="-1" aria-label="Forest green" style="background: #26703d;"></div>
+            <div class="swatch" role="radio" aria-checked="false" tabindex="-1" aria-label="Burgundy" style="background: #7a1f2b;"></div>
+            <div class="swatch" role="radio" aria-checked="false" tabindex="-1" aria-label="Sand" style="background: #d8c39a;"></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-13">
+        <div class="itemContent">
+          <h2>Custom country listbox with arrow key selection</h2>
+          <div class="listbox-wrapper">
+            <span id="kn-s13-label">Country</span>
+            <ul role="listbox" tabindex="0" aria-labelledby="kn-s13-label" aria-activedescendant="kn-s13-opt-1" id="kn-s13-listbox">
+              <li role="option" id="kn-s13-opt-1" aria-selected="true" class="active">Canada</li>
+              <li role="option" id="kn-s13-opt-2" aria-selected="false">Germany</li>
+              <li role="option" id="kn-s13-opt-3" aria-selected="false">Japan</li>
+              <li role="option" id="kn-s13-opt-4" aria-selected="false">Mexico</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-14">
+        <div class="itemContent">
+          <h2>Cookie preferences dialog with close button and Escape</h2>
+          <button type="button" id="kn-s14-open">Cookie preferences</button>
+          <dialog id="kn-s14-dialog" aria-labelledby="kn-s14-title">
+            <h3 id="kn-s14-title">Cookie preferences</h3>
+            <p>We use cookies to improve your experience on our site.</p>
+            <button type="button" id="kn-s14-close">Close</button>
+          </dialog>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-15">
+        <div class="itemContent">
+          <h2>File actions menu button with arrow key navigation</h2>
+          <p>📄 budget-2027.xlsx</p>
+          <div>
+            <button type="button" id="kn-s15-button" aria-haspopup="menu" aria-expanded="false" aria-controls="kn-s15-menu">File actions ▾</button>
+            <ul role="menu" id="kn-s15-menu" aria-labelledby="kn-s15-button" hidden>
+              <li role="menuitem" tabindex="-1" data-action="Renamed">Rename</li>
+              <li role="menuitem" tabindex="-1" data-action="Duplicated">Duplicate</li>
+              <li role="menuitem" tabindex="-1" data-action="Deleted">Delete</li>
+            </ul>
+          </div>
+          <p class="status" id="kn-s15-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-16">
+        <div class="itemContent">
+          <h2>Promotional carousel with previous and next buttons</h2>
+          <div class="carousel" role="group" aria-roledescription="carousel" aria-label="Promotions">
+            <button type="button" id="kn-s16-prev" aria-label="Previous slide">‹</button>
+            <div class="slide" id="kn-s16-slide" aria-live="polite" style="background: #1a5fb4;">New arrivals</div>
+            <button type="button" id="kn-s16-next" aria-label="Next slide">›</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-17">
+        <div class="itemContent">
+          <h2>Custom volume slider with arrow, Home and End keys</h2>
+          <span id="kn-s17-label">Volume</span>
+          <div class="slider-track">
+            <div class="slider-thumb" role="slider" tabindex="0" aria-labelledby="kn-s17-label" aria-valuemin="0" aria-valuemax="100" aria-valuenow="40" id="kn-s17-thumb" style="left: 40%;"></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-18">
+        <div class="itemContent">
+          <h2>Project name with an edit button</h2>
+          <div style="display: flex; gap: 12px; align-items: center;">
+            <span id="kn-s18-name">Website redesign</span>
+            <label for="kn-s18-input" hidden id="kn-s18-input-label">Project name</label>
+            <input id="kn-s18-input" type="text" hidden>
+            <button type="button" id="kn-s18-edit">Edit name</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-19">
+        <div class="itemContent">
+          <h2>Clickable travel card containing a real link</h2>
+          <div class="card">
+            <h3 style="margin: 0;"><a href="#lisbon-itinerary">Weekend in Lisbon</a></h3>
+            <p>Three-day itinerary with food tours and day trips.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-20">
+        <div class="itemContent">
+          <h2>Help menu that opens on hover and on keyboard focus</h2>
+          <nav aria-label="Help">
+            <div class="hover-menu">
+              <a href="#help">Help center</a>
+              <ul class="submenu">
+                <li><a href="#help-orders">Orders and shipping</a></li>
+                <li><a href="#help-returns">Returns</a></li>
+                <li><a href="#help-account">Account settings</a></li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    const ratingInputs = document.querySelectorAll("#kn-s11-rating input");
+    ratingInputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        const value = Number(input.value);
+        document.querySelectorAll("#kn-s11-rating label").forEach((label, index) => {
+          label.classList.toggle("on", index < value);
+        });
+        document.getElementById("kn-s11-status").textContent = `You rated this recipe ${value} out of 5.`;
+      });
+    });
+
+    const swatches = Array.from(document.querySelectorAll("#kn-s12-group [role='radio']"));
+    function selectSwatch(swatch) {
+      swatches.forEach((other) => {
+        const selected = other === swatch;
+        other.setAttribute("aria-checked", String(selected));
+        other.tabIndex = selected ? 0 : -1;
+      });
+      swatch.focus();
+    }
+    swatches.forEach((swatch, index) => {
+      swatch.addEventListener("click", () => selectSwatch(swatch));
+      swatch.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+          event.preventDefault();
+          selectSwatch(swatches[(index + 1) % swatches.length]);
+        } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+          event.preventDefault();
+          selectSwatch(swatches[(index - 1 + swatches.length) % swatches.length]);
+        } else if (event.key === " ") {
+          event.preventDefault();
+          selectSwatch(swatch);
+        }
+      });
+    });
+
+    const listbox = document.getElementById("kn-s13-listbox");
+    const options = Array.from(listbox.querySelectorAll("[role='option']"));
+    let activeIndex = 0;
+    function selectOption(index) {
+      activeIndex = index;
+      options.forEach((option, i) => {
+        option.classList.toggle("active", i === index);
+        option.setAttribute("aria-selected", String(i === index));
+      });
+      listbox.setAttribute("aria-activedescendant", options[index].id);
+    }
+    options.forEach((option, index) => option.addEventListener("click", () => selectOption(index)));
+    listbox.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        selectOption(Math.min(options.length - 1, activeIndex + 1));
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        selectOption(Math.max(0, activeIndex - 1));
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        selectOption(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        selectOption(options.length - 1);
+      }
+    });
+
+    const dialog = document.getElementById("kn-s14-dialog");
+    document.getElementById("kn-s14-open").addEventListener("click", () => dialog.showModal());
+    document.getElementById("kn-s14-close").addEventListener("click", () => dialog.close());
+
+    const menuButton = document.getElementById("kn-s15-button");
+    const menu = document.getElementById("kn-s15-menu");
+    const menuItems = Array.from(menu.querySelectorAll("[role='menuitem']"));
+    function openMenu(focusIndex) {
+      menu.hidden = false;
+      menuButton.setAttribute("aria-expanded", "true");
+      menuItems[focusIndex].focus();
+    }
+    function closeMenu() {
+      menu.hidden = true;
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.focus();
+    }
+    function runAction(item) {
+      document.getElementById("kn-s15-status").textContent = `${item.dataset.action} budget-2027.xlsx.`;
+      closeMenu();
+    }
+    menuButton.addEventListener("click", () => {
+      if (menu.hidden) openMenu(0); else closeMenu();
+    });
+    menuButton.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        openMenu(0);
+      } else if (event.key === "ArrowUp") {
+        event.preventDefault();
+        openMenu(menuItems.length - 1);
+      }
+    });
+    menuItems.forEach((item, index) => {
+      item.addEventListener("click", () => runAction(item));
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          menuItems[(index + 1) % menuItems.length].focus();
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          menuItems[(index - 1 + menuItems.length) % menuItems.length].focus();
+        } else if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          runAction(item);
+        } else if (event.key === "Escape" || event.key === "Tab") {
+          closeMenu();
+        }
+      });
+    });
+
+    const slides = [
+      { text: "New arrivals", color: "#1a5fb4" },
+      { text: "Winter sale", color: "#c01c28" },
+      { text: "Free shipping", color: "#26a269" }
+    ];
+    let slideIndex = 0;
+    function showSlide() {
+      const slide = document.getElementById("kn-s16-slide");
+      slide.textContent = slides[slideIndex].text;
+      slide.style.background = slides[slideIndex].color;
+    }
+    document.getElementById("kn-s16-prev").addEventListener("click", () => {
+      slideIndex = (slideIndex + slides.length - 1) % slides.length;
+      showSlide();
+    });
+    document.getElementById("kn-s16-next").addEventListener("click", () => {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide();
+    });
+
+    const thumb = document.getElementById("kn-s17-thumb");
+    function setVolume(value) {
+      const clamped = Math.max(0, Math.min(100, value));
+      thumb.setAttribute("aria-valuenow", String(clamped));
+      thumb.style.left = `${clamped}%`;
+    }
+    thumb.addEventListener("keydown", (event) => {
+      const current = Number(thumb.getAttribute("aria-valuenow"));
+      const steps = { ArrowRight: 1, ArrowUp: 1, ArrowLeft: -1, ArrowDown: -1, PageUp: 10, PageDown: -10 };
+      if (event.key in steps) {
+        event.preventDefault();
+        setVolume(current + steps[event.key]);
+      } else if (event.key === "Home") {
+        event.preventDefault();
+        setVolume(0);
+      } else if (event.key === "End") {
+        event.preventDefault();
+        setVolume(100);
+      }
+    });
+    const track = thumb.parentElement;
+    track.addEventListener("click", (event) => {
+      const rect = track.getBoundingClientRect();
+      setVolume(Math.round(((event.clientX - rect.left) / rect.width) * 100));
+    });
+
+    const nameText = document.getElementById("kn-s18-name");
+    const nameInput = document.getElementById("kn-s18-input");
+    const nameLabel = document.getElementById("kn-s18-input-label");
+    const editButton = document.getElementById("kn-s18-edit");
+    editButton.addEventListener("click", () => {
+      const editing = !nameInput.hidden;
+      if (editing) {
+        nameText.textContent = nameInput.value || "Untitled project";
+        nameInput.hidden = true;
+        nameLabel.hidden = true;
+        nameText.hidden = false;
+        editButton.textContent = "Edit name";
+      } else {
+        nameInput.value = nameText.textContent;
+        nameText.hidden = true;
+        nameLabel.hidden = false;
+        nameInput.hidden = false;
+        editButton.textContent = "Save name";
+        nameInput.focus();
+      }
+    });
+    nameInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") editButton.click();
+    });
+  </script>
+</body>
+</html>

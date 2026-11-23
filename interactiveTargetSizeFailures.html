@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Target Size Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    button, a, input {
+      font-family: inherit;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #222222;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .panel {
+      max-width: 420px;
+      padding: 16px;
+      border: 1px solid #bbbbbb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .panel-header strong {
+      font-size: 16px;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 2px;
+    }
+
+    .window-controls .icon-btn {
+      width: 14px;
+      height: 14px;
+      font-size: 9px;
+      border-radius: 2px;
+    }
+
+    .pager-16 {
+      display: flex;
+      gap: 2px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .pager-16 a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      box-sizing: border-box;
+      font-size: 10px;
+      border: 1px solid #888888;
+      color: #1a4fa3;
+      text-decoration: none;
+    }
+
+    .pager-16 a[aria-current="page"] {
+      background: #1a4fa3;
+      color: #ffffff;
+    }
+
+    .toolbar-18 {
+      gap: 0;
+      border: 1px solid #cccccc;
+      width: max-content;
+    }
+
+    .toolbar-18 .icon-btn {
+      width: 18px;
+      height: 18px;
+      font-size: 11px;
+      border-radius: 0;
+      border-width: 0 1px 0 0;
+    }
+
+    .stars-12 {
+      display: flex;
+      gap: 1px;
+    }
+
+    .stars-12 button {
+      width: 12px;
+      height: 12px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      line-height: 12px;
+      color: #c9c9c9;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .stars-12 button[aria-checked="true"] {
+      color: #e0a800;
+    }
+
+    .tiny-checks {
+      display: grid;
+      gap: 2px;
+      font-size: 12px;
+    }
+
+    .tiny-checks .check-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      height: 12px;
+    }
+
+    .tiny-checks [role="checkbox"] {
+      width: 12px;
+      height: 12px;
+      box-sizing: border-box;
+      border: 1px solid #555555;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .tiny-checks [role="checkbox"][aria-checked="true"] {
+      background: #2a7a2a;
+    }
+
+    .social-16 {
+      display: flex;
+      gap: 4px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .social-16 a {
+      display: block;
+      width: 16px;
+      height: 16px;
+    }
+
+    .social-16 svg {
+      display: block;
+      width: 16px;
+      height: 16px;
+      fill: #333333;
+    }
+
+    .stepper-14 {
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .stepper-14 .icon-btn {
+      width: 14px;
+      height: 14px;
+      font-size: 10px;
+    }
+
+    .stepper-14 input {
+      width: 40px;
+      height: 20px;
+      box-sizing: border-box;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .chips-tight {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .chips-tight li {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      background: #e8eef8;
+      overflow: hidden;
+    }
+
+    .chips-tight .chip-label {
+      height: 18px;
+      padding: 0 4px 0 8px;
+      border: none;
+      background: transparent;
+      font-size: 11px;
+      cursor: pointer;
+    }
+
+    .chips-tight .chip-remove {
+      width: 10px;
+      height: 10px;
+      margin-right: 4px;
+      font-size: 7px;
+      border: none;
+      border-radius: 50%;
+      background: #c8d6ee;
+    }
+
+    .slide-preview {
+      height: 110px;
+      max-width: 360px;
+      border-radius: 8px;
+      background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .dots-8 {
+      display: flex;
+      gap: 4px;
+    }
+
+    .dots-8 button {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: #999999;
+      cursor: pointer;
+    }
+
+    .dots-8 button[aria-current="true"] {
+      background: #222222;
+    }
+
+    .map {
+      position: relative;
+      width: 320px;
+      height: 180px;
+      border-radius: 6px;
+      background:
+        linear-gradient(90deg, transparent 49%, #ffffff 49% 51%, transparent 51%),
+        linear-gradient(0deg, transparent 59%, #ffffff 59% 61%, transparent 61%),
+        #cfe6c8;
+    }
+
+    .map-zoom {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .map-zoom .icon-btn {
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      border-radius: 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Interactive Target Size Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="interactive-target-size-failure-1">
+        <div class="itemContent">
+          <h2>Toast with tiny close and minimize buttons</h2>
+          <div class="panel" role="status">
+            <div class="panel-header">
+              <strong>Upload complete</strong>
+              <div class="window-controls">
+                <button type="button" class="icon-btn" aria-label="Minimize">&#x2013;</button>
+                <button type="button" class="icon-btn" aria-label="Close">&#x2715;</button>
+              </div>
+            </div>
+            <p>3 files were uploaded to the shared folder.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-2">
+        <div class="itemContent">
+          <h2>Compact numbered pagination</h2>
+          <nav aria-label="Comment pages">
+            <ul class="pager-16">
+              <li><a href="#" aria-label="Previous page">&lsaquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#" aria-current="page">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#">5</a></li>
+              <li><a href="#" aria-label="Next page">&rsaquo;</a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-3">
+        <div class="itemContent">
+          <h2>Dense text editor toolbar</h2>
+          <div class="row toolbar-18" role="toolbar" aria-label="Text formatting">
+            <button type="button" class="icon-btn" aria-label="Bold" aria-pressed="false" data-toggle-pressed><b>B</b></button>
+            <button type="button" class="icon-btn" aria-label="Italic" aria-pressed="false" data-toggle-pressed><i>I</i></button>
+            <button type="button" class="icon-btn" aria-label="Underline" aria-pressed="false" data-toggle-pressed><u>U</u></button>
+            <button type="button" class="icon-btn" aria-label="Bulleted list">&#x2022;</button>
+            <button type="button" class="icon-btn" aria-label="Numbered list">1.</button>
+            <button type="button" class="icon-btn" aria-label="Insert link">&#x1F517;</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-4">
+        <div class="itemContent">
+          <h2>Small star rating</h2>
+          <div class="stars-12" role="radiogroup" aria-label="Rate this recipe" data-radio-group>
+            <button type="button" role="radio" aria-checked="false" aria-label="1 star">&#9733;</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="2 stars">&#9733;</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="3 stars">&#9733;</button>
+            <button type="button" role="radio" aria-checked="true" aria-label="4 stars">&#9733;</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="5 stars">&#9733;</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-5">
+        <div class="itemContent">
+          <h2>Custom ARIA checkboxes with unclickable labels</h2>
+          <div class="tiny-checks" role="group" aria-label="Show columns">
+            <div class="check-line"><span role="checkbox" tabindex="0" aria-checked="true" aria-labelledby="ts-col-1"></span><span id="ts-col-1">Name</span></div>
+            <div class="check-line"><span role="checkbox" tabindex="0" aria-checked="true" aria-labelledby="ts-col-2"></span><span id="ts-col-2">Email</span></div>
+            <div class="check-line"><span role="checkbox" tabindex="0" aria-checked="false" aria-labelledby="ts-col-3"></span><span id="ts-col-3">Phone</span></div>
+            <div class="check-line"><span role="checkbox" tabindex="0" aria-checked="false" aria-labelledby="ts-col-4"></span><span id="ts-col-4">Company</span></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-6">
+        <div class="itemContent">
+          <h2>Footer social icon links</h2>
+          <ul class="social-16" aria-label="Follow us">
+            <li><a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v9h4v-9h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg></a></li>
+            <li><a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6c0-1 1-2 2-2h14c1 0 2 1 2 2v12c0 1-1 2-2 2H5c-1 0-2-1-2-2zm7 3v6l5-3z"/></svg></a></li>
+            <li><a href="#" aria-label="RSS feed"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4a16 16 0 0116 16h-3A13 13 0 004 7zm0 6a10 10 0 0110 10h-3a7 7 0 00-7-7zm2 6a2 2 0 110 4 2 2 0 010-4z"/></svg></a></li>
+            <li><a href="#" aria-label="Email newsletter"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2zm2 2v1l8 5 8-5V7l-8 5z"/></svg></a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-7">
+        <div class="itemContent">
+          <h2>Tiny quantity stepper</h2>
+          <div class="stepper-14" role="group" aria-label="Quantity" data-stepper>
+            <button type="button" class="icon-btn" aria-label="Decrease quantity" data-delta="-1">&minus;</button>
+            <input type="number" value="1" min="0" aria-label="Quantity">
+            <button type="button" class="icon-btn" aria-label="Increase quantity" data-delta="1">+</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-8">
+        <div class="itemContent">
+          <h2>Tag chips with tiny remove buttons</h2>
+          <ul class="chips-tight" aria-label="Tags">
+            <li data-dismissable><button type="button" class="chip-label">design</button><button type="button" class="icon-btn chip-remove" aria-label="Remove tag design" data-dismiss>&#x2715;</button></li>
+            <li data-dismissable><button type="button" class="chip-label">ux</button><button type="button" class="icon-btn chip-remove" aria-label="Remove tag ux" data-dismiss>&#x2715;</button></li>
+            <li data-dismissable><button type="button" class="chip-label">a11y</button><button type="button" class="icon-btn chip-remove" aria-label="Remove tag a11y" data-dismiss>&#x2715;</button></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-9">
+        <div class="itemContent">
+          <h2>Small slideshow dot buttons</h2>
+          <div class="slide-preview">&#x26F0;&#xFE0F; Mountain retreats</div>
+          <div class="dots-8" role="group" aria-label="Choose slide">
+            <button type="button" aria-label="Slide 1" aria-current="true"></button>
+            <button type="button" aria-label="Slide 2"></button>
+            <button type="button" aria-label="Slide 3"></button>
+            <button type="button" aria-label="Slide 4"></button>
+            <button type="button" aria-label="Slide 5"></button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-10">
+        <div class="itemContent">
+          <h2>Stacked map zoom controls</h2>
+          <div class="map" role="img" aria-label="Street map of the city centre">
+            <div class="map-zoom" role="group" aria-label="Map zoom">
+              <button type="button" class="icon-btn" aria-label="Zoom in">+</button>
+              <button type="button" class="icon-btn" aria-label="Zoom out">&minus;</button>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("[data-toggle-pressed]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+      });
+    });
+
+    document.querySelectorAll("[data-radio-group]").forEach((group) => {
+      const radios = group.querySelectorAll('[role="radio"]');
+      radios.forEach((radio) => {
+        radio.addEventListener("click", () => {
+          radios.forEach((other) => other.setAttribute("aria-checked", String(other === radio)));
+        });
+      });
+    });
+
+    document.querySelectorAll('[role="checkbox"]').forEach((box) => {
+      box.addEventListener("click", () => {
+        box.setAttribute("aria-checked", String(box.getAttribute("aria-checked") !== "true"));
+      });
+    });
+
+    document.querySelectorAll("[data-stepper]").forEach((stepper) => {
+      const input = stepper.querySelector("input");
+      stepper.querySelectorAll("[data-delta]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const next = Math.max(0, Number(input.value || 0) + Number(button.dataset.delta));
+          input.value = String(next);
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-dismiss]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.closest("[data-dismissable]");
+        if (target) {
+          target.hidden = true;
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-tree-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        button.textContent = expanded ? "\u25B8" : "\u25BE";
+      });
+    });
+
+    document.querySelectorAll("a[href='#']").forEach((link) => {
+      link.addEventListener("click", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>

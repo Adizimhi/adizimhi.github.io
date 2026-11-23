@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Not Obscured Footer Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 1px solid #333333;
+      border-radius: 6px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .tile {
+      width: 280px;
+      padding: 12px;
+      border: 1px solid #777777;
+      border-radius: 8px;
+    }
+
+    .switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch-track {
+      width: 44px;
+      height: 24px;
+      border-radius: 12px;
+      background: #777777;
+      position: relative;
+    }
+
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .switch[aria-checked="true"] .switch-track {
+      background: #1a7f37;
+    }
+
+    .switch[aria-checked="true"] .switch-track::after {
+      left: 23px;
+    }
+
+    .note {
+      min-height: 40px;
+      width: 320px;
+      padding: 8px;
+      border: 1px solid #777777;
+      border-radius: 6px;
+    }
+
+    .list-item {
+      box-sizing: border-box;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    pre {
+      margin: 0;
+      padding: 8px;
+      background: #f4f4f4;
+      border: 1px solid #777777;
+      overflow-x: auto;
+      max-width: 360px;
+    }
+
+    [role="tablist"] {
+      display: flex;
+      gap: 4px;
+    }
+
+    [role="tab"][aria-selected="true"] {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+
+    [aria-pressed="true"] {
+      background: #ffe8a3;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      margin-bottom: 0;
+    }
+
+    .list-item {
+      scroll-snap-align: end;
+    }
+
+    .bottom-dock {
+      position: sticky;
+      bottom: 0;
+      z-index: 100;
+      margin: 24px -24px 0;
+    }
+
+    .chat-bar {
+      box-sizing: border-box;
+      height: 56px;
+      padding: 8px 24px;
+      background: #e8f1ec;
+      border-top: 1px solid #555555;
+    }
+
+    .tab-bar {
+      box-sizing: border-box;
+      height: 108px;
+      padding: 20px 24px;
+      background: #14361f;
+    }
+
+    .tab-bar ul {
+      display: flex;
+      justify-content: space-around;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .tab-bar a {
+      display: inline-block;
+      padding: 12px;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Focus Not Obscured Footer Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="focus-not-obscured-footer-failure-11">
+        <div class="itemContent">
+          <h2>Book a demo button</h2>
+          <p>See how the scheduling tool works for teams of every size.</p>
+          <button type="button">Book a demo</button>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-12">
+        <div class="itemContent">
+          <h2>View all reviews link</h2>
+          <p>4.6 out of 5 from 312 verified buyers.</p>
+          <a href="#all-reviews">View all 312 reviews</a>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-13">
+        <div class="itemContent">
+          <h2>Postcode lookup field</h2>
+          <p>Check whether we deliver to your area.</p>
+          <div class="row">
+            <label for="postcode-13">Postcode</label>
+            <input id="postcode-13" type="text" autocomplete="postal-code">
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-14">
+        <div class="itemContent">
+          <h2>Appointment time field</h2>
+          <p>Clinic opening hours are 8 am to 6 pm.</p>
+          <div class="row">
+            <label for="appointment-time-14">Appointment time</label>
+            <input id="appointment-time-14" type="time" min="08:00" max="18:00">
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-15">
+        <div class="itemContent">
+          <h2>Ticket quantity field</h2>
+          <p>Jazz in the park, Saturday 7 pm.</p>
+          <div class="row">
+            <label for="ticket-quantity-15">Number of tickets</label>
+            <input id="ticket-quantity-15" type="number" min="1" max="8" value="2">
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-16">
+        <div class="itemContent">
+          <h2>CV upload field</h2>
+          <p>Apply for the junior designer role.</p>
+          <div class="row">
+            <label for="cv-upload-16">Upload your CV</label>
+            <input id="cv-upload-16" type="file">
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-17">
+        <div class="itemContent">
+          <h2>Custom video play button</h2>
+          <p>Product tour, 2 minutes.</p>
+          <div class="row">
+            <div role="button" tabindex="0" class="tile" style="width:auto">&#9654; Play product tour</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-18">
+        <div class="itemContent">
+          <h2>Product details tabs</h2>
+          <p>Ceramic pour-over coffee set</p>
+          <div role="tablist" aria-label="Product details" data-tabs>
+            <button type="button" role="tab" id="tab-description-18" aria-selected="true" aria-controls="panel-description-18">Description</button>
+            <button type="button" role="tab" id="tab-care-18" aria-selected="false" aria-controls="panel-care-18" tabindex="-1">Care</button>
+          </div>
+          <div role="tabpanel" id="panel-description-18" aria-labelledby="tab-description-18" hidden></div>
+          <div role="tabpanel" id="panel-care-18" aria-labelledby="tab-care-18" hidden></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-19">
+        <div class="itemContent">
+          <h2>Save to favourites toggle</h2>
+          <p>Lisbon city apartment, 2 guests, 95 euros per night.</p>
+          <button type="button" aria-pressed="false" data-pressed>Save to favourites</button>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-20">
+        <div class="itemContent">
+          <h2>Inline reply box</h2>
+          <p>Reply to Maria's comment</p>
+          <div class="row">
+            <div class="note" contenteditable="true" role="textbox" aria-label="Your reply"></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <div class="bottom-dock">
+    <div class="chat-bar">
+      <button type="button">Questions? Chat with us</button>
+    </div>
+    <nav class="tab-bar" aria-label="App">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#search">Search</a></li>
+        <li><a href="#basket">Basket</a></li>
+        <li><a href="#account">Account</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <script>
+    document.querySelectorAll("[data-tabs]").forEach((tablist) => {
+      const tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+      tablist.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+          return;
+        }
+        const index = tabs.indexOf(document.activeElement);
+        const next = tabs[(index + (event.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+        tabs.forEach((tab) => {
+          tab.setAttribute("aria-selected", String(tab === next));
+          tab.tabIndex = tab === next ? 0 : -1;
+        });
+        next.focus();
+      });
+    });
+
+    document.querySelectorAll("[data-pressed]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+      });
+    });
+  </script>
+</body>
+</html>

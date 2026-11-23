@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Form Tagging Failures 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .stack {
+      display: grid;
+      gap: 6px;
+      max-width: 320px;
+    }
+
+    input[type="search"],
+    input[type="text"],
+    select {
+      padding: 8px 10px;
+      font: inherit;
+      border: 1px solid #777777;
+      border-radius: 4px;
+      min-width: 220px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font: inherit;
+      border-radius: 4px;
+      border: 1px solid #1a5fb4;
+      background: #1a5fb4;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .icon-toggle {
+      width: 40px;
+      padding: 8px 0;
+      background: #ffffff;
+      color: #222222;
+      border-color: #777777;
+    }
+
+    .layout {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    aside {
+      background: #f7f7f7;
+      padding: 12px;
+      border-radius: 6px;
+      min-width: 260px;
+    }
+
+    fieldset {
+      border: 1px solid #aaaaaa;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    footer {
+      background: #2d2d2d;
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 6px;
+    }
+
+    footer label,
+    footer h3 {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Search Form Tagging Failures 2</h1>
+
+    <ul class="list">
+      <li class="list-item" id="search-form-tagging-failure-11">
+        <div class="itemContent">
+          <h2>Documentation search form posting to a search endpoint</h2>
+          <form action="#search" method="get" class="search-row">
+            <input type="search" name="q" aria-label="Search documentation" placeholder="Search docs">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-12">
+        <div class="itemContent">
+          <h2>Expandable search opened from a magnifier button</h2>
+          <div class="search-row">
+            <button type="button" class="icon-toggle" id="sft-f12-toggle" aria-label="Open search" aria-expanded="true" aria-controls="sft-f12-form">🔍</button>
+            <form action="#results" id="sft-f12-form" class="search-row">
+              <label for="sft-f12-q">Search</label>
+              <input id="sft-f12-q" type="search" name="q">
+              <button type="submit">Go</button>
+            </form>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-13">
+        <div class="itemContent">
+          <h2>Job search with keyword and location fields</h2>
+          <form action="#jobs" class="search-row">
+            <label for="sft-f13-keyword">What</label>
+            <input id="sft-f13-keyword" type="search" name="keyword" placeholder="Job title or skill">
+            <label for="sft-f13-location">Where</label>
+            <input id="sft-f13-location" type="text" name="location" placeholder="City or postcode">
+            <button type="submit">Search jobs</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-14">
+        <div class="itemContent">
+          <h2>Library catalog search with field selector</h2>
+          <form action="#catalog" class="stack">
+            <label for="sft-f14-q">Search the catalog</label>
+            <input id="sft-f14-q" type="search" name="q">
+            <div class="search-row">
+              <label><input type="radio" name="sft-f14-field" value="keyword" checked> Keyword</label>
+              <label><input type="radio" name="sft-f14-field" value="title"> Title</label>
+              <label><input type="radio" name="sft-f14-field" value="author"> Author</label>
+            </div>
+            <button type="submit">Search catalog</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-15">
+        <div class="itemContent">
+          <h2>Searchbox role on the input with no search landmark</h2>
+          <div class="search-row">
+            <label id="sft-f15-label" for="sft-f15-q">Search music</label>
+            <input id="sft-f15-q" type="text" role="searchbox" aria-labelledby="sft-f15-label" placeholder="Artists, songs or albums">
+            <button type="button">Search</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-16">
+        <div class="itemContent">
+          <h2>Blog sidebar search inside a complementary landmark</h2>
+          <div class="layout">
+            <article style="max-width: 320px;">
+              <h3>Five easy houseplants</h3>
+              <p>Snake plants and pothos thrive with very little attention.</p>
+            </article>
+            <aside aria-label="Blog sidebar">
+              <form action="#blog-search" class="stack">
+                <label for="sft-f16-q">Search the blog</label>
+                <input id="sft-f16-q" type="search" name="q">
+                <button type="submit">Search</button>
+              </form>
+            </aside>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-17">
+        <div class="itemContent">
+          <h2>Property search grouped in a fieldset legend</h2>
+          <form action="#properties">
+            <fieldset class="stack">
+              <legend>Search properties</legend>
+              <label for="sft-f17-area">Area</label>
+              <input id="sft-f17-area" type="search" name="area">
+              <label for="sft-f17-type">Type</label>
+              <select id="sft-f17-type" name="type">
+                <option>Any</option>
+                <option>Apartment</option>
+                <option>House</option>
+              </select>
+              <button type="submit">Search</button>
+            </fieldset>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-18">
+        <div class="itemContent">
+          <h2>Search wrapped in a generic region role</h2>
+          <div role="region" aria-label="Search">
+            <form action="#results" class="search-row">
+              <label for="sft-f18-q">Search events</label>
+              <input id="sft-f18-q" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-19">
+        <div class="itemContent">
+          <h2>Misspelled search role on the form</h2>
+          <form action="#results" role="serach" class="search-row">
+            <label for="sft-f19-q">Search courses</label>
+            <input id="sft-f19-q" type="search" name="q">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-20">
+        <div class="itemContent">
+          <h2>Help center search in the page footer</h2>
+          <footer>
+            <h3>Still need help?</h3>
+            <form action="#help" class="search-row">
+              <label for="sft-f20-q">Search our help center</label>
+              <input id="sft-f20-q" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+          </footer>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => event.preventDefault());
+    });
+
+    const toggle = document.getElementById("sft-f12-toggle");
+    toggle.addEventListener("click", () => {
+      const form = document.getElementById("sft-f12-form");
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!open));
+      form.hidden = open;
+    });
+  </script>
+</body>
+</html>

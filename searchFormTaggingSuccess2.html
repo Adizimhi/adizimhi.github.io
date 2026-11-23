@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Form Tagging Success 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .stack {
+      display: grid;
+      gap: 6px;
+      max-width: 320px;
+    }
+
+    input[type="search"],
+    input[type="text"],
+    select {
+      padding: 8px 10px;
+      font: inherit;
+      border: 1px solid #777777;
+      border-radius: 4px;
+      min-width: 220px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font: inherit;
+      border-radius: 4px;
+      border: 1px solid #1a5fb4;
+      background: #1a5fb4;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .icon-toggle {
+      width: 40px;
+      padding: 8px 0;
+      background: #ffffff;
+      color: #222222;
+      border-color: #777777;
+    }
+
+    .layout {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    aside {
+      background: #f7f7f7;
+      padding: 12px;
+      border-radius: 6px;
+      min-width: 260px;
+    }
+
+    fieldset {
+      border: 1px solid #aaaaaa;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    footer {
+      background: #2d2d2d;
+      color: #ffffff;
+      padding: 16px;
+      border-radius: 6px;
+    }
+
+    footer label,
+    footer h3 {
+      color: #ffffff;
+    }
+
+    .results {
+      margin: 0;
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Search Form Tagging Success 2</h1>
+
+    <ul class="list">
+      <li class="list-item" id="search-form-tagging-success-11">
+        <div class="itemContent">
+          <h2>Documentation search form with role search</h2>
+          <form action="#search" method="get" role="search" aria-label="Documentation" class="search-row">
+            <input type="search" name="q" aria-label="Search documentation" placeholder="Search docs">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-12">
+        <div class="itemContent">
+          <h2>Expandable search with toggle inside the search landmark</h2>
+          <div role="search" aria-label="Site" class="search-row">
+            <button type="button" class="icon-toggle" id="sft-s12-toggle" aria-label="Open search" aria-expanded="true" aria-controls="sft-s12-form">🔍</button>
+            <form action="#results" id="sft-s12-form" class="search-row">
+              <label for="sft-s12-q">Search</label>
+              <input id="sft-s12-q" type="search" name="q">
+              <button type="submit">Go</button>
+            </form>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-13">
+        <div class="itemContent">
+          <h2>Job search with keyword and location in a search element</h2>
+          <search aria-label="Jobs">
+            <form action="#jobs" class="search-row">
+              <label for="sft-s13-keyword">What</label>
+              <input id="sft-s13-keyword" type="search" name="keyword" placeholder="Job title or skill">
+              <label for="sft-s13-location">Where</label>
+              <input id="sft-s13-location" type="text" name="location" placeholder="City or postcode">
+              <button type="submit">Search jobs</button>
+            </form>
+          </search>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-14">
+        <div class="itemContent">
+          <h2>Library catalog search with field selector and role search</h2>
+          <form action="#catalog" role="search" aria-label="Library catalog" class="stack">
+            <label for="sft-s14-q">Search the catalog</label>
+            <input id="sft-s14-q" type="search" name="q">
+            <div class="search-row">
+              <label><input type="radio" name="sft-s14-field" value="keyword" checked> Keyword</label>
+              <label><input type="radio" name="sft-s14-field" value="title"> Title</label>
+              <label><input type="radio" name="sft-s14-field" value="author"> Author</label>
+            </div>
+            <button type="submit">Search catalog</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-15">
+        <div class="itemContent">
+          <h2>Searchbox role input inside a search landmark</h2>
+          <div role="search" aria-label="Music" class="search-row">
+            <label id="sft-s15-label" for="sft-s15-q">Search music</label>
+            <input id="sft-s15-q" type="text" role="searchbox" aria-labelledby="sft-s15-label" placeholder="Artists, songs or albums">
+            <button type="button">Search</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-16">
+        <div class="itemContent">
+          <h2>Blog sidebar search form with role search</h2>
+          <div class="layout">
+            <article style="max-width: 320px;">
+              <h3>Five easy houseplants</h3>
+              <p>Snake plants and pothos thrive with very little attention.</p>
+            </article>
+            <aside aria-label="Blog sidebar">
+              <form action="#blog-search" role="search" aria-label="Blog" class="stack">
+                <label for="sft-s16-q">Search the blog</label>
+                <input id="sft-s16-q" type="search" name="q">
+                <button type="submit">Search</button>
+              </form>
+            </aside>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-17">
+        <div class="itemContent">
+          <h2>Property search fieldset inside role search</h2>
+          <form action="#properties" role="search" aria-label="Properties">
+            <fieldset class="stack">
+              <legend>Search properties</legend>
+              <label for="sft-s17-area">Area</label>
+              <input id="sft-s17-area" type="search" name="area">
+              <label for="sft-s17-type">Type</label>
+              <select id="sft-s17-type" name="type">
+                <option>Any</option>
+                <option>Apartment</option>
+                <option>House</option>
+              </select>
+              <button type="submit">Search</button>
+            </fieldset>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-18">
+        <div class="itemContent">
+          <h2>Live search element without a form</h2>
+          <search aria-label="Events">
+            <label for="sft-s18-q">Search events</label>
+            <input id="sft-s18-q" type="search" aria-controls="sft-s18-results">
+          </search>
+          <ul class="results" id="sft-s18-results" aria-live="polite">
+            <li>Jazz in the park</li>
+            <li>Farmers market</li>
+            <li>Open air cinema</li>
+            <li>Night run 10K</li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-19">
+        <div class="itemContent">
+          <h2>Refine search on a results page</h2>
+          <form action="#results" role="search" aria-labelledby="sft-s19-heading" class="stack">
+            <h3 id="sft-s19-heading" style="margin: 0;">Refine your course search</h3>
+            <label for="sft-s19-q">Search courses</label>
+            <input id="sft-s19-q" type="search" name="q" value="data science">
+            <label for="sft-s19-level">Level</label>
+            <select id="sft-s19-level" name="level">
+              <option>Any level</option>
+              <option>Beginner</option>
+              <option>Advanced</option>
+            </select>
+            <button type="submit">Update results</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-20">
+        <div class="itemContent">
+          <h2>Help center search in the page footer with role search</h2>
+          <footer>
+            <h3>Still need help?</h3>
+            <form action="#help" role="search" aria-label="Help center" class="search-row">
+              <label for="sft-s20-q">Search our help center</label>
+              <input id="sft-s20-q" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+          </footer>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => event.preventDefault());
+    });
+
+    const toggle = document.getElementById("sft-s12-toggle");
+    toggle.addEventListener("click", () => {
+      const form = document.getElementById("sft-s12-form");
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      toggle.setAttribute("aria-expanded", String(!open));
+      form.hidden = open;
+    });
+
+    document.getElementById("sft-s18-q").addEventListener("input", (event) => {
+      const term = event.target.value.trim().toLowerCase();
+      document.querySelectorAll("#sft-s18-results li").forEach((item) => {
+        item.hidden = term !== "" && !item.textContent.toLowerCase().includes(term);
+      });
+    });
+  </script>
+</body>
+</html>

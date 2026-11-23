@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Label Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      max-width: 360px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    select,
+    textarea {
+      padding: 8px;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    fieldset {
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .editor {
+      min-height: 60px;
+      padding: 8px;
+      border: 1px solid #888888;
+      border-radius: 4px;
+    }
+
+    .custom-listbox {
+      margin: 0;
+      padding: 4px;
+      list-style: none;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      max-width: 220px;
+    }
+
+    .custom-listbox [role="option"] {
+      padding: 6px;
+    }
+
+    .custom-listbox [aria-selected="true"] {
+      background: #dbe9ff;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #555555;
+    }
+
+    .fake-label {
+      font-weight: bold;
+    }
+
+    .qty-table {
+      border-collapse: collapse;
+    }
+
+    .qty-table th,
+    .qty-table td {
+      padding: 6px 10px;
+      border: 1px solid #dddddd;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Field Label Success</h1>
+    <ul class="list">
+      <li class="list-item" id="field-label-success-1">
+        <div class="itemContent">
+          <h2>Full name with explicit label</h2>
+          <div class="field">
+            <label for="fl-s1-name">Full name</label>
+            <input type="text" id="fl-s1-name" name="fullName" autocomplete="name">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-2">
+        <div class="itemContent">
+          <h2>Email wrapped in label</h2>
+          <label class="field">
+            Email address
+            <input type="email" name="email" autocomplete="email">
+          </label>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-3">
+        <div class="itemContent">
+          <h2>Password with aria-label</h2>
+          <div class="field">
+            <input type="password" name="password" aria-label="Password" autocomplete="current-password">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-4">
+        <div class="itemContent">
+          <h2>Product search labelled by visible text</h2>
+          <div class="field">
+            <span id="fl-s4-heading" class="fake-label">Search products</span>
+            <input type="search" name="q" aria-labelledby="fl-s4-heading">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-5">
+        <div class="itemContent">
+          <h2>Shipping speed radio group</h2>
+          <fieldset>
+            <legend>Shipping speed</legend>
+            <div class="option-row">
+              <input type="radio" id="fl-s5-standard" name="shipping" value="standard" checked>
+              <label for="fl-s5-standard">Standard (5-7 days)</label>
+            </div>
+            <div class="option-row">
+              <input type="radio" id="fl-s5-express" name="shipping" value="express">
+              <label for="fl-s5-express">Express (2 days)</label>
+            </div>
+            <div class="option-row">
+              <input type="radio" id="fl-s5-overnight" name="shipping" value="overnight">
+              <label for="fl-s5-overnight">Overnight</label>
+            </div>
+          </fieldset>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-6">
+        <div class="itemContent">
+          <h2>Terms agreement checkbox</h2>
+          <div class="option-row">
+            <input type="checkbox" id="fl-s6-terms" name="terms">
+            <label for="fl-s6-terms">I agree to the terms and conditions</label>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-7">
+        <div class="itemContent">
+          <h2>Country select with label</h2>
+          <div class="field">
+            <label for="fl-s7-country">Country</label>
+            <select id="fl-s7-country" name="country">
+              <option value="ca">Canada</option>
+              <option value="fr">France</option>
+              <option value="jp">Japan</option>
+              <option value="us">United States</option>
+            </select>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-8">
+        <div class="itemContent">
+          <h2>Feedback textarea with label</h2>
+          <div class="field">
+            <label for="fl-s8-comments">Comments</label>
+            <textarea id="fl-s8-comments" name="comments" rows="4"></textarea>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-9">
+        <div class="itemContent">
+          <h2>Site search with visually hidden label</h2>
+          <div class="search-row">
+            <label for="fl-s9-site-search" class="visually-hidden">Search this site</label>
+            <input type="search" id="fl-s9-site-search" name="siteSearch">
+            <button type="button">Go</button>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-10">
+        <div class="itemContent">
+          <h2>Appointment date with label</h2>
+          <div class="field">
+            <label for="fl-s10-date">Appointment date</label>
+            <input type="date" id="fl-s10-date" name="appointmentDate">
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

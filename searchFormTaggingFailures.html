@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Form Tagging Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="search"],
+    input[type="text"],
+    select {
+      padding: 8px 10px;
+      font: inherit;
+      border: 1px solid #777777;
+      border-radius: 4px;
+      min-width: 220px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font: inherit;
+      border-radius: 4px;
+      border: 1px solid #1a5fb4;
+      background: #1a5fb4;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: #f2f2f2;
+      border-radius: 6px;
+    }
+
+    .brand {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .icon-search {
+      width: 40px;
+      padding: 8px 0;
+    }
+
+    .suggestions {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border: 1px solid #777777;
+      width: 260px;
+    }
+
+    .suggestions li {
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .suggestions li:hover {
+      background: #e8f0fb;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 8px 12px;
+      background: #f7f7f7;
+      border: 1px solid #dddddd;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    th,
+    td {
+      border: 1px solid #cccccc;
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Search Form Tagging Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="search-form-tagging-failure-1">
+        <div class="itemContent">
+          <h2>Site header search form without a search landmark</h2>
+          <header class="site-header">
+            <span class="brand">Bookhaven</span>
+            <form action="#results" class="search-row">
+              <label for="sft-f1-q">Search books</label>
+              <input id="sft-f1-q" type="search" name="q" placeholder="Title, author or ISBN">
+              <button type="submit">Search</button>
+            </form>
+          </header>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-2">
+        <div class="itemContent">
+          <h2>Search field and magnifier button in a plain div</h2>
+          <div class="search-row">
+            <input id="sft-f2-q" type="text" placeholder="Search…" aria-label="Search">
+            <button type="button" class="icon-search" aria-label="Search">🔍</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-3">
+        <div class="itemContent">
+          <h2>Search role placed on the input instead of a container</h2>
+          <form action="#results" class="search-row">
+            <label for="sft-f3-q">Search recipes</label>
+            <input id="sft-f3-q" type="search" name="q" role="search">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-4">
+        <div class="itemContent">
+          <h2>Search form marked with role form instead of role search</h2>
+          <form action="#results" role="form" aria-label="Search site" class="search-row">
+            <label for="sft-f4-q">Search the site</label>
+            <input id="sft-f4-q" type="search" name="q">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-5">
+        <div class="itemContent">
+          <h2>Store search with category filter and no landmark</h2>
+          <form action="#results" class="search-row">
+            <label for="sft-f5-category">Department</label>
+            <select id="sft-f5-category" name="category">
+              <option>All departments</option>
+              <option>Electronics</option>
+              <option>Garden</option>
+              <option>Toys</option>
+            </select>
+            <label for="sft-f5-q">Search products</label>
+            <input id="sft-f5-q" type="search" name="q">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-6">
+        <div class="itemContent">
+          <h2>Autocomplete search combobox without a landmark</h2>
+          <div>
+            <label for="sft-f6-q">Search destinations</label>
+            <div class="search-row">
+              <input id="sft-f6-q" type="search" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="sft-f6-list" autocomplete="off">
+              <button type="button" id="sft-f6-go">Search</button>
+            </div>
+            <ul class="suggestions" id="sft-f6-list" role="listbox" aria-label="Suggested destinations" hidden>
+              <li role="option" id="sft-f6-opt-1">Paris, France</li>
+              <li role="option" id="sft-f6-opt-2">Porto, Portugal</li>
+              <li role="option" id="sft-f6-opt-3">Prague, Czech Republic</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-7">
+        <div class="itemContent">
+          <h2>Search inside a region landmark labelled Search</h2>
+          <section aria-label="Search">
+            <form action="#results" class="search-row">
+              <label for="sft-f7-q">Search articles</label>
+              <input id="sft-f7-q" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-8">
+        <div class="itemContent">
+          <h2>Search form placed inside the navigation landmark</h2>
+          <nav aria-label="Main" class="main-nav">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#support">Support</a>
+            <form action="#results" class="search-row">
+              <label for="sft-f8-q">Search</label>
+              <input id="sft-f8-q" type="search" name="q">
+              <button type="submit">Go</button>
+            </form>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-9">
+        <div class="itemContent">
+          <h2>Table toolbar search for filtering employees</h2>
+          <div class="toolbar">
+            <strong>Employees</strong>
+            <div class="search-row">
+              <label for="sft-f9-q">Search employees</label>
+              <input id="sft-f9-q" type="search" placeholder="Name or department">
+            </div>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Name</th><th>Department</th></tr>
+            </thead>
+            <tbody id="sft-f9-rows">
+              <tr><td>Ana Ruiz</td><td>Finance</td></tr>
+              <tr><td>Ben Okafor</td><td>Engineering</td></tr>
+              <tr><td>Chloe Martin</td><td>Marketing</td></tr>
+              <tr><td>Daniel Kim</td><td>Engineering</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-failure-10">
+        <div class="itemContent">
+          <h2>Search role applied only to the submit button</h2>
+          <form action="#results" class="search-row">
+            <label for="sft-f10-q">Search help articles</label>
+            <input id="sft-f10-q" type="search" name="q">
+            <button type="submit" role="search">Search</button>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => event.preventDefault());
+    });
+
+    const destinationInput = document.getElementById("sft-f6-q");
+    const destinationList = document.getElementById("sft-f6-list");
+    destinationInput.addEventListener("input", () => {
+      const term = destinationInput.value.trim().toLowerCase();
+      let visible = 0;
+      destinationList.querySelectorAll("li").forEach((option) => {
+        const match = term && option.textContent.toLowerCase().includes(term);
+        option.hidden = !match;
+        if (match) visible += 1;
+      });
+      destinationList.hidden = visible === 0;
+      destinationInput.setAttribute("aria-expanded", String(visible > 0));
+    });
+    destinationList.querySelectorAll("li").forEach((option) => {
+      option.addEventListener("click", () => {
+        destinationInput.value = option.textContent;
+        destinationList.hidden = true;
+        destinationInput.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("sft-f9-q").addEventListener("input", (event) => {
+      const term = event.target.value.trim().toLowerCase();
+      document.querySelectorAll("#sft-f9-rows tr").forEach((row) => {
+        row.hidden = term !== "" && !row.textContent.toLowerCase().includes(term);
+      });
+    });
+  </script>
+</body>
+</html>

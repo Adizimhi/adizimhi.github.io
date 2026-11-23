@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slider Dragging Movements Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .slider {
+      position: relative;
+      width: 320px;
+      height: 12px;
+      margin: 12px 0;
+      background: #d6d6d6;
+      border-radius: 6px;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .slider[data-click-track] {
+      cursor: pointer;
+    }
+
+    .slider-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      border-radius: 6px;
+      background: #3b6fd8;
+      pointer-events: none;
+    }
+
+    .slider-thumb {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 24px;
+      height: 24px;
+      box-sizing: border-box;
+      padding: 0;
+      border: 2px solid #ffffff;
+      border-radius: 50%;
+      background: #333333;
+      box-shadow: 0 0 0 1px #333333;
+      transform: translate(-50%, -50%);
+      cursor: grab;
+      touch-action: none;
+    }
+
+    .slider-thumb:focus-visible {
+      outline: 3px solid #1a4fa3;
+      outline-offset: 2px;
+    }
+
+    .vertical-slider {
+      width: 12px;
+      height: 200px;
+      margin: 0 12px;
+    }
+
+    .vertical-slider .slider-thumb {
+      left: 50%;
+      top: 0;
+    }
+
+    .vertical-slider .slider-fill {
+      top: auto;
+      bottom: 0;
+      width: 100%;
+      height: 0;
+    }
+
+    .band-group {
+      display: flex;
+      gap: 32px;
+      align-items: flex-end;
+    }
+
+    .band {
+      display: grid;
+      justify-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+
+    .step-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 44px;
+      padding: 0 10px;
+      border: 1px solid #666666;
+      border-radius: 6px;
+      background: #ffffff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .preset-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .preset-row button {
+      min-height: 40px;
+      padding: 0 14px;
+      border: 1px solid #666666;
+      border-radius: 20px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .preset-row button[aria-pressed="true"] {
+      background: #222222;
+      color: #ffffff;
+    }
+
+    .value-text {
+      font-size: 14px;
+      color: #333333;
+      min-width: 64px;
+    }
+
+    .number-input {
+      width: 80px;
+      height: 36px;
+      box-sizing: border-box;
+      font-size: 15px;
+    }
+
+    .ticks {
+      display: flex;
+      justify-content: space-between;
+      width: 320px;
+      font-size: 12px;
+      color: #555555;
+    }
+
+    .hue {
+      height: 16px;
+      border-radius: 8px;
+      background: linear-gradient(to right, #ff0000, #ffff00, #00ff00, #00ffff, #0000ff, #ff00ff, #ff0000);
+    }
+
+    .swatch-preview {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      border: 1px solid #999999;
+    }
+
+    .compare {
+      position: relative;
+      width: 320px;
+      height: 180px;
+      overflow: hidden;
+      border-radius: 6px;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .compare .layer {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+      color: #ffffff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    }
+
+    .compare .after {
+      justify-content: flex-end;
+      padding-right: 16px;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+    }
+
+    .compare .before {
+      width: 50%;
+      overflow: hidden;
+      padding-left: 16px;
+      box-sizing: border-box;
+      white-space: nowrap;
+      background: linear-gradient(135deg, #8e9eab, #4b5662);
+    }
+
+    .compare .slider-thumb {
+      top: 50%;
+      width: 24px;
+      height: 180px;
+      border: none;
+      border-radius: 0;
+      background: linear-gradient(to right, transparent 10px, #ffffff 10px 14px, transparent 14px);
+      box-shadow: none;
+      cursor: ew-resize;
+    }
+
+    .knob-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .knob {
+      --angle: 0deg;
+      position: relative;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #fafafa, #b5b5b5);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .knob::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 8px;
+      width: 4px;
+      height: 28px;
+      margin-left: -2px;
+      border-radius: 2px;
+      background: #c62828;
+      transform-origin: 2px 40px;
+      transform: rotate(var(--angle));
+    }
+
+    .knob:focus-visible {
+      outline: 3px solid #1a4fa3;
+      outline-offset: 4px;
+    }
+
+    .unlock {
+      position: relative;
+      width: 280px;
+      height: 48px;
+      padding: 0 24px;
+      box-sizing: border-box;
+      border-radius: 24px;
+      background: #e3e8ef;
+    }
+
+    .unlock .unlock-rail {
+      width: 100%;
+      height: 48px;
+      margin: 0;
+      background: transparent;
+    }
+
+    .unlock .unlock-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #555555;
+      pointer-events: none;
+    }
+
+    .unlock .slider-thumb {
+      width: 44px;
+      height: 44px;
+      border: none;
+      background: #2a7a2a;
+      color: #ffffff;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .checker {
+      height: 16px;
+      border-radius: 8px;
+      background:
+        linear-gradient(to right, rgba(42, 90, 200, 0), rgba(42, 90, 200, 1)),
+        repeating-conic-gradient(#cccccc 0% 25%, #ffffff 0% 50%) 0 0 / 16px 16px;
+    }
+
+    .gauge {
+      position: relative;
+      width: 200px;
+      height: 100px;
+      overflow: hidden;
+      touch-action: none;
+      cursor: grab;
+    }
+
+    .gauge::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(from -90deg, #2a7a2a 0deg, #e0a800 90deg, #c62828 180deg, transparent 180deg);
+    }
+
+    .gauge::after {
+      content: "";
+      position: absolute;
+      left: 30px;
+      top: 30px;
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .gauge .needle {
+      position: absolute;
+      left: 98px;
+      bottom: 0;
+      z-index: 1;
+      width: 4px;
+      height: 90px;
+      border-radius: 2px;
+      background: #222222;
+      transform-origin: 2px 90px;
+      transform: rotate(var(--angle, 0deg));
+      pointer-events: none;
+    }
+
+    .gauge:focus-visible {
+      outline: 3px solid #1a4fa3;
+      outline-offset: 4px;
+    }
+
+    .timeline {
+      height: 8px;
+      background: #555555;
+    }
+
+    .timeline .slider-fill {
+      background: #e53935;
+    }
+
+    .timeline .chapter-mark {
+      position: absolute;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: #ffffff;
+      pointer-events: none;
+    }
+
+    .grip-thumb {
+      width: 40px;
+      height: 24px;
+      border-radius: 6px;
+      background: repeating-linear-gradient(90deg, #555555 0 2px, #dddddd 2px 6px);
+      box-shadow: 0 0 0 1px #333333;
+    }
+
+    .emoji-thumb {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: #ffffff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tooltip-thumb .tip {
+      position: absolute;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: #222222;
+      color: #ffffff;
+      font-size: 12px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .tick-marks {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(to right, #888888 0 2px, transparent 2px 20%);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+
+    .page-scrubber {
+      display: flex;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .page-view {
+      width: 160px;
+      height: 200px;
+      border: 1px solid #bbbbbb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      font-size: 14px;
+    }
+
+    .photo {
+      width: 200px;
+      height: 130px;
+      border-radius: 6px;
+      background: linear-gradient(160deg, #87ceeb 0 55%, #3b7a3b 55% 100%);
+      transform: rotate(var(--rotate, 0deg));
+    }
+
+    .mini-player {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: max-content;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: #1d1d1d;
+      color: #ffffff;
+    }
+
+    .mini-player .slider {
+      width: 160px;
+      height: 6px;
+      background: #555555;
+    }
+
+    .mini-player .slider-thumb {
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .mini-player .slider-fill {
+      background: #1db954;
+    }
+
+    input[type="range"] {
+      width: 320px;
+    }
+
+    .styled-range {
+      appearance: none;
+      -webkit-appearance: none;
+      height: 10px;
+      border-radius: 5px;
+      background: linear-gradient(to right, #ffffff, #1a4fa3);
+      border: 1px solid #888888;
+      cursor: pointer;
+    }
+
+    .styled-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #1a4fa3;
+      border: 3px solid #ffffff;
+      box-shadow: 0 0 0 1px #1a4fa3;
+    }
+
+    .styled-range::-moz-range-thumb {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #1a4fa3;
+      border: 3px solid #ffffff;
+    }
+
+    .vertical-range {
+      writing-mode: vertical-lr;
+      direction: rtl;
+      width: 24px;
+      height: 180px;
+    }
+
+    .preview-text {
+      margin: 0;
+    }
+
+    .opacity-preview {
+      width: 120px;
+      height: 60px;
+      border-radius: 6px;
+      background: #1a4fa3;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Slider Dragging Movements Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="slider-dragging-movements-failure-21">
+        <div class="itemContent">
+          <h2>SVG brush size slider</h2>
+          <svg width="320" height="40" viewBox="0 0 320 40" data-slider style="touch-action:none">
+            <rect data-rail x="20" y="16" width="280" height="8" rx="4" fill="#d6d6d6"></rect>
+            <rect data-fill x="20" y="16" width="0" height="8" rx="4" fill="#2a7a2a" pointer-events="none"></rect>
+            <circle id="sdm-f-svg" role="slider" aria-label="Brush size" aria-valuemin="1" aria-valuemax="50" aria-valuenow="10" data-unit="px" tabindex="0" cx="20" cy="20" r="12" fill="#333333" stroke="#ffffff" stroke-width="2" style="cursor:grab"></circle>
+          </svg>
+          <span class="value-text" data-output-for="sdm-f-svg">10px</span>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-22">
+        <div class="itemContent">
+          <h2>Appointment time window</h2>
+          <div class="slider" data-slider>
+            <div class="slider-fill" data-fill></div>
+            <div
+              class="slider-thumb"
+              id="sdm-f-window-start"
+              role="slider"
+              aria-label="Earliest appointment time"
+              aria-valuemin="8"
+              aria-valuemax="18"
+              aria-valuenow="9"
+              tabindex="0"
+              data-unit=":00"
+            ></div>
+            <div
+              class="slider-thumb"
+              id="sdm-f-window-end"
+              role="slider"
+              aria-label="Latest appointment time"
+              aria-valuemin="8"
+              aria-valuemax="18"
+              aria-valuenow="13"
+              tabindex="0"
+              data-unit=":00"
+            ></div>
+          </div>
+          <p class="value-text">Between <span data-output-for="sdm-f-window-start">9:00</span> and <span data-output-for="sdm-f-window-end">13:00</span></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-23">
+        <div class="itemContent">
+          <h2>Mortgage term with tick marks</h2>
+          <div class="slider" data-slider>
+            <span class="tick-marks" aria-hidden="true"></span>
+            <div
+              class="slider-thumb"
+              id="sdm-f-term"
+              role="slider"
+              aria-label="Mortgage term"
+              aria-valuemin="5"
+              aria-valuemax="30"
+              aria-valuenow="25"
+              tabindex="0"
+              data-step="5"
+              data-unit=" years"
+            ></div>
+          </div>
+          <div class="ticks" aria-hidden="true"><span>5</span><span>10</span><span>15</span><span>20</span><span>25</span><span>30</span></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-24">
+        <div class="itemContent">
+          <h2>Tip amount with floating value tooltip</h2>
+          <div class="slider" data-slider>
+            <div class="slider-fill" data-fill></div>
+            <button
+              class="slider-thumb tooltip-thumb"
+              id="sdm-f-tip"
+              role="slider"
+              aria-label="Tip percentage"
+              aria-valuemin="0"
+              aria-valuemax="30"
+              aria-valuenow="15"
+              type="button"
+              data-unit="%"
+            ><span class="tip" data-output-for="sdm-f-tip">15%</span></button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-25">
+        <div class="itemContent">
+          <h2>Vertical document page scrubber</h2>
+          <div class="page-scrubber">
+            <div class="page-view" id="sdm-f-page-view">Page 12</div>
+            <div class="slider vertical-slider" data-slider data-orientation="vertical">
+              <div
+                class="slider-thumb"
+                id="sdm-f-page"
+                role="slider"
+                aria-label="Page"
+                aria-valuemin="1"
+                aria-valuemax="40"
+                aria-valuenow="12"
+                tabindex="0"
+                aria-orientation="vertical"
+                data-effect="page"
+                data-effect-target="sdm-f-page-view"
+              ></div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-26">
+        <div class="itemContent">
+          <h2>Slide to unlock</h2>
+          <div class="unlock">
+            <span class="unlock-label" id="sdm-f-unlock-label">Slide to unlock</span>
+            <div class="slider unlock-rail" data-slider data-snap-back>
+              <div
+                class="slider-thumb"
+                id="sdm-f-unlock"
+                role="slider"
+                aria-label="Slide to unlock"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                tabindex="0"
+                data-effect="unlock"
+                data-effect-target="sdm-f-unlock-label"
+              >&#x27A4;</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-27">
+        <div class="itemContent">
+          <h2>Photo straighten angle</h2>
+          <div class="photo" id="sdm-f-photo" role="img" aria-label="Landscape photo"></div>
+          <div class="slider" data-slider>
+            <div
+              class="slider-thumb"
+              id="sdm-f-rotate"
+              role="slider"
+              aria-label="Straighten angle"
+              aria-valuemin="-45"
+              aria-valuemax="45"
+              aria-valuenow="0"
+              tabindex="0"
+              data-unit="&deg;"
+              data-effect="rotate"
+              data-effect-target="sdm-f-photo"
+            ></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-28">
+        <div class="itemContent">
+          <h2>Colour transparency over checkerboard</h2>
+          <div class="slider checker" data-slider>
+            <div
+              class="slider-thumb"
+              id="sdm-f-alpha"
+              role="slider"
+              aria-label="Colour transparency"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="60"
+              tabindex="0"
+              data-unit="%"
+            ></div>
+          </div>
+          <span class="value-text" data-output-for="sdm-f-alpha">60%</span>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-29">
+        <div class="itemContent">
+          <h2>Semi-circular speed gauge</h2>
+          <div class="gauge" id="sdm-f-gauge" data-knob data-sweep="180" data-centre="bottom" role="slider" aria-label="Cruise speed" aria-valuemin="0" aria-valuemax="160" aria-valuenow="80" data-unit=" km/h" data-step="5" tabindex="0">
+            <span class="needle" aria-hidden="true"></span>
+          </div>
+          <span class="value-text" data-output-for="sdm-f-gauge">80 km/h</span>
+        </div>
+      </li>
+
+      <li class="list-item" id="slider-dragging-movements-failure-30">
+        <div class="itemContent">
+          <h2>Mini player volume with speaker icon</h2>
+          <div class="mini-player">
+            <span aria-hidden="true">&#x1F509;</span>
+            <div class="slider" data-slider>
+              <div class="slider-fill" data-fill></div>
+              <div
+                class="slider-thumb"
+                id="sdm-f-mini-volume"
+                role="slider"
+                aria-label="Volume"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="45"
+                tabindex="0"
+              ></div>
+            </div>
+            <span aria-hidden="true">&#x1F50A;</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    const clamp = (value, minimum, maximum) => Math.min(maximum, Math.max(minimum, value));
+    const registry = new Map();
+
+    const describe = (element, value) => {
+      if (element.dataset.labels) {
+        const labels = element.dataset.labels.split("|");
+        const index = Math.round((value - Number(element.getAttribute("aria-valuemin"))) / Number(element.dataset.step || 1));
+        return labels[index] || String(value);
+      }
+      if (element.dataset.format === "time") {
+        const minutes = Math.floor(value / 60);
+        const seconds = String(value % 60).padStart(2, "0");
+        return `${minutes}:${seconds}`;
+      }
+      if (element.dataset.format === "balance") {
+        if (value === 0) {
+          return "Centre";
+        }
+        return `${Math.abs(value)}% ${value < 0 ? "left" : "right"}`;
+      }
+      return `${element.dataset.prefix || ""}${value}${element.dataset.unit || ""}`;
+    };
+
+    const announce = (element, value) => {
+      const text = describe(element, value);
+      if (element.dataset.labels || element.dataset.format || element.dataset.unit || element.dataset.prefix) {
+        element.setAttribute("aria-valuetext", text);
+      }
+      if (!element.id) {
+        return;
+      }
+      document.querySelectorAll(`[data-output-for="${element.id}"]`).forEach((output) => {
+        output.textContent = text;
+      });
+      document.querySelectorAll(`[data-sync-for="${element.id}"]`).forEach((input) => {
+        if (document.activeElement !== input) {
+          input.value = String(value);
+        }
+      });
+      document.querySelectorAll(`[data-set-for="${element.id}"]`).forEach((button) => {
+        if (button.hasAttribute("aria-pressed")) {
+          button.setAttribute("aria-pressed", String(Number(button.dataset.value) === value));
+        }
+      });
+      element.dispatchEvent(new CustomEvent("slider-change", { detail: value, bubbles: true }));
+    };
+
+    const addKeyboard = (element, getValue, setValue) => {
+      element.addEventListener("keydown", (event) => {
+        const step = Number(element.dataset.step || 1);
+        const minimum = Number(element.getAttribute("aria-valuemin"));
+        const maximum = Number(element.getAttribute("aria-valuemax"));
+        const keys = {
+          ArrowRight: getValue() + step,
+          ArrowUp: getValue() + step,
+          ArrowLeft: getValue() - step,
+          ArrowDown: getValue() - step,
+          PageUp: getValue() + step * 10,
+          PageDown: getValue() - step * 10,
+          Home: minimum,
+          End: maximum
+        };
+        if (event.key in keys) {
+          event.preventDefault();
+          setValue(keys[event.key]);
+        }
+      });
+    };
+
+    const initTrackSlider = (track) => {
+      const vertical = track.dataset.orientation === "vertical";
+      const rail = track.querySelector("[data-rail]") || track;
+      const thumbs = Array.from(track.querySelectorAll('[role="slider"]'));
+      const fill = track.querySelector("[data-fill]");
+      const clip = track.querySelector("[data-clip]");
+      const range = (thumb) => [Number(thumb.getAttribute("aria-valuemin")), Number(thumb.getAttribute("aria-valuemax"))];
+      const current = (thumb) => Number(thumb.getAttribute("aria-valuenow"));
+      const percent = (thumb) => {
+        const [minimum, maximum] = range(thumb);
+        return ((current(thumb) - minimum) / (maximum - minimum)) * 100;
+      };
+
+      const render = () => {
+        thumbs.forEach((thumb) => {
+          const p = percent(thumb);
+          if (thumb instanceof SVGElement) {
+            const x = Number(rail.getAttribute("x"));
+            const width = Number(rail.getAttribute("width"));
+            thumb.setAttribute("cx", String(x + (width * p) / 100));
+          } else if (vertical) {
+            thumb.style.top = `${100 - p}%`;
+          } else {
+            thumb.style.left = `${p}%`;
+          }
+        });
+        if (fill) {
+          if (thumbs.length === 2) {
+            const start = percent(thumbs[0]);
+            const end = percent(thumbs[1]);
+            fill.style.left = `${start}%`;
+            fill.style.width = `${end - start}%`;
+          } else if (fill instanceof SVGElement) {
+            fill.setAttribute("width", String((Number(rail.getAttribute("width")) * percent(thumbs[0])) / 100));
+          } else if (vertical) {
+            fill.style.height = `${percent(thumbs[0])}%`;
+          } else {
+            fill.style.width = `${percent(thumbs[0])}%`;
+          }
+        }
+        if (clip) {
+          clip.style.width = `${percent(thumbs[0])}%`;
+        }
+      };
+
+      const setValue = (thumb, raw) => {
+        const [minimum, maximum] = range(thumb);
+        const step = Number(thumb.dataset.step || 1);
+        let value = clamp(Math.round((raw - minimum) / step) * step + minimum, minimum, maximum);
+        if (thumbs.length === 2) {
+          const index = thumbs.indexOf(thumb);
+          value = index === 0 ? Math.min(value, current(thumbs[1])) : Math.max(value, current(thumbs[0]));
+        }
+        thumb.setAttribute("aria-valuenow", String(value));
+        render();
+        announce(thumb, value);
+      };
+
+      const valueFromPointer = (thumb, event) => {
+        const [minimum, maximum] = range(thumb);
+        const rectangle = rail.getBoundingClientRect();
+        const ratio = vertical
+          ? (rectangle.bottom - event.clientY) / rectangle.height
+          : (event.clientX - rectangle.left) / rectangle.width;
+        return minimum + clamp(ratio, 0, 1) * (maximum - minimum);
+      };
+
+      thumbs.forEach((thumb) => {
+        let dragging = false;
+
+        thumb.addEventListener("pointerdown", (event) => {
+          dragging = true;
+          thumb.setPointerCapture(event.pointerId);
+          thumb.style.cursor = "grabbing";
+        });
+
+        thumb.addEventListener("pointermove", (event) => {
+          if (dragging) {
+            setValue(thumb, valueFromPointer(thumb, event));
+          }
+        });
+
+        const stop = (event) => {
+          if (!dragging) {
+            return;
+          }
+          dragging = false;
+          thumb.style.cursor = "";
+          if (thumb.hasPointerCapture(event.pointerId)) {
+            thumb.releasePointerCapture(event.pointerId);
+          }
+          if (track.hasAttribute("data-snap-back") && current(thumb) < range(thumb)[1]) {
+            setValue(thumb, range(thumb)[0]);
+          }
+        };
+
+        thumb.addEventListener("pointerup", stop);
+        thumb.addEventListener("pointercancel", stop);
+
+        thumb.startDrag = (event) => {
+          dragging = true;
+          thumb.setPointerCapture(event.pointerId);
+        };
+
+        addKeyboard(thumb, () => current(thumb), (value) => setValue(thumb, value));
+        registry.set(thumb.id, { get: () => current(thumb), set: (value) => setValue(thumb, value), element: thumb });
+      });
+
+      if (track.hasAttribute("data-click-track")) {
+        track.addEventListener("pointerdown", (event) => {
+          if (event.target.closest('[role="slider"]')) {
+            return;
+          }
+          const nearest = thumbs.reduce((best, thumb) => {
+            const distance = Math.abs(valueFromPointer(thumb, event) - current(thumb));
+            return !best || distance < best.distance ? { thumb, distance } : best;
+          }, null).thumb;
+          setValue(nearest, valueFromPointer(nearest, event));
+          nearest.focus();
+          nearest.startDrag(event);
+        });
+      }
+
+      render();
+      thumbs.forEach((thumb) => announce(thumb, current(thumb)));
+    };
+
+    const initKnob = (knob) => {
+      const sweep = Number(knob.dataset.sweep || 270);
+      const minimum = Number(knob.getAttribute("aria-valuemin"));
+      const maximum = Number(knob.getAttribute("aria-valuemax"));
+      const current = () => Number(knob.getAttribute("aria-valuenow"));
+      let dragging = false;
+
+      const setValue = (raw) => {
+        const step = Number(knob.dataset.step || 1);
+        const value = clamp(Math.round((raw - minimum) / step) * step + minimum, minimum, maximum);
+        knob.setAttribute("aria-valuenow", String(value));
+        const angle = -sweep / 2 + ((value - minimum) / (maximum - minimum)) * sweep;
+        knob.style.setProperty("--angle", `${angle}deg`);
+        announce(knob, value);
+      };
+
+      knob.addEventListener("pointerdown", (event) => {
+        dragging = true;
+        knob.setPointerCapture(event.pointerId);
+      });
+
+      knob.addEventListener("pointermove", (event) => {
+        if (!dragging) {
+          return;
+        }
+        const rectangle = knob.getBoundingClientRect();
+        const centreX = rectangle.left + rectangle.width / 2;
+        const centreY = knob.dataset.centre === "bottom" ? rectangle.bottom : rectangle.top + rectangle.height / 2;
+        const angle = (Math.atan2(event.clientX - centreX, centreY - event.clientY) * 180) / Math.PI;
+        const limited = clamp(angle, -sweep / 2, sweep / 2);
+        setValue(minimum + ((limited + sweep / 2) / sweep) * (maximum - minimum));
+      });
+
+      const stop = (event) => {
+        dragging = false;
+        if (knob.hasPointerCapture(event.pointerId)) {
+          knob.releasePointerCapture(event.pointerId);
+        }
+      };
+
+      knob.addEventListener("pointerup", stop);
+      knob.addEventListener("pointercancel", stop);
+      addKeyboard(knob, current, setValue);
+      registry.set(knob.id, { get: current, set: setValue, element: knob });
+      setValue(current());
+    };
+
+    document.querySelectorAll("[data-slider]").forEach(initTrackSlider);
+    document.querySelectorAll("[data-knob]").forEach(initKnob);
+
+    document.querySelectorAll("[data-step-for]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const api = registry.get(button.dataset.stepFor);
+        const step = Number(api.element.dataset.step || 1);
+        api.set(api.get() + Number(button.dataset.delta) * step);
+      });
+    });
+
+    document.querySelectorAll("[data-set-for]").forEach((button) => {
+      button.addEventListener("click", () => {
+        registry.get(button.dataset.setFor).set(Number(button.dataset.value));
+      });
+    });
+
+    document.querySelectorAll("[data-sync-for]").forEach((input) => {
+      input.addEventListener("change", () => {
+        registry.get(input.dataset.syncFor).set(Number(input.value));
+      });
+    });
+
+    document.querySelectorAll('input[type="range"]').forEach((input) => {
+      const update = () => {
+        document.querySelectorAll(`[data-output-for="${input.id}"]`).forEach((output) => {
+          output.textContent = `${input.dataset.prefix || ""}${input.value}${input.dataset.unit || ""}`;
+        });
+        document.querySelectorAll(`[data-sync-for-native="${input.id}"]`).forEach((field) => {
+          if (document.activeElement !== field) {
+            field.value = input.value;
+          }
+        });
+        input.dispatchEvent(new CustomEvent("slider-change", { detail: Number(input.value), bubbles: true }));
+      };
+      input.addEventListener("input", update);
+      update();
+    });
+
+    document.querySelectorAll("[data-sync-for-native]").forEach((field) => {
+      field.addEventListener("change", () => {
+        const input = document.getElementById(field.dataset.syncForNative);
+        input.value = field.value;
+        input.dispatchEvent(new Event("input"));
+      });
+    });
+
+    document.addEventListener("slider-change", (event) => {
+      const source = event.target;
+      const effect = source.dataset.effect;
+      if (!effect) {
+        return;
+      }
+      const target = document.getElementById(source.dataset.effectTarget);
+      const value = event.detail;
+      if (effect === "hue") {
+        target.style.background = `hsl(${value}, 80%, 50%)`;
+      } else if (effect === "font") {
+        target.style.fontSize = `${value}px`;
+      } else if (effect === "opacity") {
+        target.style.opacity = String(value / 100);
+      } else if (effect === "rotate") {
+        target.style.setProperty("--rotate", `${value}deg`);
+      } else if (effect === "page") {
+        target.textContent = `Page ${value}`;
+      } else if (effect === "mood") {
+        const faces = ["\u{1F61E}", "\u{1F615}", "\u{1F610}", "\u{1F642}", "\u{1F604}"];
+        source.textContent = faces[value - 1];
+      } else if (effect === "unlock") {
+        target.textContent = value === Number(source.getAttribute("aria-valuemax")) ? "Unlocked" : "Slide to unlock";
+      }
+    });
+  </script>
+</body>
+</html>

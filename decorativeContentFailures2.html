@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Decorative Content Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: #1f5fae;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 15px;
+      width: fit-content;
+    }
+
+    .hero {
+      padding: 24px;
+      border-radius: 8px;
+      color: #1b1b1b;
+      background: radial-gradient(circle at 85% 20%, #ffe29a 0 40px, transparent 41px),
+        linear-gradient(135deg, #fbe3e8 0%, #dbe9ff 100%);
+    }
+
+    .icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+    }
+
+    .icon-phone {
+      border: 3px solid #2a8c5a;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .icon-star {
+      background: #f2b01e;
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    }
+
+    .icon-chevron {
+      background: #1f5fae;
+      clip-path: polygon(25% 0%, 75% 50%, 25% 100%, 10% 85%, 45% 50%, 10% 15%);
+    }
+
+    .icon-sparkle {
+      background: #c45cc4;
+      clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
+    }
+
+    .ornament-swatch {
+      width: 120px;
+      height: 24px;
+      background: repeating-linear-gradient(45deg, #b07d2b 0 6px, transparent 6px 12px);
+    }
+
+    .custom-bullets {
+      margin: 0;
+      padding-left: 24px;
+      list-style-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12'%3E%3Ccircle cx='6' cy='6' r='5' fill='%232a8c5a'/%3E%3C/svg%3E");
+    }
+
+    .img-bullets {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .img-bullets li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stripe-card {
+      position: relative;
+      padding: 16px 16px 16px 28px;
+      border: 1px solid #dddddd;
+      border-radius: 6px;
+    }
+
+    .stripe-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 8px;
+      background: linear-gradient(#ff7a59, #ffc15e);
+      border-radius: 6px 0 0 6px;
+    }
+
+    .watermark-box {
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+      border: 1px solid #dddddd;
+      border-radius: 6px;
+    }
+
+    .watermark-box svg {
+      position: absolute;
+      right: -20px;
+      top: -20px;
+      opacity: 0.25;
+    }
+
+    .promo-pattern {
+      padding: 20px;
+      border-radius: 8px;
+      color: #ffffff;
+      background-color: #3b6ea8;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='2' fill='%23ffffff' opacity='.4'/%3E%3C/svg%3E");
+    }
+
+    .fleuron {
+      text-align: center;
+      font-size: 28px;
+      color: #996633;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author img {
+      border-radius: 50%;
+    }
+
+    .testimonial {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 16px;
+      background: #fafafa;
+      border-radius: 6px;
+    }
+
+    .testimonial blockquote {
+      margin: 0;
+    }
+
+    .corner-card {
+      position: relative;
+      padding: 32px;
+      border: 1px solid #e0cfa8;
+      background: #fffaf0;
+    }
+
+    .corner-card img {
+      position: absolute;
+    }
+
+    .corner-card .tl { top: 4px; left: 4px; }
+    .corner-card .tr { top: 4px; right: 4px; transform: scaleX(-1); }
+    .corner-card .bl { bottom: 4px; left: 4px; transform: scaleY(-1); }
+    .corner-card .br { bottom: 4px; right: 4px; transform: scale(-1, -1); }
+
+    .toc {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 6px;
+    }
+
+    .toc a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #1f5fae;
+    }
+
+    .help-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border: 1px solid #c5d7ee;
+      border-radius: 8px;
+      color: #0b5cad;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .confetti-wrap {
+      position: relative;
+      padding: 20px;
+      border-radius: 8px;
+      background: #fff7e6;
+    }
+
+    .confetti-wrap canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .confetti-wrap p {
+      position: relative;
+      margin: 0;
+    }
+
+    .footer-wave {
+      background: #1f3b5c;
+      color: #ffffff;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .footer-wave p {
+      margin: 0;
+      padding: 0 16px 16px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Decorative Content Failures</h1>
+    <ul class="list">
+      <li class="list-item" id="decorative-content-failure-11">
+        <div class="itemContent">
+          <h2>Sparkle SVG with title in heading</h2>
+          <p>
+            <svg role="img" aria-labelledby="sparkle-title" width="18" height="18" viewBox="0 0 16 16">
+              <title id="sparkle-title">sparkle</title>
+              <path d="M8 0 L10 6 L16 8 L10 10 L8 16 L6 10 L0 8 L6 6 Z" fill="#c45cc4"/>
+            </svg>
+            New arrivals this week
+          </p>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-12">
+        <div class="itemContent">
+          <h2>Continue button with arrow image alt</h2>
+          <button class="btn" type="button">Continue <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M3 8 H13 M9 4 L13 8 L9 12' fill='none' stroke='%23ffffff' stroke-width='2'/%3E%3C/svg%3E" alt="arrow" width="16" height="16"></button>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-13">
+        <div class="itemContent">
+          <h2>Exposed fleuron dingbat between sections</h2>
+          <p>The guests departed shortly after midnight.</p>
+          <div class="fleuron">&#x2766; &#x2766; &#x2766;</div>
+          <p>Morning brought rain and an unexpected letter.</p>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-14">
+        <div class="itemContent">
+          <h2>Card corner flourishes with corner alt</h2>
+          <div class="corner-card">
+            <img class="tl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M2 38 V2 H38' fill='none' stroke='%23b07d2b' stroke-width='3'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23b07d2b'/%3E%3C/svg%3E" alt="corner" width="40" height="40">
+            <img class="tr" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M2 38 V2 H38' fill='none' stroke='%23b07d2b' stroke-width='3'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23b07d2b'/%3E%3C/svg%3E" alt="corner" width="40" height="40">
+            <img class="bl" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M2 38 V2 H38' fill='none' stroke='%23b07d2b' stroke-width='3'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23b07d2b'/%3E%3C/svg%3E" alt="corner" width="40" height="40">
+            <img class="br" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Cpath d='M2 38 V2 H38' fill='none' stroke='%23b07d2b' stroke-width='3'/%3E%3Ccircle cx='10' cy='10' r='3' fill='%23b07d2b'/%3E%3C/svg%3E" alt="corner" width="40" height="40">
+            <p>You are cordially invited to the annual garden party.</p>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-15">
+        <div class="itemContent">
+          <h2>Hero illustration with file name alt</h2>
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='90'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%23ffd1dc'/%3E%3Cstop offset='1' stop-color='%23c1e1ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='90' fill='url(%23g)'/%3E%3Ccircle cx='60' cy='45' r='30' fill='%23ffffff' opacity='.5'/%3E%3Ccircle cx='420' cy='30' r='20' fill='%23ffffff' opacity='.5'/%3E%3C/svg%3E" alt="hero-banner-final-v2.png" width="480" height="90">
+          <p>Plan your next getaway with our travel guides.</p>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-16">
+        <div class="itemContent">
+          <h2>Table of contents chevrons labelled as images</h2>
+          <ul class="toc">
+            <li><a href="#introduction"><span class="icon icon-chevron" role="img" aria-label="chevron right"></span> Introduction</a></li>
+            <li><a href="#installation"><span class="icon icon-chevron" role="img" aria-label="chevron right"></span> Installation</a></li>
+            <li><a href="#configuration"><span class="icon icon-chevron" role="img" aria-label="chevron right"></span> Configuration</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-17">
+        <div class="itemContent">
+          <h2>Picture banner with decorative banner alt</h2>
+          <picture>
+            <source media="(min-width: 800px)" srcset="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='90'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%23ffd1dc'/%3E%3Cstop offset='1' stop-color='%23c1e1ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='90' fill='url(%23g)'/%3E%3Ccircle cx='60' cy='45' r='30' fill='%23ffffff' opacity='.5'/%3E%3Ccircle cx='420' cy='30' r='20' fill='%23ffffff' opacity='.5'/%3E%3C/svg%3E">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='90'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%23ffd1dc'/%3E%3Cstop offset='1' stop-color='%23c1e1ff'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='480' height='90' fill='url(%23g)'/%3E%3Ccircle cx='60' cy='45' r='30' fill='%23ffffff' opacity='.5'/%3E%3Ccircle cx='420' cy='30' r='20' fill='%23ffffff' opacity='.5'/%3E%3C/svg%3E" alt="decorative banner image" width="480" height="90">
+          </picture>
+          <p>Summer reading list: twelve books for long afternoons.</p>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-18">
+        <div class="itemContent">
+          <h2>Flower emoji divider not hidden</h2>
+          <p>Thank you for celebrating with us.</p>
+          <p>&#x1F338;&#x1F338;&#x1F338;&#x1F338;&#x1F338;&#x1F338;</p>
+          <p>See you next spring.</p>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-19">
+        <div class="itemContent">
+          <h2>Testimonial quote mark image with alt</h2>
+          <div class="testimonial">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='32'%3E%3Ctext x='0' y='40' font-size='64' font-family='Georgia' fill='%23cccccc'%3E%E2%80%9C%3C/text%3E%3C/svg%3E" alt="decorative quote graphic" width="40" height="32">
+            <blockquote>The service was fast and the staff were wonderful.</blockquote>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="decorative-content-failure-20">
+        <div class="itemContent">
+          <h2>Sparkle icon element exposed beside label</h2>
+          <p><span class="icon icon-sparkle" role="img" aria-label="sparkle decoration"></span> New feature: dark mode</p>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

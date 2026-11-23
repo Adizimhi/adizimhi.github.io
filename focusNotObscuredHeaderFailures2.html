@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Not Obscured Header Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    html {
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      margin-top: 0;
+    }
+
+    .site-top {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin: 0 -24px 24px;
+      background: #ffffff;
+    }
+
+    .announcement {
+      box-sizing: border-box;
+      height: 56px;
+      margin: 0;
+      padding: 18px 24px;
+      background: #5a1e3c;
+      color: #ffffff;
+    }
+
+    .primary-bar {
+      box-sizing: border-box;
+      height: 124px;
+      padding: 24px;
+      background: #f3f0e8;
+      border-bottom: 1px solid #555555;
+    }
+
+    .primary-bar .brand {
+      margin: 0 0 16px;
+      font-size: 26px;
+      font-weight: bold;
+    }
+
+    .primary-bar nav ul {
+      display: flex;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .primary-bar a {
+      color: #1a1a1a;
+    }
+
+    .list-item {
+      box-sizing: border-box;
+      min-height: 100vh;
+      scroll-snap-align: start;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 1px solid #333333;
+      border-radius: 6px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .tile {
+      width: 280px;
+      padding: 12px;
+      border: 1px solid #777777;
+      border-radius: 8px;
+    }
+
+    .switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch-track {
+      width: 44px;
+      height: 24px;
+      border-radius: 12px;
+      background: #777777;
+      position: relative;
+    }
+
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .switch[aria-checked="true"] .switch-track {
+      background: #1a7f37;
+    }
+
+    .switch[aria-checked="true"] .switch-track::after {
+      left: 23px;
+    }
+
+    .note {
+      min-height: 40px;
+      width: 320px;
+      padding: 8px;
+      border: 1px solid #777777;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="site-top">
+    <p class="announcement">Free delivery on all orders over 50 euros this week.</p>
+    <header class="primary-bar">
+      <p class="brand">Harbour &amp; Pine</p>
+      <nav aria-label="Main">
+        <ul>
+          <li><a href="#living">Living</a></li>
+          <li><a href="#kitchen">Kitchen</a></li>
+          <li><a href="#garden">Garden</a></li>
+          <li><a href="#sale">Sale</a></li>
+        </ul>
+      </nav>
+    </header>
+  </div>
+
+  <main>
+    <h1>Focus Not Obscured Header Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="focus-not-obscured-header-failure-11">
+        <div class="itemContent">
+          <h2>Choose plan button on a pricing card</h2>
+          <button type="button">Choose the Team plan</button>
+          <p>Up to 25 seats, shared workspaces and priority support for 12 euros per seat.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-12">
+        <div class="itemContent">
+          <h2>Download brochure link</h2>
+          <a href="#brochure-download">Download the 2026 brochure (PDF, 2 MB)</a>
+          <p>Our full range of garden furniture with dimensions and care instructions.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-13">
+        <div class="itemContent">
+          <h2>Phone number field</h2>
+          <div class="row">
+            <label for="callback-phone-13">Phone number</label>
+            <input id="callback-phone-13" type="tel" autocomplete="tel">
+          </div>
+          <p>We will call you back within one working day.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-14">
+        <div class="itemContent">
+          <h2>Event date picker</h2>
+          <div class="row">
+            <label for="event-date-14">Preferred workshop date</label>
+            <input id="event-date-14" type="date">
+          </div>
+          <p>Workshops run every Saturday morning from March to October.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-15">
+        <div class="itemContent">
+          <h2>Playback volume slider</h2>
+          <div class="row">
+            <label for="podcast-volume-15">Podcast volume</label>
+            <input id="podcast-volume-15" type="range" min="0" max="100" value="60">
+          </div>
+          <p>Episode 42: Building accessible design systems.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-16">
+        <div class="itemContent">
+          <h2>Short feedback text area</h2>
+          <div class="row">
+            <label for="quick-feedback-16">Quick feedback</label>
+            <textarea id="quick-feedback-16" rows="1" cols="30"></textarea>
+          </div>
+          <p>Tell us in one line how we did today.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-17">
+        <div class="itemContent">
+          <h2>Play preview custom button</h2>
+          <div class="row">
+            <div role="button" tabindex="0" class="tile" style="width:auto">Play 30 second preview</div>
+          </div>
+          <p>Track 3: Morning Tide, from the album Coastal Lines.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-18">
+        <div class="itemContent">
+          <h2>Accent colour picker</h2>
+          <div class="row">
+            <label for="accent-colour-18">Profile accent colour</label>
+            <input id="accent-colour-18" type="color" value="#1f6feb">
+          </div>
+          <p>The accent colour is used for your profile banner and buttons.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-19">
+        <div class="itemContent">
+          <h2>Accordion header button</h2>
+          <button type="button" aria-expanded="false" aria-controls="returns-panel-19">Returns and refunds</button>
+          <div id="returns-panel-19" hidden>
+            <p>You can return any unworn item within 30 days.</p>
+          </div>
+          <p>Frequently asked questions about orders.</p>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-failure-20">
+        <div class="itemContent">
+          <h2>Editable sticky note</h2>
+          <div class="row">
+            <div class="note" contenteditable="true" role="textbox" aria-label="Sticky note">Buy milk and eggs</div>
+          </div>
+          <p>Notes are saved automatically to your board.</p>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("[aria-controls][aria-expanded]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        document.getElementById(button.getAttribute("aria-controls")).hidden = expanded;
+      });
+    });
+  </script>
+</body>
+</html>

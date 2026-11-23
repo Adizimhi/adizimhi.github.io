@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Target Size Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    button, a, input {
+      font-family: inherit;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #222222;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .panel {
+      max-width: 420px;
+      padding: 16px;
+      border: 1px solid #bbbbbb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .panel-header strong {
+      font-size: 16px;
+    }
+
+    .close-44 {
+      width: 44px;
+      height: 44px;
+      font-size: 20px;
+    }
+
+    .toolbar-32 {
+      gap: 4px;
+      padding: 4px;
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      width: max-content;
+    }
+
+    .toolbar-32 .icon-btn {
+      width: 32px;
+      height: 32px;
+      font-size: 15px;
+    }
+
+    .toolbar-32 .icon-btn[aria-pressed="true"] {
+      background: #dbe8ff;
+      border-color: #3366cc;
+    }
+
+    .pager-44 {
+      display: flex;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .pager-44 a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 44px;
+      box-sizing: border-box;
+      border: 1px solid #888888;
+      border-radius: 6px;
+      color: #1a4fa3;
+      text-decoration: none;
+    }
+
+    .pager-44 a[aria-current="page"] {
+      background: #1a4fa3;
+      color: #ffffff;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 4px;
+      max-width: 360px;
+    }
+
+    .check-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 44px;
+      padding: 0 12px;
+      border: 1px solid #dddddd;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .check-row input {
+      appearance: none;
+      width: 24px;
+      height: 24px;
+      margin: 0;
+      border: 2px solid #555555;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .check-row input:checked {
+      background: #2a7a2a;
+      border-color: #2a7a2a;
+    }
+
+    .stars-32 {
+      display: flex;
+      gap: 4px;
+    }
+
+    .stars-32 button {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      font-size: 26px;
+      line-height: 1;
+      color: #c9c9c9;
+      cursor: pointer;
+    }
+
+    .stars-32 button[aria-checked="true"] {
+      color: #e0a800;
+    }
+
+    .social-40 {
+      display: flex;
+      gap: 12px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .social-40 a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #333333;
+    }
+
+    .social-40 svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffffff;
+    }
+
+    .stepper-36 {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .stepper-36 .icon-btn {
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+    }
+
+    .stepper-36 input {
+      width: 56px;
+      height: 36px;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 4px 4px 12px;
+      border-radius: 999px;
+      background: #e8eef8;
+      font-size: 14px;
+    }
+
+    .chip .icon-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: none;
+      background: #c8d6ee;
+      font-size: 14px;
+    }
+
+    .article-text {
+      max-width: 560px;
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    .banner {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      max-width: 520px;
+      padding: 20px;
+      border-radius: 8px;
+      background: #fff6d8;
+    }
+
+    .banner p {
+      margin: 0;
+      flex: 1;
+    }
+
+    .dismiss-16 {
+      width: 16px;
+      height: 16px;
+      margin: 0 8px;
+      font-size: 10px;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Interactive Target Size Success</h1>
+
+    <ul class="list">
+      <li class="list-item" id="interactive-target-size-success-1">
+        <div class="itemContent">
+          <h2>Icon-only close button in dialog header</h2>
+          <div class="panel" role="dialog" aria-labelledby="ts-dialog-title-1">
+            <div class="panel-header">
+              <strong id="ts-dialog-title-1">Session expiring</strong>
+              <button type="button" class="icon-btn close-44" aria-label="Close dialog">&#x2715;</button>
+            </div>
+            <p>Your session will expire in 5 minutes due to inactivity.</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-2">
+        <div class="itemContent">
+          <h2>Text formatting toolbar</h2>
+          <div class="row toolbar-32" role="toolbar" aria-label="Text formatting">
+            <button type="button" class="icon-btn" aria-label="Bold" aria-pressed="false" data-toggle-pressed><b>B</b></button>
+            <button type="button" class="icon-btn" aria-label="Italic" aria-pressed="false" data-toggle-pressed><i>I</i></button>
+            <button type="button" class="icon-btn" aria-label="Underline" aria-pressed="false" data-toggle-pressed><u>U</u></button>
+            <button type="button" class="icon-btn" aria-label="Strikethrough" aria-pressed="false" data-toggle-pressed><s>S</s></button>
+            <button type="button" class="icon-btn" aria-label="Insert link">&#x1F517;</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-3">
+        <div class="itemContent">
+          <h2>Search results pagination</h2>
+          <nav aria-label="Search results pages">
+            <ul class="pager-44">
+              <li><a href="#" aria-label="Previous page">&lsaquo;</a></li>
+              <li><a href="#">1</a></li>
+              <li><a href="#" aria-current="page">2</a></li>
+              <li><a href="#">3</a></li>
+              <li><a href="#">4</a></li>
+              <li><a href="#" aria-label="Next page">&rsaquo;</a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-4">
+        <div class="itemContent">
+          <h2>Custom checkboxes with full-row labels</h2>
+          <fieldset class="check-list">
+            <legend>Notification preferences</legend>
+            <label class="check-row"><input type="checkbox" name="notify" value="email"> Email updates</label>
+            <label class="check-row"><input type="checkbox" name="notify" value="sms"> Text messages</label>
+            <label class="check-row"><input type="checkbox" name="notify" value="push" checked> Push notifications</label>
+          </fieldset>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-5">
+        <div class="itemContent">
+          <h2>Star rating widget</h2>
+          <div class="stars-32" role="radiogroup" aria-label="Rate this product" data-radio-group>
+            <button type="button" role="radio" aria-checked="false" aria-label="1 star">&#9733;</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="2 stars">&#9733;</button>
+            <button type="button" role="radio" aria-checked="true" aria-label="3 stars">&#9733;</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="4 stars">&#9733;</button>
+            <button type="button" role="radio" aria-checked="false" aria-label="5 stars">&#9733;</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-6">
+        <div class="itemContent">
+          <h2>Social media icon links</h2>
+          <ul class="social-40" aria-label="Follow us">
+            <li>
+              <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-4 1.8-4 4.5V11H7v4h3v9h4v-9h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6c0-1 1-2 2-2h14c1 0 2 1 2 2v12c0 1-1 2-2 2H5c-1 0-2-1-2-2zm7 3v6l5-3z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Email newsletter">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 5h20v14H2zm2 2v1l8 5 8-5V7l-8 5z"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-7">
+        <div class="itemContent">
+          <h2>Cart quantity stepper</h2>
+          <div class="stepper-36" role="group" aria-label="Quantity" data-stepper>
+            <button type="button" class="icon-btn" aria-label="Decrease quantity" data-delta="-1">&minus;</button>
+            <input type="number" value="2" min="0" aria-label="Quantity">
+            <button type="button" class="icon-btn" aria-label="Increase quantity" data-delta="1">+</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-8">
+        <div class="itemContent">
+          <h2>Filter chips with remove buttons</h2>
+          <ul class="chips" aria-label="Active filters" style="list-style:none;padding:0;margin:0">
+            <li class="chip" data-dismissable>Size: M <button type="button" class="icon-btn" aria-label="Remove filter Size: M" data-dismiss>&#x2715;</button></li>
+            <li class="chip" data-dismissable>Color: Blue <button type="button" class="icon-btn" aria-label="Remove filter Color: Blue" data-dismiss>&#x2715;</button></li>
+            <li class="chip" data-dismissable>In stock <button type="button" class="icon-btn" aria-label="Remove filter In stock" data-dismiss>&#x2715;</button></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-9">
+        <div class="itemContent">
+          <h2>Inline links within a paragraph</h2>
+          <p class="article-text">
+            Before you return an item, please read our <a href="#">returns policy</a> and check that the
+            product is listed under <a href="#">eligible categories</a>. If you need help, our
+            <a href="#">support team</a> is available every day from 8am to 8pm.
+          </p>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-success-10">
+        <div class="itemContent">
+          <h2>Small dismiss button with ample spacing</h2>
+          <div class="banner" data-dismissable>
+            <p>We have updated our privacy notice. The changes take effect next month.</p>
+            <button type="button" class="icon-btn dismiss-16" aria-label="Dismiss notice" data-dismiss>&#x2715;</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("[data-toggle-pressed]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+      });
+    });
+
+    document.querySelectorAll("[data-radio-group]").forEach((group) => {
+      const radios = group.querySelectorAll('[role="radio"]');
+      radios.forEach((radio) => {
+        radio.addEventListener("click", () => {
+          radios.forEach((other) => other.setAttribute("aria-checked", String(other === radio)));
+        });
+      });
+    });
+
+    document.querySelectorAll('[role="checkbox"]').forEach((box) => {
+      box.addEventListener("click", () => {
+        box.setAttribute("aria-checked", String(box.getAttribute("aria-checked") !== "true"));
+      });
+    });
+
+    document.querySelectorAll("[data-stepper]").forEach((stepper) => {
+      const input = stepper.querySelector("input");
+      stepper.querySelectorAll("[data-delta]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const next = Math.max(0, Number(input.value || 0) + Number(button.dataset.delta));
+          input.value = String(next);
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-dismiss]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.closest("[data-dismissable]");
+        if (target) {
+          target.hidden = true;
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-tree-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        button.textContent = expanded ? "\u25B8" : "\u25BE";
+      });
+    });
+
+    document.querySelectorAll("a[href='#']").forEach((link) => {
+      link.addEventListener("click", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>

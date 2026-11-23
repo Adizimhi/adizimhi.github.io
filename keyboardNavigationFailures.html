@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Navigation Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .fake-button {
+      display: inline-block;
+      width: fit-content;
+      padding: 10px 18px;
+      background: #1a5fb4;
+      color: #ffffff;
+      border-radius: 6px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .fake-link {
+      color: #1a5fb4;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .status {
+      color: #333333;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .fake-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .fake-checkbox .box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #555555;
+      border-radius: 3px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+
+    .hover-nav {
+      display: flex;
+      gap: 24px;
+      background: #f2f2f2;
+      padding: 10px 16px;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .hover-nav .menu {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .hover-nav .submenu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #ffffff;
+      border: 1px solid #cccccc;
+      padding: 8px 0;
+      min-width: 160px;
+      list-style: none;
+      margin: 0;
+      z-index: 2;
+    }
+
+    .hover-nav .submenu.open {
+      display: block;
+    }
+
+    .hover-nav .submenu a {
+      display: block;
+      padding: 6px 12px;
+      color: #222222;
+      text-decoration: none;
+    }
+
+    .tab-list {
+      display: flex;
+      gap: 4px;
+      border-bottom: 2px solid #cccccc;
+    }
+
+    .tab {
+      padding: 8px 16px;
+      cursor: pointer;
+      background: #eeeeee;
+      border-radius: 6px 6px 0 0;
+    }
+
+    .tab.active {
+      background: #1a5fb4;
+      color: #ffffff;
+    }
+
+    .accordion-header {
+      padding: 10px 14px;
+      background: #eeeeee;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .accordion-panel {
+      padding: 10px 14px;
+    }
+
+    .gallery-main {
+      width: 320px;
+      height: 160px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      font-size: 64px;
+    }
+
+    .gallery-thumbs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .gallery-thumbs img {
+      width: 60px;
+      height: 60px;
+      border-radius: 4px;
+      cursor: pointer;
+      border: 2px solid transparent;
+    }
+
+    .gallery-thumbs img.selected {
+      border-color: #1a5fb4;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Keyboard Navigation Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="keyboard-navigation-failure-1">
+        <div class="itemContent">
+          <h2>Add to cart div with click handler</h2>
+          <p>Wireless headphones — $89.00</p>
+          <div class="fake-button" id="kn-f1-button">Add to cart</div>
+          <p class="status" id="kn-f1-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-2">
+        <div class="itemContent">
+          <h2>Read more span that expands an article</h2>
+          <p>
+            The city council approved the new cycling plan on Tuesday after a long debate.
+            <span class="hidden" id="kn-f2-more">The plan adds 40 km of protected lanes over the next three years and will be funded by the regional transport budget.</span>
+          </p>
+          <span class="fake-link" id="kn-f2-toggle" onclick="toggleReadMore()">Read more</span>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-3">
+        <div class="itemContent">
+          <h2>Anchor without href used as a download action</h2>
+          <p>Quarterly sales report (PDF, 1.2 MB)</p>
+          <a class="fake-link" id="kn-f3-link">Download report</a>
+          <p class="status" id="kn-f3-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-4">
+        <div class="itemContent">
+          <h2>Newsletter button removed from tab order</h2>
+          <label for="kn-f4-email">Email address</label>
+          <input id="kn-f4-email" type="email" autocomplete="email">
+          <button type="button" tabindex="-1" id="kn-f4-button">Subscribe</button>
+          <p class="status" id="kn-f4-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-5">
+        <div class="itemContent">
+          <h2>Custom terms checkbox built from a div</h2>
+          <div class="fake-checkbox" id="kn-f5-checkbox">
+            <span class="box" id="kn-f5-box"></span>
+            <span>I agree to the terms and conditions</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-6">
+        <div class="itemContent">
+          <h2>Navigation submenu that opens only on mouse hover</h2>
+          <nav aria-label="Store">
+            <div class="hover-nav">
+              <div class="menu" data-hover-menu>
+                <span>Women</span>
+                <ul class="submenu">
+                  <li><a href="#women-dresses">Dresses</a></li>
+                  <li><a href="#women-shoes">Shoes</a></li>
+                  <li><a href="#women-bags">Bags</a></li>
+                </ul>
+              </div>
+              <div class="menu" data-hover-menu>
+                <span>Men</span>
+                <ul class="submenu">
+                  <li><a href="#men-shirts">Shirts</a></li>
+                  <li><a href="#men-shoes">Shoes</a></li>
+                  <li><a href="#men-watches">Watches</a></li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-7">
+        <div class="itemContent">
+          <h2>Tabs built from divs with click handlers</h2>
+          <div class="tab-list" data-click-tabs>
+            <div class="tab active" data-panel="kn-f7-overview">Overview</div>
+            <div class="tab" data-panel="kn-f7-specs">Specifications</div>
+            <div class="tab" data-panel="kn-f7-reviews">Reviews</div>
+          </div>
+          <div id="kn-f7-overview">A lightweight laptop with an all-day battery.</div>
+          <div id="kn-f7-specs" class="hidden">14-inch display, 16 GB RAM, 512 GB SSD.</div>
+          <div id="kn-f7-reviews" class="hidden">4.6 out of 5 from 312 reviews.</div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-8">
+        <div class="itemContent">
+          <h2>FAQ accordion with clickable div headers</h2>
+          <div data-click-accordion>
+            <div class="accordion-header">How long does shipping take?</div>
+            <div class="accordion-panel hidden">Standard shipping takes 3–5 business days.</div>
+          </div>
+          <div data-click-accordion>
+            <div class="accordion-header">Can I return an item?</div>
+            <div class="accordion-panel hidden">Yes, returns are accepted within 30 days of delivery.</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-9">
+        <div class="itemContent">
+          <h2>Focusable role button without Enter or Space support</h2>
+          <p id="kn-f9-file">holiday-photos.zip</p>
+          <div class="fake-button" role="button" tabindex="0" id="kn-f9-delete">Delete file</div>
+          <p class="status" id="kn-f9-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-10">
+        <div class="itemContent">
+          <h2>Product gallery thumbnails selected by clicking images</h2>
+          <div class="gallery-main" id="kn-f10-main" style="background: #fde2b3;">🍊</div>
+          <div class="gallery-thumbs">
+            <img class="selected" data-emoji="🍊" data-bg="#fde2b3" alt="Orange" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><rect width='60' height='60' fill='%23fde2b3'/><circle cx='30' cy='30' r='18' fill='%23f28c28'/></svg>">
+            <img data-emoji="🍋" data-bg="#fff6b3" alt="Lemon" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><rect width='60' height='60' fill='%23fff6b3'/><ellipse cx='30' cy='30' rx='20' ry='15' fill='%23f2d528'/></svg>">
+            <img data-emoji="🍇" data-bg="#e8d5f5" alt="Grapes" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><rect width='60' height='60' fill='%23e8d5f5'/><circle cx='24' cy='24' r='8' fill='%237b3fa0'/><circle cx='36' cy='24' r='8' fill='%237b3fa0'/><circle cx='30' cy='37' r='8' fill='%237b3fa0'/></svg>">
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.getElementById("kn-f1-button").addEventListener("click", () => {
+      document.getElementById("kn-f1-status").textContent = "Wireless headphones added to your cart.";
+    });
+
+    function toggleReadMore() {
+      const more = document.getElementById("kn-f2-more");
+      const toggle = document.getElementById("kn-f2-toggle");
+      more.classList.toggle("hidden");
+      toggle.textContent = more.classList.contains("hidden") ? "Read more" : "Read less";
+    }
+
+    document.getElementById("kn-f3-link").addEventListener("click", () => {
+      document.getElementById("kn-f3-status").textContent = "Download started: quarterly-sales.pdf";
+    });
+
+    document.getElementById("kn-f4-button").addEventListener("click", () => {
+      document.getElementById("kn-f4-status").textContent = "Thanks for subscribing!";
+    });
+
+    document.getElementById("kn-f5-checkbox").addEventListener("click", () => {
+      const box = document.getElementById("kn-f5-box");
+      box.textContent = box.textContent ? "" : "✓";
+    });
+
+    document.querySelectorAll("[data-hover-menu]").forEach((menu) => {
+      const submenu = menu.querySelector(".submenu");
+      menu.addEventListener("mouseenter", () => submenu.classList.add("open"));
+      menu.addEventListener("mouseleave", () => submenu.classList.remove("open"));
+    });
+
+    document.querySelectorAll("[data-click-tabs]").forEach((tabList) => {
+      const tabs = tabList.querySelectorAll(".tab");
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          tabs.forEach((other) => {
+            other.classList.remove("active");
+            document.getElementById(other.dataset.panel).classList.add("hidden");
+          });
+          tab.classList.add("active");
+          document.getElementById(tab.dataset.panel).classList.remove("hidden");
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-click-accordion]").forEach((section) => {
+      section.querySelector(".accordion-header").addEventListener("click", () => {
+        section.querySelector(".accordion-panel").classList.toggle("hidden");
+      });
+    });
+
+    document.getElementById("kn-f9-delete").addEventListener("click", () => {
+      document.getElementById("kn-f9-file").textContent = "File deleted.";
+      document.getElementById("kn-f9-status").textContent = "holiday-photos.zip was moved to the trash.";
+    });
+
+    document.querySelectorAll(".gallery-thumbs img").forEach((thumb, index, all) => {
+      thumb.addEventListener("click", () => {
+        all.forEach((other) => other.classList.remove("selected"));
+        thumb.classList.add("selected");
+        const main = document.getElementById("kn-f10-main");
+        main.textContent = thumb.dataset.emoji;
+        main.style.background = thumb.dataset.bg;
+      });
+    });
+  </script>
+</body>
+</html>

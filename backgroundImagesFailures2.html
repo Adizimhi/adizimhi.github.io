@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Images Failures 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .bg {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px 24px;
+    }
+
+    .icon-link {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #cccccc;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 22px 22px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .weather {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 28px;
+    }
+
+    .weather-icon {
+      width: 80px;
+      height: 80px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='34' rx='26' ry='15' fill='%239aa5b1'/%3E%3Ccircle cx='30' cy='28' r='13' fill='%239aa5b1'/%3E%3Ccircle cx='48' cy='24' r='15' fill='%239aa5b1'/%3E%3Cg stroke='%231a5fb4' stroke-width='3' stroke-linecap='round'%3E%3Cline x1='26' y1='56' x2='22' y2='68'/%3E%3Cline x1='40' y1='56' x2='36' y2='68'/%3E%3Cline x1='54' y1='56' x2='50' y2='68'/%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .route-map {
+      width: 360px;
+      height: 220px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220' viewBox='0 0 360 220'%3E%3Crect width='360' height='220' fill='%23eef3e6'/%3E%3Cpath d='M0 150 H360 M120 0 V220 M250 0 V220' stroke='%23ffffff' stroke-width='14'/%3E%3Cpath d='M60 150 H120 V60 H250' stroke='%23c01c28' stroke-width='5' fill='none' stroke-dasharray='10 6'/%3E%3Ccircle cx='60' cy='150' r='9' fill='%231a5fb4'/%3E%3Ccircle cx='250' cy='60' r='9' fill='%23c01c28'/%3E%3Cg font-family='Arial, sans-serif' font-size='14' font-weight='bold' fill='%231d1d1d'%3E%3Ctext x='20' y='180'%3EYou are here%3C/text%3E%3Ctext x='215' y='42'%3ERiverside Store%3C/text%3E%3Ctext x='130' y='110'%3EElm St%3C/text%3E%3Ctext x='150' y='142'%3EMain St%3C/text%3E%3C/g%3E%3C/svg%3E");
+      max-width: 100%;
+      border-radius: 6px;
+    }
+
+    .organic-seal {
+      width: 140px;
+      height: 140px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Ccircle cx='70' cy='70' r='66' fill='%2326a269'/%3E%3Ccircle cx='70' cy='70' r='54' fill='none' stroke='%23ffffff' stroke-width='2' stroke-dasharray='4 4'/%3E%3Cg font-family='Arial, sans-serif' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3E%3Ctext x='70' y='60' font-size='16'%3ECERTIFIED%3C/text%3E%3Ctext x='70' y='82' font-size='16'%3EORGANIC%3C/text%3E%3Ctext x='70' y='104' font-size='11'%3EEU 2026%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .close-button {
+      background-color: #eeeeee;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cpath d='M4 4 L16 16 M16 4 L4 16' stroke='%23222222' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-size: 18px 18px;
+    }
+
+    .notice {
+      position: relative;
+      border: 1px solid #555555;
+      border-radius: 8px;
+      padding: 16px 56px 16px 16px;
+      max-width: 360px;
+    }
+
+    .notice .close-button {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+
+    .pie-chart {
+      width: 300px;
+      height: 200px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200'%3E%3Crect width='300' height='200' fill='%23ffffff'/%3E%3Ccircle cx='100' cy='100' r='80' fill='%231a5fb4'/%3E%3Cpath d='M100 100 L100 20 A80 80 0 0 1 176 125 Z' fill='%23e5a50a'/%3E%3Cpath d='M100 100 L176 125 A80 80 0 0 1 120 177 Z' fill='%2326a269'/%3E%3Cg font-family='Arial, sans-serif' font-size='14' fill='%231d1d1d'%3E%3Crect x='200' y='50' width='14' height='14' fill='%231a5fb4'/%3E%3Ctext x='220' y='62'%3ERent 55%25%3C/text%3E%3Crect x='200' y='85' width='14' height='14' fill='%23e5a50a'/%3E%3Ctext x='220' y='97'%3EFood 30%25%3C/text%3E%3Crect x='200' y='120' width='14' height='14' fill='%2326a269'/%3E%3Ctext x='220' y='132'%3ETravel 15%25%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .menu-button {
+      background-color: #eeeeee;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M3 6 H21 M3 12 H21 M3 18 H21' stroke='%23222222' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    .coupon {
+      width: 360px;
+      height: 120px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='120' viewBox='0 0 360 120'%3E%3Crect x='2' y='2' width='356' height='116' rx='10' fill='%23fff5b1' stroke='%23e5a50a' stroke-width='3' stroke-dasharray='10 6'/%3E%3Cg font-family='Arial, sans-serif' fill='%231d1d1d' text-anchor='middle'%3E%3Ctext x='180' y='50' font-size='26' font-weight='bold'%3E20%25 OFF YOUR ORDER%3C/text%3E%3Ctext x='180' y='90' font-size='20'%3EUse code SAVE20 at checkout%3C/text%3E%3C/g%3E%3C/svg%3E");
+      max-width: 100%;
+    }
+
+    .sponsor {
+      width: 140px;
+      height: 60px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .sponsor-acme {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='60' viewBox='0 0 140 60'%3E%3Crect width='140' height='60' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='70' y='40' font-family='Arial, sans-serif' font-size='26' font-weight='bold' fill='%23c01c28' text-anchor='middle'%3EACME%3C/text%3E%3C/svg%3E");
+    }
+
+    .sponsor-globex {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='60' viewBox='0 0 140 60'%3E%3Crect width='140' height='60' rx='6' fill='%23f0f0f0'/%3E%3Ccircle cx='28' cy='30' r='14' fill='%231a5fb4'/%3E%3Ctext x='84' y='38' font-family='Arial, sans-serif' font-size='20' font-weight='bold' fill='%231a5fb4' text-anchor='middle'%3EGlobex%3C/text%3E%3C/svg%3E");
+    }
+
+    .sponsor-initech {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='60' viewBox='0 0 140 60'%3E%3Crect width='140' height='60' rx='6' fill='%23f0f0f0'/%3E%3Ctext x='70' y='38' font-family='Arial, sans-serif' font-size='20' font-style='italic' fill='%2326703d' text-anchor='middle'%3EInitech%3C/text%3E%3C/svg%3E");
+    }
+
+    .signup-link {
+      display: inline-block;
+      width: 220px;
+      height: 56px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='56' viewBox='0 0 220 56'%3E%3Crect width='220' height='56' rx='28' fill='%2326a269'/%3E%3Ctext x='110' y='35' font-family='Arial, sans-serif' font-size='20' font-weight='bold' fill='%23ffffff' text-anchor='middle'%3ESign up free %E2%86%92%3C/text%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+    }
+
+    .video-thumb {
+      position: relative;
+      width: 360px;
+      max-width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      background-image: linear-gradient(160deg, #241f31 0%, #5e5c64 100%);
+      display: grid;
+      place-items: center;
+    }
+
+    .play-button {
+      width: 64px;
+      height: 64px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background-color: transparent;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='rgba(0,0,0,0.65)'/%3E%3Cpath d='M26 20 L46 32 L26 44 Z' fill='%23ffffff'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .texture-card {
+      padding: 24px;
+      border-radius: 8px;
+      color: #ffffff;
+      background-color: #1c2c5b;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40' viewBox='0 0 120 40'%3E%3Cpath d='M0 20 Q15 5 30 20 T60 20 T90 20 T120 20' fill='none' stroke='rgba(255,255,255,0.25)' stroke-width='3'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    .texture-card h3 {
+      margin: 0 0 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Background Images Failures 2</h1>
+
+    <ul class="list">
+      <li class="list-item" id="background-images-failure-11">
+        <div class="itemContent">
+          <h2>Weather widget condition icon</h2>
+          <div class="weather">
+            <div class="weather-icon bg"></div>
+            <span>18°C</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-12">
+        <div class="itemContent">
+          <h2>Store directions map</h2>
+          <div class="route-map bg"></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-13">
+        <div class="itemContent">
+          <h2>Certified organic product seal</h2>
+          <p>Rolled oats, 1 kg</p>
+          <div class="organic-seal bg"></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-14">
+        <div class="itemContent">
+          <h2>Notice close icon button</h2>
+          <div class="notice">
+            <p>Your password was changed successfully.</p>
+            <button type="button" class="icon-button close-button"></button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-15">
+        <div class="itemContent">
+          <h2>Monthly budget pie chart</h2>
+          <div class="pie-chart bg"></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-16">
+        <div class="itemContent">
+          <h2>Mobile menu icon button</h2>
+          <header class="row">
+            <button type="button" class="icon-button menu-button" aria-expanded="false"></button>
+          </header>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-17">
+        <div class="itemContent">
+          <h2>Discount coupon image</h2>
+          <div class="coupon bg"></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-18">
+        <div class="itemContent">
+          <h2>Event sponsor logos</h2>
+          <div class="row">
+            <div class="sponsor sponsor-acme"></div>
+            <div class="sponsor sponsor-globex"></div>
+            <div class="sponsor sponsor-initech"></div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-19">
+        <div class="itemContent">
+          <h2>Sign up call to action link</h2>
+          <a href="#signup" class="signup-link"></a>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-failure-20">
+        <div class="itemContent">
+          <h2>Video play icon button</h2>
+          <div class="video-thumb">
+            <button type="button" class="play-button"></button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>

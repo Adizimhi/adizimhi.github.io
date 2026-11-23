@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Label Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      max-width: 360px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    select,
+    textarea {
+      padding: 8px;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    fieldset {
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .editor {
+      min-height: 60px;
+      padding: 8px;
+      border: 1px solid #888888;
+      border-radius: 4px;
+    }
+
+    .custom-listbox {
+      margin: 0;
+      padding: 4px;
+      list-style: none;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      max-width: 220px;
+    }
+
+    .custom-listbox [role="option"] {
+      padding: 6px;
+    }
+
+    .custom-listbox [aria-selected="true"] {
+      background: #dbe9ff;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #555555;
+    }
+
+    .fake-label {
+      font-weight: bold;
+    }
+
+    .qty-table {
+      border-collapse: collapse;
+    }
+
+    .qty-table th,
+    .qty-table td {
+      padding: 6px 10px;
+      border: 1px solid #dddddd;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Field Label Failures</h1>
+    <ul class="list">
+      <li class="list-item" id="field-label-failure-11">
+        <div class="itemContent">
+          <h2>Radio buttons with unassociated option text</h2>
+          <fieldset>
+            <legend>Payment method</legend>
+            <div class="option-row"><input type="radio" name="payment" value="card"> <span>Credit card</span></div>
+            <div class="option-row"><input type="radio" name="payment" value="paypal"> <span>PayPal</span></div>
+            <div class="option-row"><input type="radio" name="payment" value="bank"> <span>Bank transfer</span></div>
+          </fieldset>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-12">
+        <div class="itemContent">
+          <h2>Password with whitespace aria-label</h2>
+          <div class="field">
+            <span class="fake-label">New password</span>
+            <input type="password" name="newPassword" aria-label="   ">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-13">
+        <div class="itemContent">
+          <h2>Birth date labelled by empty element</h2>
+          <div class="field">
+            <span class="fake-label">Date of birth</span>
+            <span id="fl-f13-dob-label"></span>
+            <input type="date" name="dob" aria-labelledby="fl-f13-dob-label">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-14">
+        <div class="itemContent">
+          <h2>Combobox input without name</h2>
+          <div class="field">
+            <span class="fake-label">Airport</span>
+            <input type="text" role="combobox" aria-expanded="false" aria-controls="fl-f14-list" aria-autocomplete="list">
+            <ul id="fl-f14-list" role="listbox" aria-label="Airport suggestions" class="custom-listbox" hidden>
+              <li role="option" aria-selected="false">Heathrow</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-15">
+        <div class="itemContent">
+          <h2>Custom listbox without name</h2>
+          <div class="field">
+            <span class="fake-label">Seat class</span>
+            <ul role="listbox" tabindex="0" class="custom-listbox">
+              <li role="option" aria-selected="true">Economy</li>
+              <li role="option" aria-selected="false">Business</li>
+              <li role="option" aria-selected="false">First</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-16">
+        <div class="itemContent">
+          <h2>Search field with icon only</h2>
+          <div class="search-row">
+            <svg aria-hidden="true" focusable="false" width="18" height="18" viewBox="0 0 18 18">
+              <circle cx="7" cy="7" r="5" fill="none" stroke="#333333" stroke-width="2"/>
+              <path d="M11 11 L16 16" stroke="#333333" stroke-width="2"/>
+            </svg>
+            <input type="search" name="q">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-17">
+        <div class="itemContent">
+          <h2>Label element not associated with field</h2>
+          <div class="field">
+            <label>Mobile phone</label>
+            <input type="tel" name="mobile">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-18">
+        <div class="itemContent">
+          <h2>Quantity with styled div instead of label</h2>
+          <div class="field">
+            <div class="fake-label">Quantity</div>
+            <input type="number" name="quantity" min="1" value="1">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-19">
+        <div class="itemContent">
+          <h2>Label containing only an empty-alt icon</h2>
+          <div class="search-row">
+            <label>
+              <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Ccircle cx='9' cy='7' r='5' fill='%23d9534f'/%3E%3Cpath d='M5 10 L9 17 L13 10 Z' fill='%23d9534f'/%3E%3C/svg%3E" alt="" width="18" height="18">
+              <input type="text" name="location">
+            </label>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-failure-20">
+        <div class="itemContent">
+          <h2>Brightness range without label</h2>
+          <div class="field">
+            <span class="fake-label">Brightness</span>
+            <input type="range" name="brightness" min="0" max="100" value="50">
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>
