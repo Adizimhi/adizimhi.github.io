@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Navigation Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status {
+      color: #333333;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    button,
+    .custom-button {
+      width: fit-content;
+      padding: 10px 18px;
+      font: inherit;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .primary {
+      background: #1a5fb4;
+      color: #ffffff;
+      border: none;
+    }
+
+    .custom-button {
+      display: inline-block;
+      background: #c01c28;
+      color: #ffffff;
+      user-select: none;
+    }
+
+    :focus-visible {
+      outline: 3px solid #e5a50a;
+      outline-offset: 2px;
+    }
+
+    .custom-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .custom-checkbox .box {
+      width: 18px;
+      height: 18px;
+      border: 2px solid #555555;
+      border-radius: 3px;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+
+    [role="tablist"] {
+      display: flex;
+      gap: 4px;
+      border-bottom: 2px solid #cccccc;
+    }
+
+    [role="tab"] {
+      padding: 8px 16px;
+      border: none;
+      background: #eeeeee;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    [role="tab"][aria-selected="true"] {
+      background: #1a5fb4;
+      color: #ffffff;
+    }
+
+    .accordion-trigger {
+      width: 100%;
+      text-align: left;
+      padding: 10px 14px;
+      background: #eeeeee;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .accordion-panel {
+      padding: 10px 14px;
+    }
+
+    .disclosure-nav {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+      padding: 10px 16px;
+      margin: 0;
+      background: #f2f2f2;
+      border-radius: 6px;
+      width: fit-content;
+    }
+
+    .disclosure-nav > li {
+      position: relative;
+    }
+
+    .disclosure-nav button {
+      background: none;
+      border: none;
+      padding: 4px 8px;
+    }
+
+    .disclosure-nav .submenu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      list-style: none;
+      margin: 0;
+      padding: 8px 0;
+      background: #ffffff;
+      border: 1px solid #cccccc;
+      min-width: 160px;
+      z-index: 2;
+    }
+
+    .disclosure-nav .submenu a {
+      display: block;
+      padding: 6px 12px;
+      color: #222222;
+    }
+
+    .switch-button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .switch-button .track {
+      width: 44px;
+      height: 24px;
+      background: #999999;
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .switch-button .knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #ffffff;
+      border-radius: 50%;
+    }
+
+    .switch-button[aria-checked="true"] .track {
+      background: #2ec27e;
+    }
+
+    .switch-button[aria-checked="true"] .knob {
+      left: 23px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Keyboard Navigation Success</h1>
+
+    <ul class="list">
+      <li class="list-item" id="keyboard-navigation-success-1">
+        <div class="itemContent">
+          <h2>Native add to cart button</h2>
+          <p>Wireless headphones — $89.00</p>
+          <button type="button" class="primary" id="kn-s1-button">Add to cart</button>
+          <p class="status" id="kn-s1-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-2">
+        <div class="itemContent">
+          <h2>Native link to a report download</h2>
+          <p>Quarterly sales report (PDF, 1.2 MB)</p>
+          <a href="#quarterly-sales-report" id="kn-s2-link">Download report</a>
+          <p class="status" id="kn-s2-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-3">
+        <div class="itemContent">
+          <h2>Custom role button with Enter and Space support</h2>
+          <p id="kn-s3-file">holiday-photos.zip</p>
+          <div class="custom-button" role="button" tabindex="0" id="kn-s3-delete">Delete file</div>
+          <p class="status" id="kn-s3-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-4">
+        <div class="itemContent">
+          <h2>Custom terms checkbox operable with Space</h2>
+          <div class="custom-checkbox" role="checkbox" aria-checked="false" tabindex="0" id="kn-s4-checkbox">
+            <span class="box" aria-hidden="true"></span>
+            <span>I agree to the terms and conditions</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-5">
+        <div class="itemContent">
+          <h2>Tabs with roving tabindex and arrow keys</h2>
+          <div role="tablist" aria-label="Laptop details" data-tabs>
+            <button type="button" role="tab" id="kn-s5-tab-1" aria-selected="true" aria-controls="kn-s5-panel-1" tabindex="0">Overview</button>
+            <button type="button" role="tab" id="kn-s5-tab-2" aria-selected="false" aria-controls="kn-s5-panel-2" tabindex="-1">Specifications</button>
+            <button type="button" role="tab" id="kn-s5-tab-3" aria-selected="false" aria-controls="kn-s5-panel-3" tabindex="-1">Reviews</button>
+          </div>
+          <div role="tabpanel" id="kn-s5-panel-1" aria-labelledby="kn-s5-tab-1" tabindex="0">A lightweight laptop with an all-day battery.</div>
+          <div role="tabpanel" id="kn-s5-panel-2" aria-labelledby="kn-s5-tab-2" tabindex="0" hidden>14-inch display, 16 GB RAM, 512 GB SSD.</div>
+          <div role="tabpanel" id="kn-s5-panel-3" aria-labelledby="kn-s5-tab-3" tabindex="0" hidden>4.6 out of 5 from 312 reviews.</div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-6">
+        <div class="itemContent">
+          <h2>FAQ accordion with button headers</h2>
+          <div data-accordion>
+            <h3 style="margin: 0;">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="kn-s6-panel-1">How long does shipping take?</button>
+            </h3>
+            <div class="accordion-panel" id="kn-s6-panel-1" hidden>Standard shipping takes 3–5 business days.</div>
+          </div>
+          <div data-accordion>
+            <h3 style="margin: 0;">
+              <button type="button" class="accordion-trigger" aria-expanded="false" aria-controls="kn-s6-panel-2">Can I return an item?</button>
+            </h3>
+            <div class="accordion-panel" id="kn-s6-panel-2" hidden>Yes, returns are accepted within 30 days of delivery.</div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-7">
+        <div class="itemContent">
+          <h2>Disclosure navigation menu with expand buttons</h2>
+          <nav aria-label="Store">
+            <ul class="disclosure-nav">
+              <li data-disclosure>
+                <button type="button" aria-expanded="false" aria-controls="kn-s7-women">Women ▾</button>
+                <ul class="submenu" id="kn-s7-women" hidden>
+                  <li><a href="#women-dresses">Dresses</a></li>
+                  <li><a href="#women-shoes">Shoes</a></li>
+                  <li><a href="#women-bags">Bags</a></li>
+                </ul>
+              </li>
+              <li data-disclosure>
+                <button type="button" aria-expanded="false" aria-controls="kn-s7-men">Men ▾</button>
+                <ul class="submenu" id="kn-s7-men" hidden>
+                  <li><a href="#men-shirts">Shirts</a></li>
+                  <li><a href="#men-shoes">Shoes</a></li>
+                  <li><a href="#men-watches">Watches</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-8">
+        <div class="itemContent">
+          <h2>Read more using native details and summary</h2>
+          <p>The city council approved the new cycling plan on Tuesday after a long debate.</p>
+          <details>
+            <summary>Read more</summary>
+            <p>The plan adds 40 km of protected lanes over the next three years and will be funded by the regional transport budget.</p>
+          </details>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-9">
+        <div class="itemContent">
+          <h2>Shipping form with native controls</h2>
+          <form id="kn-s9-form">
+            <div style="display: grid; gap: 8px; max-width: 280px;">
+              <label for="kn-s9-country">Country</label>
+              <select id="kn-s9-country">
+                <option>Canada</option>
+                <option>Germany</option>
+                <option>Japan</option>
+              </select>
+              <fieldset>
+                <legend>Delivery speed</legend>
+                <label><input type="radio" name="kn-s9-speed" value="standard" checked> Standard</label><br>
+                <label><input type="radio" name="kn-s9-speed" value="express"> Express</label>
+              </fieldset>
+              <button type="submit" class="primary">Continue</button>
+            </div>
+          </form>
+          <p class="status" id="kn-s9-status" aria-live="polite"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-success-10">
+        <div class="itemContent">
+          <h2>Dark mode switch built on a button</h2>
+          <button type="button" class="switch-button" role="switch" aria-checked="false" id="kn-s10-switch">
+            <span class="track" aria-hidden="true"><span class="knob"></span></span>
+            <span>Dark mode</span>
+          </button>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.getElementById("kn-s1-button").addEventListener("click", () => {
+      document.getElementById("kn-s1-status").textContent = "Wireless headphones added to your cart.";
+    });
+
+    document.getElementById("kn-s2-link").addEventListener("click", (event) => {
+      event.preventDefault();
+      document.getElementById("kn-s2-status").textContent = "Download started: quarterly-sales.pdf";
+    });
+
+    function activateDelete() {
+      document.getElementById("kn-s3-file").textContent = "File deleted.";
+      document.getElementById("kn-s3-status").textContent = "holiday-photos.zip was moved to the trash.";
+    }
+    const deleteButton = document.getElementById("kn-s3-delete");
+    deleteButton.addEventListener("click", activateDelete);
+    deleteButton.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        activateDelete();
+      }
+      if (event.key === " ") {
+        event.preventDefault();
+      }
+    });
+    deleteButton.addEventListener("keyup", (event) => {
+      if (event.key === " ") {
+        activateDelete();
+      }
+    });
+
+    const checkbox = document.getElementById("kn-s4-checkbox");
+    function toggleCheckbox() {
+      const checked = checkbox.getAttribute("aria-checked") === "true";
+      checkbox.setAttribute("aria-checked", String(!checked));
+      checkbox.querySelector(".box").textContent = checked ? "" : "✓";
+    }
+    checkbox.addEventListener("click", toggleCheckbox);
+    checkbox.addEventListener("keydown", (event) => {
+      if (event.key === " ") {
+        event.preventDefault();
+        toggleCheckbox();
+      }
+    });
+
+    document.querySelectorAll("[data-tabs]").forEach((tabList) => {
+      const tabs = Array.from(tabList.querySelectorAll('[role="tab"]'));
+      function selectTab(tab) {
+        tabs.forEach((other) => {
+          const selected = other === tab;
+          other.setAttribute("aria-selected", String(selected));
+          other.tabIndex = selected ? 0 : -1;
+          document.getElementById(other.getAttribute("aria-controls")).hidden = !selected;
+        });
+        tab.focus();
+      }
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => selectTab(tab));
+        tab.addEventListener("keydown", (event) => {
+          let next = null;
+          if (event.key === "ArrowRight") next = tabs[(index + 1) % tabs.length];
+          if (event.key === "ArrowLeft") next = tabs[(index - 1 + tabs.length) % tabs.length];
+          if (event.key === "Home") next = tabs[0];
+          if (event.key === "End") next = tabs[tabs.length - 1];
+          if (next) {
+            event.preventDefault();
+            selectTab(next);
+          }
+        });
+      });
+    });
+
+    document.querySelectorAll(".accordion-trigger").forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        const expanded = trigger.getAttribute("aria-expanded") === "true";
+        trigger.setAttribute("aria-expanded", String(!expanded));
+        document.getElementById(trigger.getAttribute("aria-controls")).hidden = expanded;
+      });
+    });
+
+    document.querySelectorAll("[data-disclosure]").forEach((item) => {
+      const button = item.querySelector("button");
+      const submenu = item.querySelector(".submenu");
+      function setOpen(open) {
+        button.setAttribute("aria-expanded", String(open));
+        submenu.hidden = !open;
+      }
+      button.addEventListener("click", () => setOpen(button.getAttribute("aria-expanded") !== "true"));
+      item.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          setOpen(false);
+          button.focus();
+        }
+      });
+      item.addEventListener("focusout", (event) => {
+        if (!item.contains(event.relatedTarget)) setOpen(false);
+      });
+    });
+
+    document.getElementById("kn-s9-form").addEventListener("submit", (event) => {
+      event.preventDefault();
+      const country = document.getElementById("kn-s9-country").value;
+      document.getElementById("kn-s9-status").textContent = `Shipping to ${country} saved.`;
+    });
+
+    document.getElementById("kn-s10-switch").addEventListener("click", (event) => {
+      const button = event.currentTarget;
+      const on = button.getAttribute("aria-checked") === "true";
+      button.setAttribute("aria-checked", String(!on));
+    });
+  </script>
+</body>
+</html>

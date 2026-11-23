@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Not Obscured Footer Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    body {
+      padding-bottom: 170px;
+    }
+
+    .cookie-banner {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 100;
+      box-sizing: border-box;
+      height: 170px;
+      padding: 20px 24px;
+      background: #102a43;
+      color: #ffffff;
+    }
+
+    .cookie-banner p {
+      margin: 0 0 16px;
+      max-width: 720px;
+    }
+
+    .cookie-banner .row button {
+      border-color: #ffffff;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 1px solid #333333;
+      border-radius: 6px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .tile {
+      width: 280px;
+      padding: 12px;
+      border: 1px solid #777777;
+      border-radius: 8px;
+    }
+
+    .switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch-track {
+      width: 44px;
+      height: 24px;
+      border-radius: 12px;
+      background: #777777;
+      position: relative;
+    }
+
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .switch[aria-checked="true"] .switch-track {
+      background: #1a7f37;
+    }
+
+    .switch[aria-checked="true"] .switch-track::after {
+      left: 23px;
+    }
+
+    .note {
+      min-height: 40px;
+      width: 320px;
+      padding: 8px;
+      border: 1px solid #777777;
+      border-radius: 6px;
+    }
+
+    .list-item {
+      box-sizing: border-box;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .pagination {
+      display: flex;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    pre {
+      margin: 0;
+      padding: 8px;
+      background: #f4f4f4;
+      border: 1px solid #777777;
+      overflow-x: auto;
+      max-width: 360px;
+    }
+
+    [role="tablist"] {
+      display: flex;
+      gap: 4px;
+    }
+
+    [role="tab"][aria-selected="true"] {
+      background: #1a1a1a;
+      color: #ffffff;
+    }
+
+    [aria-pressed="true"] {
+      background: #ffe8a3;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Focus Not Obscured Footer Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="focus-not-obscured-footer-failure-1">
+        <div class="itemContent">
+          <h2>Continue to checkout link</h2>
+          <p>Your basket contains 3 items totalling 84 euros.</p>
+          <a href="#checkout">Continue to checkout</a>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-2">
+        <div class="itemContent">
+          <h2>Load more comments button</h2>
+          <p>Showing 10 of 48 comments on this post.</p>
+          <button type="button">Load more comments</button>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-3">
+        <div class="itemContent">
+          <h2>Promo code field and apply button</h2>
+          <p>Have a discount voucher?</p>
+          <div class="row">
+            <label for="promo-code-3">Promo code</label>
+            <input id="promo-code-3" type="text" autocomplete="off">
+            <button type="button">Apply</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-4">
+        <div class="itemContent">
+          <h2>Sort results select</h2>
+          <p>124 hiking boots found.</p>
+          <div class="row">
+            <label for="sort-results-4">Sort by</label>
+            <select id="sort-results-4">
+              <option>Most popular</option>
+              <option>Price: low to high</option>
+              <option>Price: high to low</option>
+              <option>Newest</option>
+            </select>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-5">
+        <div class="itemContent">
+          <h2>Remember me checkbox</h2>
+          <p>Signing in on a shared computer? Leave this unchecked.</p>
+          <div class="row">
+            <input id="remember-me-5" type="checkbox">
+            <label for="remember-me-5">Keep me signed in</label>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-6">
+        <div class="itemContent">
+          <h2>FAQ disclosure</h2>
+          <p>Frequently asked questions</p>
+          <details>
+            <summary>Can I change my delivery address after ordering?</summary>
+            <p>Yes, until the parcel has been handed to the courier.</p>
+          </details>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-7">
+        <div class="itemContent">
+          <h2>Scrollable code sample region</h2>
+          <p>Install the command line tool:</p>
+          <pre tabindex="0" aria-label="Install command"><code>npm install --save-dev @example/accessibility-checker-command-line-interface</code></pre>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-8">
+        <div class="itemContent">
+          <h2>Email notifications switch</h2>
+          <p>We will only email you about activity on your own posts.</p>
+          <button type="button" class="switch" role="switch" aria-checked="true" data-switch>
+            <span class="switch-track" aria-hidden="true"></span>
+            <span>Email notifications</span>
+          </button>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-9">
+        <div class="itemContent">
+          <h2>Search results pagination</h2>
+          <p>Page 2 of 5</p>
+          <nav aria-label="Search results pages">
+            <ul class="pagination">
+              <li><a href="#page-1">Previous</a></li>
+              <li><a href="#page-1">1</a></li>
+              <li><a href="#page-2" aria-current="page">2</a></li>
+              <li><a href="#page-3">3</a></li>
+              <li><a href="#page-3">Next</a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-footer-failure-10">
+        <div class="itemContent">
+          <h2>Shipping speed radio group</h2>
+          <fieldset>
+            <legend>Shipping speed</legend>
+            <div class="row">
+              <label><input type="radio" name="shipping-speed-10" value="standard" checked> Standard (3 to 5 days)</label>
+              <label><input type="radio" name="shipping-speed-10" value="express"> Express (next day)</label>
+            </div>
+          </fieldset>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <section class="cookie-banner" aria-label="Cookie consent">
+    <p>We use cookies to remember your preferences and to understand how the site is used. You can change your choice at any time.</p>
+    <div class="row">
+      <button type="button">Accept all</button>
+      <button type="button">Reject all</button>
+      <button type="button">Cookie settings</button>
+    </div>
+  </section>
+
+  <script>
+    document.querySelector("main").addEventListener("focusin", (event) => {
+      event.target.scrollIntoView({ block: "end" });
+    });
+
+    document.querySelectorAll("[data-switch]").forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const checked = toggle.getAttribute("aria-checked") === "true";
+        toggle.setAttribute("aria-checked", String(!checked));
+      });
+    });
+  </script>
+</body>
+</html>

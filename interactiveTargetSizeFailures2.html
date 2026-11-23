@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Target Size Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    button, a, input {
+      font-family: inherit;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #222222;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .panel {
+      max-width: 420px;
+      padding: 16px;
+      border: 1px solid #bbbbbb;
+      border-radius: 8px;
+      background: #fafafa;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .panel-header strong {
+      font-size: 16px;
+    }
+
+    .player-16 {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px;
+      width: max-content;
+      border-radius: 4px;
+      background: #1d1d1d;
+    }
+
+    .player-16 .icon-btn {
+      width: 16px;
+      height: 16px;
+      border: none;
+      background: #3a3a3a;
+      color: #ffffff;
+      font-size: 9px;
+    }
+
+    .calendar-18 {
+      display: grid;
+      grid-template-columns: repeat(7, 18px);
+      gap: 0;
+      width: max-content;
+    }
+
+    .calendar-18 .day-name {
+      text-align: center;
+      font-size: 9px;
+      color: #555555;
+    }
+
+    .calendar-18 button {
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      border: 1px solid #eeeeee;
+      background: #ffffff;
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .calendar-18 button[aria-pressed="true"] {
+      background: #1a4fa3;
+      color: #ffffff;
+    }
+
+    .swatches-14 {
+      display: flex;
+      gap: 3px;
+    }
+
+    .swatches-14 [role="radio"] {
+      width: 14px;
+      height: 14px;
+      box-sizing: border-box;
+      border-radius: 50%;
+      border: 1px solid #888888;
+      cursor: pointer;
+    }
+
+    .swatches-14 [role="radio"][aria-checked="true"] {
+      outline: 2px solid #222222;
+    }
+
+    .orders {
+      border-collapse: collapse;
+    }
+
+    .orders th,
+    .orders td {
+      padding: 4px 8px;
+      border-bottom: 1px solid #dddddd;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .orders .actions {
+      display: flex;
+      gap: 2px;
+    }
+
+    .orders .icon-btn {
+      width: 14px;
+      height: 14px;
+      font-size: 8px;
+      border: none;
+    }
+
+    .perm-grid {
+      display: grid;
+      grid-template-columns: 90px repeat(3, 12px);
+      gap: 4px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .perm-grid input {
+      appearance: none;
+      width: 12px;
+      height: 12px;
+      margin: 0;
+      border: 1px solid #555555;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+
+    .perm-grid input:checked {
+      background: #2a7a2a;
+    }
+
+    .perm-grid .head {
+      font-size: 9px;
+      color: #555555;
+    }
+
+    .mini-links {
+      display: grid;
+      gap: 0;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .mini-links a {
+      display: block;
+      width: max-content;
+      height: 12px;
+      font-size: 10px;
+      line-height: 12px;
+      color: #1a4fa3;
+    }
+
+    .post-card {
+      max-width: 360px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .post-card .panel-header .row {
+      gap: 2px;
+    }
+
+    .post-card .icon-btn {
+      width: 16px;
+      height: 16px;
+      font-size: 10px;
+      border: none;
+    }
+
+    .size-picker {
+      display: inline-flex;
+      border: 1px solid #888888;
+    }
+
+    .size-picker [role="radio"] {
+      width: 20px;
+      height: 16px;
+      box-sizing: border-box;
+      padding: 0;
+      border: none;
+      border-right: 1px solid #888888;
+      background: #ffffff;
+      font-size: 9px;
+      cursor: pointer;
+    }
+
+    .size-picker [role="radio"]:last-child {
+      border-right: none;
+    }
+
+    .size-picker [role="radio"][aria-checked="true"] {
+      background: #222222;
+      color: #ffffff;
+    }
+
+    .reactions {
+      display: flex;
+      gap: 2px;
+    }
+
+    .reactions button {
+      width: 16px;
+      height: 16px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      font-size: 12px;
+      line-height: 16px;
+      cursor: pointer;
+    }
+
+    .tree {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      font-size: 12px;
+    }
+
+    .tree li {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      height: 16px;
+    }
+
+    .tree .icon-btn {
+      width: 12px;
+      height: 12px;
+      font-size: 9px;
+      border: none;
+      background: transparent;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Interactive Target Size Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="interactive-target-size-failure-11">
+        <div class="itemContent">
+          <h2>Compact video player controls</h2>
+          <div class="player-16" role="group" aria-label="Video controls">
+            <button type="button" class="icon-btn" aria-label="Rewind 10 seconds">&#x23EA;</button>
+            <button type="button" class="icon-btn" aria-label="Play" aria-pressed="false" data-toggle-pressed>&#x25B6;</button>
+            <button type="button" class="icon-btn" aria-label="Forward 10 seconds">&#x23E9;</button>
+            <button type="button" class="icon-btn" aria-label="Mute" aria-pressed="false" data-toggle-pressed>&#x1F50A;</button>
+            <button type="button" class="icon-btn" aria-label="Captions" aria-pressed="false" data-toggle-pressed>CC</button>
+            <button type="button" class="icon-btn" aria-label="Full screen">&#x26F6;</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-12">
+        <div class="itemContent">
+          <h2>Mini calendar date picker</h2>
+          <div role="group" aria-label="April 2026">
+            <div class="calendar-18">
+              <span class="day-name" aria-hidden="true">M</span><span class="day-name" aria-hidden="true">T</span><span class="day-name" aria-hidden="true">W</span><span class="day-name" aria-hidden="true">T</span><span class="day-name" aria-hidden="true">F</span><span class="day-name" aria-hidden="true">S</span><span class="day-name" aria-hidden="true">S</span>
+              <button type="button" aria-label="April 6" data-toggle-pressed aria-pressed="false">6</button>
+              <button type="button" aria-label="April 7" data-toggle-pressed aria-pressed="false">7</button>
+              <button type="button" aria-label="April 8" data-toggle-pressed aria-pressed="false">8</button>
+              <button type="button" aria-label="April 9" data-toggle-pressed aria-pressed="true">9</button>
+              <button type="button" aria-label="April 10" data-toggle-pressed aria-pressed="false">10</button>
+              <button type="button" aria-label="April 11" data-toggle-pressed aria-pressed="false">11</button>
+              <button type="button" aria-label="April 12" data-toggle-pressed aria-pressed="false">12</button>
+              <button type="button" aria-label="April 13" data-toggle-pressed aria-pressed="false">13</button>
+              <button type="button" aria-label="April 14" data-toggle-pressed aria-pressed="false">14</button>
+              <button type="button" aria-label="April 15" data-toggle-pressed aria-pressed="false">15</button>
+              <button type="button" aria-label="April 16" data-toggle-pressed aria-pressed="false">16</button>
+              <button type="button" aria-label="April 17" data-toggle-pressed aria-pressed="false">17</button>
+              <button type="button" aria-label="April 18" data-toggle-pressed aria-pressed="false">18</button>
+              <button type="button" aria-label="April 19" data-toggle-pressed aria-pressed="false">19</button>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-13">
+        <div class="itemContent">
+          <h2>Product color swatches</h2>
+          <div class="swatches-14" role="radiogroup" aria-label="Color" data-radio-group>
+            <span role="radio" tabindex="0" aria-checked="true" aria-label="Black" style="background:#111111"></span>
+            <span role="radio" tabindex="-1" aria-checked="false" aria-label="White" style="background:#ffffff"></span>
+            <span role="radio" tabindex="-1" aria-checked="false" aria-label="Red" style="background:#c62828"></span>
+            <span role="radio" tabindex="-1" aria-checked="false" aria-label="Olive" style="background:#6b7a2a"></span>
+            <span role="radio" tabindex="-1" aria-checked="false" aria-label="Sky blue" style="background:#7cc6fe"></span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-14">
+        <div class="itemContent">
+          <h2>Table row edit and delete icons</h2>
+          <table class="orders">
+            <thead>
+              <tr><th scope="col">Invoice</th><th scope="col">Amount</th><th scope="col">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>INV-2201</td><td>$420.00</td>
+                <td><div class="actions"><button type="button" class="icon-btn" aria-label="Edit invoice INV-2201">&#x270F;&#xFE0F;</button><button type="button" class="icon-btn" aria-label="Delete invoice INV-2201">&#x1F5D1;&#xFE0F;</button></div></td>
+              </tr>
+              <tr>
+                <td>INV-2202</td><td>$87.50</td>
+                <td><div class="actions"><button type="button" class="icon-btn" aria-label="Edit invoice INV-2202">&#x270F;&#xFE0F;</button><button type="button" class="icon-btn" aria-label="Delete invoice INV-2202">&#x1F5D1;&#xFE0F;</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-15">
+        <div class="itemContent">
+          <h2>Restyled native checkboxes in a permissions grid</h2>
+          <div class="perm-grid" role="group" aria-label="Role permissions">
+            <span></span><span class="head" aria-hidden="true">R</span><span class="head" aria-hidden="true">W</span><span class="head" aria-hidden="true">D</span>
+            <span>Editors</span>
+            <input type="checkbox" aria-label="Editors read" checked>
+            <input type="checkbox" aria-label="Editors write" checked>
+            <input type="checkbox" aria-label="Editors delete">
+            <span>Viewers</span>
+            <input type="checkbox" aria-label="Viewers read" checked>
+            <input type="checkbox" aria-label="Viewers write">
+            <input type="checkbox" aria-label="Viewers delete">
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-16">
+        <div class="itemContent">
+          <h2>Stacked small-print footer links</h2>
+          <ul class="mini-links" aria-label="Legal">
+            <li><a href="#">Terms of service</a></li>
+            <li><a href="#">Privacy policy</a></li>
+            <li><a href="#">Cookie settings</a></li>
+            <li><a href="#">Accessibility statement</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-17">
+        <div class="itemContent">
+          <h2>Card header bookmark and more-options icons</h2>
+          <article class="post-card">
+            <div class="panel-header">
+              <strong>Weekend hiking trails</strong>
+              <div class="row">
+                <button type="button" class="icon-btn" aria-label="Bookmark" aria-pressed="false" data-toggle-pressed>&#x1F516;</button>
+                <button type="button" class="icon-btn" aria-label="Share">&#x2197;</button>
+                <button type="button" class="icon-btn" aria-label="More options" aria-haspopup="menu">&#x22EF;</button>
+              </div>
+            </div>
+            <p>Five scenic routes within an hour of the city.</p>
+          </article>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-18">
+        <div class="itemContent">
+          <h2>Segmented clothing size selector</h2>
+          <div class="size-picker" role="radiogroup" aria-label="Size" data-radio-group>
+            <button type="button" role="radio" aria-checked="false">XS</button>
+            <button type="button" role="radio" aria-checked="false">S</button>
+            <button type="button" role="radio" aria-checked="true">M</button>
+            <button type="button" role="radio" aria-checked="false">L</button>
+            <button type="button" role="radio" aria-checked="false">XL</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-19">
+        <div class="itemContent">
+          <h2>Emoji reaction bar</h2>
+          <div class="reactions" role="group" aria-label="React to this message">
+            <button type="button" aria-label="Thumbs up" aria-pressed="false" data-toggle-pressed>&#x1F44D;</button>
+            <button type="button" aria-label="Heart" aria-pressed="false" data-toggle-pressed>&#x2764;&#xFE0F;</button>
+            <button type="button" aria-label="Laugh" aria-pressed="false" data-toggle-pressed>&#x1F602;</button>
+            <button type="button" aria-label="Surprised" aria-pressed="false" data-toggle-pressed>&#x1F62E;</button>
+            <button type="button" aria-label="Celebrate" aria-pressed="false" data-toggle-pressed>&#x1F389;</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="interactive-target-size-failure-20">
+        <div class="itemContent">
+          <h2>File tree expand toggles</h2>
+          <ul class="tree" aria-label="Project files">
+            <li><button type="button" class="icon-btn" aria-label="Expand src" aria-expanded="false" data-tree-toggle>&#x25B8;</button>src</li>
+            <li><button type="button" class="icon-btn" aria-label="Expand public" aria-expanded="false" data-tree-toggle>&#x25B8;</button>public</li>
+            <li><button type="button" class="icon-btn" aria-label="Expand tests" aria-expanded="false" data-tree-toggle>&#x25B8;</button>tests</li>
+            <li><button type="button" class="icon-btn" aria-label="Expand docs" aria-expanded="false" data-tree-toggle>&#x25B8;</button>docs</li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("[data-toggle-pressed]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const pressed = button.getAttribute("aria-pressed") === "true";
+        button.setAttribute("aria-pressed", String(!pressed));
+      });
+    });
+
+    document.querySelectorAll("[data-radio-group]").forEach((group) => {
+      const radios = group.querySelectorAll('[role="radio"]');
+      radios.forEach((radio) => {
+        radio.addEventListener("click", () => {
+          radios.forEach((other) => other.setAttribute("aria-checked", String(other === radio)));
+        });
+      });
+    });
+
+    document.querySelectorAll('[role="checkbox"]').forEach((box) => {
+      box.addEventListener("click", () => {
+        box.setAttribute("aria-checked", String(box.getAttribute("aria-checked") !== "true"));
+      });
+    });
+
+    document.querySelectorAll("[data-stepper]").forEach((stepper) => {
+      const input = stepper.querySelector("input");
+      stepper.querySelectorAll("[data-delta]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const next = Math.max(0, Number(input.value || 0) + Number(button.dataset.delta));
+          input.value = String(next);
+        });
+      });
+    });
+
+    document.querySelectorAll("[data-dismiss]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const target = button.closest("[data-dismissable]");
+        if (target) {
+          target.hidden = true;
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-tree-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        button.textContent = expanded ? "\u25B8" : "\u25BE";
+      });
+    });
+
+    document.querySelectorAll("a[href='#']").forEach((link) => {
+      link.addEventListener("click", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>

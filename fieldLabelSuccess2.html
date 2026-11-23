@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Field Label Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .field {
+      display: grid;
+      gap: 6px;
+      max-width: 360px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="number"],
+    input[type="date"],
+    input[type="search"],
+    input[type="tel"],
+    input[type="url"],
+    select,
+    textarea {
+      padding: 8px;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+
+    fieldset {
+      border: 1px solid #cccccc;
+      border-radius: 6px;
+      padding: 12px;
+    }
+
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .editor {
+      min-height: 60px;
+      padding: 8px;
+      border: 1px solid #888888;
+      border-radius: 4px;
+    }
+
+    .custom-listbox {
+      margin: 0;
+      padding: 4px;
+      list-style: none;
+      border: 1px solid #888888;
+      border-radius: 4px;
+      max-width: 220px;
+    }
+
+    .custom-listbox [role="option"] {
+      padding: 6px;
+    }
+
+    .custom-listbox [aria-selected="true"] {
+      background: #dbe9ff;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #555555;
+    }
+
+    .fake-label {
+      font-weight: bold;
+    }
+
+    .qty-table {
+      border-collapse: collapse;
+    }
+
+    .qty-table th,
+    .qty-table td {
+      padding: 6px 10px;
+      border: 1px solid #dddddd;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Field Label Success</h1>
+    <ul class="list">
+      <li class="list-item" id="field-label-success-11">
+        <div class="itemContent">
+          <h2>Guest count with label and hint</h2>
+          <div class="field">
+            <label for="fl-s11-guests">Number of guests</label>
+            <input type="number" id="fl-s11-guests" name="guests" min="1" max="12" aria-describedby="fl-s11-hint">
+            <span id="fl-s11-hint" class="hint">Maximum 12 guests per booking.</span>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-12">
+        <div class="itemContent">
+          <h2>Rich text editor labelled by visible text</h2>
+          <div class="field">
+            <span id="fl-s12-label" class="fake-label">Cover letter</span>
+            <div class="editor" role="textbox" aria-multiline="true" contenteditable="true" aria-labelledby="fl-s12-label"></div>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-13">
+        <div class="itemContent">
+          <h2>City autocomplete combobox</h2>
+          <div class="field">
+            <label for="fl-s13-city">City</label>
+            <input type="text" id="fl-s13-city" role="combobox" aria-expanded="false" aria-controls="fl-s13-list" aria-autocomplete="list">
+            <ul id="fl-s13-list" role="listbox" aria-label="City suggestions" class="custom-listbox" hidden>
+              <li role="option" aria-selected="false">Amsterdam</li>
+              <li role="option" aria-selected="false">Berlin</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-14">
+        <div class="itemContent">
+          <h2>Custom listbox labelled by heading text</h2>
+          <div class="field">
+            <span id="fl-s14-label" class="fake-label">Preferred contact time</span>
+            <ul role="listbox" tabindex="0" aria-labelledby="fl-s14-label" class="custom-listbox">
+              <li role="option" aria-selected="true">Morning</li>
+              <li role="option" aria-selected="false">Afternoon</li>
+              <li role="option" aria-selected="false">Evening</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-15">
+        <div class="itemContent">
+          <h2>Custom searchbox with aria-label</h2>
+          <div class="field">
+            <div class="editor" role="searchbox" contenteditable="true" aria-label="Search help articles"></div>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-16">
+        <div class="itemContent">
+          <h2>Pizza toppings checkbox group</h2>
+          <fieldset>
+            <legend>Pizza toppings</legend>
+            <label class="option-row"><input type="checkbox" name="toppings" value="mushroom"> Mushroom</label>
+            <label class="option-row"><input type="checkbox" name="toppings" value="olives"> Olives</label>
+            <label class="option-row"><input type="checkbox" name="toppings" value="peppers"> Peppers</label>
+          </fieldset>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-17">
+        <div class="itemContent">
+          <h2>Quantity table cells labelled by row and column</h2>
+          <table class="qty-table">
+            <tr>
+              <th id="fl-s17-product">Product</th>
+              <th id="fl-s17-qty">Quantity</th>
+            </tr>
+            <tr>
+              <td id="fl-s17-apples">Apples</td>
+              <td><input type="number" min="0" value="0" aria-labelledby="fl-s17-apples fl-s17-qty"></td>
+            </tr>
+            <tr>
+              <td id="fl-s17-pears">Pears</td>
+              <td><input type="number" min="0" value="0" aria-labelledby="fl-s17-pears fl-s17-qty"></td>
+            </tr>
+          </table>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-18">
+        <div class="itemContent">
+          <h2>Volume range with label</h2>
+          <div class="field">
+            <label for="fl-s18-volume">Volume</label>
+            <input type="range" id="fl-s18-volume" name="volume" min="0" max="100" value="60">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-19">
+        <div class="itemContent">
+          <h2>Resume upload with label</h2>
+          <div class="field">
+            <label for="fl-s19-resume">Upload resume (PDF)</label>
+            <input type="file" id="fl-s19-resume" name="resume" accept="application/pdf">
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="field-label-success-20">
+        <div class="itemContent">
+          <h2>Message body editor with aria-label</h2>
+          <div class="field">
+            <div class="editor" role="textbox" aria-multiline="true" contenteditable="true" aria-label="Message body"></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

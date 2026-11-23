@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Background Images Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .bg {
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .icon-button {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 24px 24px;
+    }
+
+    .icon-link {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 1px solid #cccccc;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 22px 22px;
+    }
+
+    .row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .hero-sale {
+      width: 100%;
+      height: 200px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='200' viewBox='0 0 600 200'%3E%3Crect width='600' height='200' fill='%23c01c28'/%3E%3Ccircle cx='520' cy='40' r='90' fill='%23e66100'/%3E%3Ctext x='40' y='80' font-family='Arial, sans-serif' font-size='34' font-weight='bold' fill='%23ffffff'%3ESUMMER SALE%3C/text%3E%3Ctext x='40' y='150' font-family='Arial, sans-serif' font-size='60' font-weight='bold' fill='%23fff5b1'%3E50%25 OFF%3C/text%3E%3Ctext x='330' y='150' font-family='Arial, sans-serif' font-size='22' fill='%23ffffff'%3Eall items until Aug 31%3C/text%3E%3C/svg%3E");
+      max-width: 600px;
+      background-size: cover;
+      border-radius: 8px;
+    }
+
+    .product-photo {
+      width: 240px;
+      height: 200px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='200' viewBox='0 0 240 200'%3E%3Crect width='240' height='200' fill='%23f6f1e9'/%3E%3Crect x='60' y='50' width='100' height='120' rx='10' fill='%232a7ab0'/%3E%3Cpath d='M160 80 h20 a22 22 0 0 1 0 44 h-20' fill='none' stroke='%232a7ab0' stroke-width='12'/%3E%3Cellipse cx='110' cy='50' rx='50' ry='8' fill='%231c5a85'/%3E%3Ctext x='78' y='118' font-family='Arial, sans-serif' font-size='18' font-weight='bold' fill='%23ffffff'%3ECAFE%3C/text%3E%3C/svg%3E");
+      border-radius: 6px;
+    }
+
+    .chart-bars {
+      width: 360px;
+      height: 220px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='360' height='220' viewBox='0 0 360 220'%3E%3Crect width='360' height='220' fill='%23ffffff'/%3E%3Cline x1='40' y1='190' x2='340' y2='190' stroke='%23333333'/%3E%3Crect x='60' y='130' width='50' height='60' fill='%231a5fb4'/%3E%3Crect x='130' y='100' width='50' height='90' fill='%231a5fb4'/%3E%3Crect x='200' y='70' width='50' height='120' fill='%231a5fb4'/%3E%3Crect x='270' y='30' width='50' height='160' fill='%231a5fb4'/%3E%3Cg font-family='Arial, sans-serif' font-size='13' fill='%23333333'%3E%3Ctext x='72' y='208'%3EQ1%3C/text%3E%3Ctext x='142' y='208'%3EQ2%3C/text%3E%3Ctext x='212' y='208'%3EQ3%3C/text%3E%3Ctext x='282' y='208'%3EQ4%3C/text%3E%3Ctext x='70' y='124'%3E%241.2M%3C/text%3E%3Ctext x='140' y='94'%3E%241.8M%3C/text%3E%3Ctext x='210' y='64'%3E%242.4M%3C/text%3E%3Ctext x='280' y='24'%3E%243.1M%3C/text%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .site-logo {
+      width: 200px;
+      height: 60px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='60' viewBox='0 0 200 60'%3E%3Ccircle cx='30' cy='30' r='22' fill='%2326a269'/%3E%3Cpath d='M18 38 L30 16 L42 38 Z' fill='%23ffffff'/%3E%3Ctext x='62' y='38' font-family='Arial, sans-serif' font-size='22' font-weight='bold' fill='%231d3b2a'%3ENorthpeak%3C/text%3E%3C/svg%3E");
+      display: block;
+    }
+
+    .search-button {
+      background-color: #1a5fb4;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='10' cy='10' r='6.5' fill='none' stroke='%23ffffff' stroke-width='2.5'/%3E%3Cline x1='15' y1='15' x2='21' y2='21' stroke='%23ffffff' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    .cart-link {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 24 24'%3E%3Cpath d='M2 3h3l2.5 11h11l2-8H6.5' fill='none' stroke='%23222222' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='9' cy='19' r='1.8' fill='%23222222'/%3E%3Ccircle cx='17' cy='19' r='1.8' fill='%23222222'/%3E%3C/svg%3E");
+    }
+
+    .steps-diagram {
+      width: 480px;
+      height: 120px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='120' viewBox='0 0 480 120'%3E%3Crect width='480' height='120' fill='%23f4f7fb'/%3E%3Cg font-family='Arial, sans-serif' font-size='15' fill='%231d1d1d' text-anchor='middle'%3E%3Ccircle cx='70' cy='50' r='28' fill='%231a5fb4'/%3E%3Ctext x='70' y='57' fill='%23ffffff' font-size='22' font-weight='bold'%3E1%3C/text%3E%3Ctext x='70' y='103'%3EPlace order%3C/text%3E%3Ccircle cx='240' cy='50' r='28' fill='%231a5fb4'/%3E%3Ctext x='240' y='57' fill='%23ffffff' font-size='22' font-weight='bold'%3E2%3C/text%3E%3Ctext x='240' y='103'%3EWe pack it%3C/text%3E%3Ccircle cx='410' cy='50' r='28' fill='%231a5fb4'/%3E%3Ctext x='410' y='57' fill='%23ffffff' font-size='22' font-weight='bold'%3E3%3C/text%3E%3Ctext x='410' y='103'%3EDelivered in 2 days%3C/text%3E%3C/g%3E%3Cpath d='M110 50 H195 M185 42 L197 50 L185 58 M280 50 H365 M355 42 L367 50 L355 58' stroke='%23555555' stroke-width='3' fill='none'/%3E%3C/svg%3E");
+      max-width: 100%;
+    }
+
+    .status-icon {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%2326a269'/%3E%3Cpath d='M9 16.5 L14 21.5 L23 11' fill='none' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    }
+
+    .status-icon.cancelled {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23c01c28'/%3E%3Cpath d='M10 10 L22 22 M22 10 L10 22' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    .rating-stars {
+      width: 150px;
+      height: 30px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='30' viewBox='0 0 150 30'%3E%3Cg font-family='Arial, sans-serif' font-size='28'%3E%3Ctext x='0' y='25' fill='%23e5a50a'%3E%E2%98%85%3C/text%3E%3Ctext x='30' y='25' fill='%23e5a50a'%3E%E2%98%85%3C/text%3E%3Ctext x='60' y='25' fill='%23e5a50a'%3E%E2%98%85%3C/text%3E%3Ctext x='90' y='25' fill='%23e5a50a'%3E%E2%98%85%3C/text%3E%3Ctext x='120' y='25' fill='%23cccccc'%3E%E2%98%85%3C/text%3E%3C/g%3E%3C/svg%3E");
+      display: inline-block;
+    }
+
+    .share-email {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='2' y='5' width='20' height='14' rx='2' fill='none' stroke='%23222222' stroke-width='2'/%3E%3Cpath d='M3 6 L12 13 L21 6' fill='none' stroke='%23222222' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .share-print {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Crect x='6' y='2' width='12' height='6' fill='none' stroke='%23222222' stroke-width='2'/%3E%3Crect x='2' y='8' width='20' height='9' rx='2' fill='none' stroke='%23222222' stroke-width='2'/%3E%3Crect x='6' y='14' width='12' height='8' fill='%23ffffff' stroke='%23222222' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .share-link {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath d='M10 14 a4 4 0 0 0 5.6 0 l3.4-3.4 a4 4 0 0 0-5.6-5.6 l-1.2 1.2 M14 10 a4 4 0 0 0-5.6 0 l-3.4 3.4 a4 4 0 0 0 5.6 5.6 l1.2-1.2' fill='none' stroke='%23222222' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    }
+
+    .gradient-banner {
+      padding: 32px;
+      border-radius: 8px;
+      color: #ffffff;
+      background-image: linear-gradient(135deg, #1a5fb4 0%, #613583 100%);
+    }
+
+    .gradient-banner h3 {
+      margin: 0 0 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Background Images Success</h1>
+
+    <ul class="list">
+      <li class="list-item" id="background-images-success-1">
+        <div class="itemContent">
+          <h2>Summer sale hero banner with role img and label</h2>
+          <div class="hero-sale bg" role="img" aria-label="Summer sale: 50% off all items until August 31"></div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-2">
+        <div class="itemContent">
+          <h2>Product photo with role img and label</h2>
+          <div class="product-photo bg" role="img" aria-label="Blue ceramic coffee mug with Cafe printed on the side"></div>
+          <p>$14.00</p>
+          <button type="button">Add to basket</button>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-3">
+        <div class="itemContent">
+          <h2>Quarterly revenue bar chart with visually hidden data</h2>
+          <div class="chart-bars bg">
+            <span class="visually-hidden">Quarterly revenue bar chart: Q1 $1.2M, Q2 $1.8M, Q3 $2.4M, Q4 $3.1M.</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-4">
+        <div class="itemContent">
+          <h2>Header logo link with visually hidden text</h2>
+          <header>
+            <a href="#home" class="site-logo bg"><span class="visually-hidden">Northpeak home</span></a>
+          </header>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-5">
+        <div class="itemContent">
+          <h2>Search icon button with aria-label</h2>
+          <form class="row">
+            <label for="bg-s5-q">Keywords</label>
+            <input id="bg-s5-q" type="text">
+            <button type="submit" class="icon-button search-button" aria-label="Search"></button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-6">
+        <div class="itemContent">
+          <h2>Shopping cart icon link with visually hidden text</h2>
+          <a href="#cart" class="icon-link cart-link"><span class="visually-hidden">Shopping cart</span></a>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-7">
+        <div class="itemContent">
+          <h2>How delivery works diagram with visible text equivalent</h2>
+          <figure style="margin: 0;">
+            <div class="steps-diagram bg" role="img" aria-label="How delivery works: 1 place order, 2 we pack it, 3 delivered in 2 days"></div>
+            <figcaption>Place your order, we pack it, and it is delivered in 2 days.</figcaption>
+          </figure>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-8">
+        <div class="itemContent">
+          <h2>Order status icons next to visible status text</h2>
+          <table>
+            <thead>
+              <tr><th>Order</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>#10421</td><td><span class="row"><span class="status-icon bg"></span> Delivered</span></td></tr>
+              <tr><td>#10398</td><td><span class="row"><span class="status-icon cancelled bg"></span> Cancelled</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-9">
+        <div class="itemContent">
+          <h2>Customer rating stars with role img and label</h2>
+          <p>Trail running shoes</p>
+          <span class="rating-stars bg" role="img" aria-label="Rated 4 out of 5 stars"></span>
+        </div>
+      </li>
+
+      <li class="list-item" id="background-images-success-10">
+        <div class="itemContent">
+          <h2>Decorative gradient behind visible promotional text</h2>
+          <div class="gradient-banner">
+            <h3>Members save more</h3>
+            <p>Join today and get free shipping on every order.</p>
+            <a href="#join" style="color: #ffffff;">Join now</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>

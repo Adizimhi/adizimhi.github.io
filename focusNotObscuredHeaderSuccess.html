@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Focus Not Obscured Header Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    html {
+      scroll-padding-top: 184px;
+    }
+
+    body {
+      padding-top: 160px;
+    }
+
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      box-sizing: border-box;
+      height: 160px;
+      padding: 24px;
+      background: #1f2a44;
+      color: #ffffff;
+    }
+
+    .site-header .brand {
+      margin: 0 0 24px;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .site-header nav ul {
+      display: flex;
+      gap: 24px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .site-header a {
+      color: #ffffff;
+    }
+
+    main {
+      padding-bottom: 100vh;
+    }
+
+    .list-item {
+      min-height: 80vh;
+    }
+
+    h2 {
+      margin: 0;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input,
+    select,
+    textarea,
+    button {
+      font: inherit;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: 1px solid #333333;
+      border-radius: 6px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+
+    .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .tile {
+      width: 280px;
+      padding: 12px;
+      border: 1px solid #777777;
+      border-radius: 8px;
+    }
+
+    .switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .switch-track {
+      width: 44px;
+      height: 24px;
+      border-radius: 12px;
+      background: #777777;
+      position: relative;
+    }
+
+    .switch-track::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #ffffff;
+    }
+
+    .switch[aria-checked="true"] .switch-track {
+      background: #1a7f37;
+    }
+
+    .switch[aria-checked="true"] .switch-track::after {
+      left: 23px;
+    }
+
+    .note {
+      min-height: 40px;
+      width: 320px;
+      padding: 8px;
+      border: 1px solid #777777;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <p class="brand">Northwind Outfitters</p>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#shop">Shop</a></li>
+        <li><a href="#journal">Journal</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Focus Not Obscured Header Success</h1>
+
+    <ul class="list">
+      <li class="list-item" id="focus-not-obscured-header-success-1">
+        <div class="itemContent">
+          <h2>Read more link in a news teaser</h2>
+          <p>City council approves the new riverside cycling lane after a two-year consultation.</p>
+          <a href="#article-riverside-lane">Read the full article</a>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-2">
+        <div class="itemContent">
+          <h2>Add to basket button</h2>
+          <p>Trail running shoes, size 42, waterproof upper.</p>
+          <div class="row">
+            <button type="button">Add to basket</button>
+            <button type="button">Save for later</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-3">
+        <div class="itemContent">
+          <h2>Newsletter email field</h2>
+          <label for="newsletter-email-3">Email address</label>
+          <input id="newsletter-email-3" type="email" autocomplete="email">
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-4">
+        <div class="itemContent">
+          <h2>Delivery country select</h2>
+          <label for="delivery-country-4">Delivery country</label>
+          <select id="delivery-country-4">
+            <option>Germany</option>
+            <option>France</option>
+            <option>Spain</option>
+            <option>Italy</option>
+          </select>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-5">
+        <div class="itemContent">
+          <h2>Terms checkbox</h2>
+          <div class="row">
+            <input id="accept-terms-5" type="checkbox">
+            <label for="accept-terms-5">I accept the terms of service</label>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-6">
+        <div class="itemContent">
+          <h2>Shipping details disclosure</h2>
+          <details>
+            <summary>Shipping details</summary>
+            <p>Orders placed before 2 pm ship the same working day.</p>
+          </details>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-7">
+        <div class="itemContent">
+          <h2>Focusable product tile</h2>
+          <div class="tile" tabindex="0" role="group" aria-label="Linen shirt, 39 euros">
+            <strong>Linen shirt</strong>
+            <p>39 euros</p>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-8">
+        <div class="itemContent">
+          <h2>Dark mode switch</h2>
+          <button type="button" class="switch" role="switch" aria-checked="false" data-switch>
+            <span class="switch-track" aria-hidden="true"></span>
+            <span>Dark mode</span>
+          </button>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-9">
+        <div class="itemContent">
+          <h2>Site search field and submit</h2>
+          <form class="row" role="search" onsubmit="return false;">
+            <label for="site-search-9">Search the help centre</label>
+            <input id="site-search-9" type="search">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="focus-not-obscured-header-success-10">
+        <div class="itemContent">
+          <h2>Star rating radio group</h2>
+          <fieldset>
+            <legend>Rate this recipe</legend>
+            <div class="row">
+              <label><input type="radio" name="recipe-rating-10" value="1"> 1 star</label>
+              <label><input type="radio" name="recipe-rating-10" value="2"> 2 stars</label>
+              <label><input type="radio" name="recipe-rating-10" value="3"> 3 stars</label>
+            </div>
+          </fieldset>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelector("main").addEventListener("focusin", (event) => {
+      event.target.scrollIntoView({ block: "start" });
+    });
+
+    document.querySelectorAll("[data-switch]").forEach((toggle) => {
+      toggle.addEventListener("click", () => {
+        const checked = toggle.getAttribute("aria-checked") === "true";
+        toggle.setAttribute("aria-checked", String(!checked));
+      });
+    });
+  </script>
+</body>
+</html>

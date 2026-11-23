@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Empty Links Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .icon-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: #eef2f8;
+      color: #1f3b5c;
+    }
+
+    .icon-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .logo-link {
+      display: inline-block;
+      width: 120px;
+      height: 40px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='40'%3E%3Crect width='120' height='40' rx='8' fill='%23234e9e'/%3E%3Ctext x='60' y='26' font-size='16' text-anchor='middle' fill='%23ffffff' font-family='Arial'%3EACME%3C/text%3E%3C/svg%3E") no-repeat center / contain;
+    }
+
+    .icon-font {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      background: #1f3b5c;
+    }
+
+    .icon-font.icon-cart {
+      clip-path: polygon(0 10%, 20% 10%, 30% 70%, 90% 70%, 100% 25%, 25% 25%);
+    }
+
+    .icon-font.icon-doc {
+      clip-path: polygon(0 0, 70% 0, 100% 30%, 100% 100%, 0 100%);
+    }
+
+    .arrow {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-top: 2px solid #1f3b5c;
+      border-right: 2px solid #1f3b5c;
+    }
+
+    .arrow.next {
+      transform: rotate(45deg);
+    }
+
+    .arrow.prev {
+      transform: rotate(-135deg);
+    }
+
+    .pagination {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pagination a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+    }
+
+    .btn-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      background: #1f5fae;
+      color: #ffffff;
+      border-radius: 6px;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .fake-link {
+      color: #1f5fae;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .card {
+      position: relative;
+      display: grid;
+      gap: 8px;
+      max-width: 320px;
+      padding: 16px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .card p {
+      margin: 0;
+    }
+
+    .stretched {
+      position: absolute;
+      inset: 0;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .skip-link:focus {
+      position: static;
+    }
+
+    .breadcrumb {
+      display: flex;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .breadcrumb li + li::before {
+      content: "/";
+      margin-right: 8px;
+      color: #888888;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Empty Links Failures</h1>
+    <ul class="list">
+      <li class="list-item" id="empty-links-failure-21">
+        <div class="itemContent">
+          <h2>Social icon links with hidden SVGs only</h2>
+          <div class="icon-row">
+            <a class="icon-link" href="#mail"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 4 L10 11 L18 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+            <a class="icon-link" href="#social"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M6 10 H14" stroke="currentColor" stroke-width="2"/></svg></a>
+            <a class="icon-link" href="#prefs"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="3 2"/></svg></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-22">
+        <div class="itemContent">
+          <h2>Pagination arrows without names</h2>
+          <nav class="pagination" aria-label="Pagination">
+            <a href="?page=1"><span class="arrow prev"></span></a>
+            <a href="?page=3"><span class="arrow next"></span></a>
+          </nav>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-23">
+        <div class="itemContent">
+          <h2>Link with presentational image</h2>
+          <a href="#previous"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Cpath d='M10 3 L5 8 L10 13' fill='none' stroke='%23333333' stroke-width='2'/%3E%3C/svg%3E" role="presentation" alt="" width="16" height="16"></a>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-24">
+        <div class="itemContent">
+          <h2>Link text in visibility hidden span</h2>
+          <a class="icon-link" href="#notifications"><span style="visibility: hidden;">Notifications</span></a>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-25">
+        <div class="itemContent">
+          <h2>Link labelled by empty element</h2>
+          <span id="el-f25-empty"></span>
+          <a class="icon-link" href="#inbox" aria-labelledby="el-f25-empty"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 4 L10 11 L18 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></a>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-26">
+        <div class="itemContent">
+          <h2>Link with whitespace aria-label</h2>
+          <a class="icon-link" href="#settings" aria-label="   "><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="3 2"/></svg></a>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-27">
+        <div class="itemContent">
+          <h2>Link containing only empty elements</h2>
+          <p>Download the app <a href="#app-store"><span></span><br></a></p>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-28">
+        <div class="itemContent">
+          <h2>Empty stretched overlay link on card</h2>
+          <div class="card">
+            <strong>Ten tips for a winter garden</strong>
+            <p>Keep your plants healthy through the cold months.</p>
+            <a class="stretched" href="#article-gardening"></a>
+          </div>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-29">
+        <div class="itemContent">
+          <h2>Div with link role and hidden icon only</h2>
+          <div class="icon-link" role="link" tabindex="0" data-href="#inbox"><svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20"><rect x="2" y="4" width="16" height="12" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 4 L10 11 L18 4" fill="none" stroke="currentColor" stroke-width="2"/></svg></div>
+        </div>
+      </li>
+      <li class="list-item" id="empty-links-failure-30">
+        <div class="itemContent">
+          <h2>Link text in element with hidden attribute</h2>
+          <a class="btn-link" href="#signup"><span hidden>Create account</span><span class="icon-font icon-doc" aria-hidden="true"></span></a>
+        </div>
+      </li>
+    </ul>
+  </main>
+  <script>
+    document.querySelectorAll('[role="link"]').forEach((element) => {
+      const go = () => {
+        window.location.hash = element.dataset.href || "";
+      };
+      element.addEventListener("click", go);
+      element.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          go();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

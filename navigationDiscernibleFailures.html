@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Discernible Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    a {
+      color: #0b4f8a;
+    }
+
+    nav ul,
+    [role="menubar"] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a,
+    nav button,
+    [role="menuitem"],
+    [role="link"] {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 24px;
+      min-height: 24px;
+      padding: 6px;
+      color: #0b4f8a;
+      background: none;
+      border: 1px solid transparent;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .bar {
+      padding: 12px;
+      background: #f2f4f7;
+      border-radius: 6px;
+    }
+
+    .dark-bar {
+      padding: 12px;
+      background: #1b1f2a;
+      border-radius: 6px;
+    }
+
+    .dark-bar a,
+    .dark-bar button {
+      color: #ffffff;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #555555;
+    }
+
+    .bg-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .bg-prev {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15 5l-7 7 7 7' fill='none' stroke='%230b4f8a' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .bg-next {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5l7 7-7 7' fill='none' stroke='%230b4f8a' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .bg-folder {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 6h7l2 2h9v11H3z' fill='%230b4f8a'/%3E%3C/svg%3E");
+    }
+
+    .bg-chart {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h4v8H4zM10 7h4v13h-4zM16 3h4v17h-4z' fill='%230b4f8a'/%3E%3C/svg%3E");
+    }
+
+    .bg-inbox {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 4h18v16H3zM3 13h5l2 3h4l2-3h5' fill='none' stroke='%230b4f8a' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .collapsed-label {
+      display: none;
+    }
+
+    .rail-label {
+      visibility: hidden;
+    }
+
+    .tab-bar ul {
+      justify-content: space-around;
+    }
+
+    .tab-bar a {
+      flex-direction: column;
+      font-size: 13px;
+    }
+
+    .sub-toggle svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .crumbs li + li::before {
+      content: "/";
+      margin-right: 8px;
+      color: #555555;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Navigation Discernible Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="navigation-discernible-failure-1">
+        <div class="itemContent">
+          <h2>Icon-only links in the main navigation</h2>
+          <nav aria-label="Main">
+            <ul>
+              <li><a href="#home"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg></a></li>
+              <li><a href="#search"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2"/></svg></a></li>
+              <li><a href="#account"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7z" fill="currentColor"/></svg></a></li>
+              <li><a href="#basket"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h3l2 11h11l2-8H7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="19" r="2" fill="currentColor"/><circle cx="18" cy="19" r="2" fill="currentColor"/></svg></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-2">
+        <div class="itemContent">
+          <h2>Brand logo links with empty alt text</h2>
+          <nav aria-label="Our brands" class="bar">
+            <ul>
+              <li><a href="#brand-outdoor"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="48" viewBox="0 0 96 48"%3E%3Crect width="96" height="48" rx="8" fill="%231a7f37"/%3E%3Ccircle cx="24" cy="24" r="12" fill="%23ffffff"/%3E%3Crect x="44" y="18" width="40" height="12" rx="6" fill="%23ffffff"/%3E%3C/svg%3E" alt="" width="96" height="48"></a></li>
+              <li><a href="#brand-kids"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="48" viewBox="0 0 96 48"%3E%3Crect width="96" height="48" rx="8" fill="%238a3ffc"/%3E%3Ccircle cx="24" cy="24" r="12" fill="%23ffffff"/%3E%3Crect x="44" y="18" width="40" height="12" rx="6" fill="%23ffffff"/%3E%3C/svg%3E" alt="" width="96" height="48"></a></li>
+              <li><a href="#brand-home"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="96" height="48" viewBox="0 0 96 48"%3E%3Crect width="96" height="48" rx="8" fill="%23b54708"/%3E%3Ccircle cx="24" cy="24" r="12" fill="%23ffffff"/%3E%3Crect x="44" y="18" width="40" height="12" rx="6" fill="%23ffffff"/%3E%3C/svg%3E" alt="" width="96" height="48"></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-3">
+        <div class="itemContent">
+          <h2>Category thumbnails without alt attributes</h2>
+          <nav aria-label="Shop by category">
+            <ul>
+              <li><a href="#category-shoes"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="8" fill="%230b4f8a"/%3E%3Ccircle cx="32" cy="26" r="12" fill="%23ffffff"/%3E%3Crect x="14" y="44" width="36" height="8" rx="4" fill="%23ffffff"/%3E%3C/svg%3E" width="64" height="64"></a></li>
+              <li><a href="#category-bags"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="8" fill="%23a4262c"/%3E%3Ccircle cx="32" cy="26" r="12" fill="%23ffffff"/%3E%3Crect x="14" y="44" width="36" height="8" rx="4" fill="%23ffffff"/%3E%3C/svg%3E" width="64" height="64"></a></li>
+              <li><a href="#category-watches"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="8" fill="%233b3b3b"/%3E%3Ccircle cx="32" cy="26" r="12" fill="%23ffffff"/%3E%3Crect x="14" y="44" width="36" height="8" rx="4" fill="%23ffffff"/%3E%3C/svg%3E" width="64" height="64"></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-4">
+        <div class="itemContent">
+          <h2>Icon links with empty aria-label</h2>
+          <nav aria-label="Account shortcuts" class="bar">
+            <ul>
+              <li><a href="#notifications" aria-label=""><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 17v-6a6 6 0 0 1 12 0v6l2 2H4z" fill="currentColor"/><circle cx="12" cy="21" r="2" fill="currentColor"/></svg></a></li>
+              <li><a href="#messages" aria-label=""><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
+              <li><a href="#settings" aria-label=""><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-5">
+        <div class="itemContent">
+          <h2>Links labelled by missing elements</h2>
+          <nav aria-label="Dashboard">
+            <ul>
+              <li><a href="#reports" aria-labelledby="nav-reports-label"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="12" width="4" height="8" fill="currentColor"/><rect x="10" y="7" width="4" height="13" fill="currentColor"/><rect x="16" y="3" width="4" height="17" fill="currentColor"/></svg></a></li>
+              <li><a href="#projects" aria-labelledby="nav-projects-label"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h7l2 2h9v11H3z" fill="currentColor"/></svg></a></li>
+              <li><a href="#inbox" aria-labelledby="nav-inbox-label"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v16H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 13h5l2 3h4l2-3h5" fill="none" stroke="currentColor" stroke-width="2"/></svg></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-6">
+        <div class="itemContent">
+          <h2>Collapsed sidebar with labels hidden by display none</h2>
+          <nav aria-label="Workspace">
+            <ul>
+              <li><a href="#overview"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg><span class="collapsed-label">Overview</span></a></li>
+              <li><a href="#files"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h7l2 2h9v11H3z" fill="currentColor"/></svg><span class="collapsed-label">Files</span></a></li>
+              <li><a href="#analytics"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="4" y="12" width="4" height="8" fill="currentColor"/><rect x="10" y="7" width="4" height="13" fill="currentColor"/><rect x="16" y="3" width="4" height="17" fill="currentColor"/></svg><span class="collapsed-label">Analytics</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-7">
+        <div class="itemContent">
+          <h2>Hamburger menu button without a name</h2>
+          <nav aria-label="Mobile">
+            <button type="button" aria-expanded="false" aria-controls="mobile-menu-7" data-menu-toggle><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="2" fill="currentColor"/><rect x="3" y="11" width="18" height="2" fill="currentColor"/><rect x="3" y="17" width="18" height="2" fill="currentColor"/></svg></button>
+            <ul id="mobile-menu-7" hidden>
+              <li><a href="#mobile-home">Home</a></li>
+              <li><a href="#mobile-about">About</a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-8">
+        <div class="itemContent">
+          <h2>Social media links in the footer</h2>
+          <footer class="dark-bar">
+            <nav aria-label="Social media">
+              <ul>
+                <li><a href="#social-feed"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 18c6 1 12-2 14-9l3-3-3 1c-2-2-6-1-6 3-4 0-6-2-8-4 0 3 1 5 3 6-1 0-2 0-3-1 0 2 2 4 4 4-2 2-4 3-4 3z" fill="currentColor"/></svg></a></li>
+                <li><a href="#social-video"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9v6l5-3z" fill="#ffffff"/></svg></a></li>
+                <li><a href="#social-photos"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="3" width="18" height="18" rx="5" fill="currentColor"/></svg></a></li>
+                <li><a href="#social-community"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" fill="currentColor"/></svg></a></li>
+              </ul>
+            </nav>
+          </footer>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-9">
+        <div class="itemContent">
+          <h2>Icon-only menubar items</h2>
+          <nav aria-label="Editor">
+            <ul role="menubar" aria-label="Editor actions">
+              <li role="none"><a role="menuitem" href="#editor-home" tabindex="0"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg></a></li>
+              <li role="none"><a role="menuitem" href="#editor-favourites" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21 4 13a5 5 0 0 1 8-6 5 5 0 0 1 8 6z" fill="currentColor"/></svg></a></li>
+              <li role="none"><a role="menuitem" href="#editor-settings" tabindex="-1"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="4 2"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-failure-10">
+        <div class="itemContent">
+          <h2>Slide indicator dots</h2>
+          <nav aria-label="Featured stories slides">
+            <ul>
+              <li><a href="#story-1"><span class="dot"></span></a></li>
+              <li><a href="#story-2"><span class="dot"></span></a></li>
+              <li><a href="#story-3"><span class="dot"></span></a></li>
+              <li><a href="#story-4"><span class="dot"></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("[data-menu-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        document.getElementById(button.getAttribute("aria-controls")).hidden = expanded;
+      });
+    });
+
+    document.querySelectorAll('[role="link"][data-href]').forEach((link) => {
+      const go = () => {
+        window.location.hash = link.dataset.href;
+      };
+      link.addEventListener("click", go);
+      link.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          go();
+        }
+      });
+    });
+
+    document.querySelectorAll('[role="menubar"]').forEach((menubar) => {
+      const items = Array.from(menubar.querySelectorAll('[role="menuitem"]'));
+      menubar.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+          return;
+        }
+        event.preventDefault();
+        const index = items.indexOf(document.activeElement);
+        const next = items[(index + (event.key === "ArrowRight" ? 1 : items.length - 1)) % items.length];
+        items.forEach((item) => {
+          item.tabIndex = item === next ? 0 : -1;
+        });
+        next.focus();
+      });
+    });
+  </script>
+</body>
+</html>

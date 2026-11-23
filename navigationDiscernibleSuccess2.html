@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navigation Discernible Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    a {
+      color: #0b4f8a;
+    }
+
+    nav ul,
+    [role="menubar"] {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    nav a,
+    nav button,
+    [role="menuitem"],
+    [role="link"] {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 24px;
+      min-height: 24px;
+      padding: 6px;
+      color: #0b4f8a;
+      background: none;
+      border: 1px solid transparent;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .bar {
+      padding: 12px;
+      background: #f2f4f7;
+      border-radius: 6px;
+    }
+
+    .dark-bar {
+      padding: 12px;
+      background: #1b1f2a;
+      border-radius: 6px;
+    }
+
+    .dark-bar a,
+    .dark-bar button {
+      color: #ffffff;
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      padding: 0;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .dot {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #555555;
+    }
+
+    .bg-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .bg-prev {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M15 5l-7 7 7 7' fill='none' stroke='%230b4f8a' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .bg-next {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M9 5l7 7-7 7' fill='none' stroke='%230b4f8a' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .bg-folder {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 6h7l2 2h9v11H3z' fill='%230b4f8a'/%3E%3C/svg%3E");
+    }
+
+    .bg-chart {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M4 12h4v8H4zM10 7h4v13h-4zM16 3h4v17h-4z' fill='%230b4f8a'/%3E%3C/svg%3E");
+    }
+
+    .bg-inbox {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M3 4h18v16H3zM3 13h5l2 3h4l2-3h5' fill='none' stroke='%230b4f8a' stroke-width='2'/%3E%3C/svg%3E");
+    }
+
+    .collapsed-label {
+      display: none;
+    }
+
+    .rail-label {
+      visibility: hidden;
+    }
+
+    .tab-bar ul {
+      justify-content: space-around;
+    }
+
+    .tab-bar a {
+      flex-direction: column;
+      font-size: 13px;
+    }
+
+    .sub-toggle svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .crumbs li + li::before {
+      content: "/";
+      margin-right: 8px;
+      color: #555555;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Navigation Discernible Success</h1>
+
+    <ul class="list">
+      <li class="list-item" id="navigation-discernible-success-11">
+        <div class="itemContent">
+          <h2>Collapsed navigation rail with clipped labels</h2>
+          <nav aria-label="Mail folders">
+            <ul>
+              <li><a href="#mail-inbox"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h18v16H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 13h5l2 3h4l2-3h5" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="visually-hidden">Inbox</span></a></li>
+              <li><a href="#mail-starred"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21 4 13a5 5 0 0 1 8-6 5 5 0 0 1 8 6z" fill="currentColor"/></svg><span class="visually-hidden">Starred</span></a></li>
+              <li><a href="#mail-sent"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="visually-hidden">Sent</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-12">
+        <div class="itemContent">
+          <h2>Header icon buttons with aria-label</h2>
+          <nav aria-label="Store tools" class="bar">
+            <ul>
+              <li><button type="button" aria-label="Search"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2"/></svg></button></li>
+              <li><button type="button" aria-label="Wish list"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21 4 13a5 5 0 0 1 8-6 5 5 0 0 1 8 6z" fill="currentColor"/></svg></button></li>
+              <li><button type="button" aria-label="Shopping cart"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4h3l2 11h11l2-8H7" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="9" cy="19" r="2" fill="currentColor"/><circle cx="18" cy="19" r="2" fill="currentColor"/></svg></button></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-13">
+        <div class="itemContent">
+          <h2>Bottom tab bar with visible labels</h2>
+          <nav aria-label="App tabs" class="bar tab-bar">
+            <ul>
+              <li><a href="#tab-home"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg><span>Home</span></a></li>
+              <li><a href="#tab-search"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10" cy="10" r="6" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15 15l6 6" stroke="currentColor" stroke-width="2"/></svg><span>Search</span></a></li>
+              <li><a href="#tab-profile"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7z" fill="currentColor"/></svg><span>Profile</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-14">
+        <div class="itemContent">
+          <h2>Submenu toggle buttons with descriptive names</h2>
+          <nav aria-label="Products">
+            <ul>
+              <li>
+                <a href="#laptops">Laptops</a>
+                <button type="button" class="sub-toggle" aria-expanded="false" aria-controls="laptops-submenu-14" data-menu-toggle><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span class="visually-hidden">Laptops submenu</span></button>
+                <ul id="laptops-submenu-14" hidden>
+                  <li><a href="#laptops-13">13 inch</a></li>
+                  <li><a href="#laptops-15">15 inch</a></li>
+                </ul>
+              </li>
+              <li>
+                <a href="#monitors">Monitors</a>
+                <button type="button" class="sub-toggle" aria-expanded="false" aria-controls="monitors-submenu-14" aria-label="Monitors submenu" data-menu-toggle><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+                <ul id="monitors-submenu-14" hidden>
+                  <li><a href="#monitors-27">27 inch</a></li>
+                  <li><a href="#monitors-32">32 inch</a></li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-15">
+        <div class="itemContent">
+          <h2>Slide indicator dots with labels</h2>
+          <nav aria-label="Featured stories slides">
+            <ul>
+              <li><a href="#story-1" aria-label="Slide 1 of 4" aria-current="true"><span class="dot"></span></a></li>
+              <li><a href="#story-2" aria-label="Slide 2 of 4"><span class="dot"></span></a></li>
+              <li><a href="#story-3" aria-label="Slide 3 of 4"><span class="dot"></span></a></li>
+              <li><a href="#story-4" aria-label="Slide 4 of 4"><span class="dot"></span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-16">
+        <div class="itemContent">
+          <h2>Category thumbnails with alt text</h2>
+          <nav aria-label="Shop by category">
+            <ul>
+              <li><a href="#category-shoes"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="8" fill="%230b4f8a"/%3E%3Ccircle cx="32" cy="26" r="12" fill="%23ffffff"/%3E%3Crect x="14" y="44" width="36" height="8" rx="4" fill="%23ffffff"/%3E%3C/svg%3E" alt="Shoes" width="64" height="64"></a></li>
+              <li><a href="#category-bags"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="8" fill="%23a4262c"/%3E%3Ccircle cx="32" cy="26" r="12" fill="%23ffffff"/%3E%3Crect x="14" y="44" width="36" height="8" rx="4" fill="%23ffffff"/%3E%3C/svg%3E" alt="Bags" width="64" height="64"></a></li>
+              <li><a href="#category-watches"><img src="data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="8" fill="%233b3b3b"/%3E%3Ccircle cx="32" cy="26" r="12" fill="%23ffffff"/%3E%3Crect x="14" y="44" width="36" height="8" rx="4" fill="%23ffffff"/%3E%3C/svg%3E" alt="Watches" width="64" height="64"></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-17">
+        <div class="itemContent">
+          <h2>Breadcrumb with a labelled home icon</h2>
+          <nav aria-label="Breadcrumb">
+            <ul class="crumbs">
+              <li><a href="#crumb-home" aria-label="Home"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11 12 3l9 8v10h-6v-6H9v6H3z" fill="currentColor"/></svg></a></li>
+              <li><a href="#crumb-garden">Garden</a></li>
+              <li><a href="#crumb-planters" aria-current="page">Planters</a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-18">
+        <div class="itemContent">
+          <h2>Language switcher with language names</h2>
+          <nav aria-label="Language">
+            <ul>
+              <li><a href="#lang-en" hreflang="en" lang="en" aria-current="true">English</a></li>
+              <li><a href="#lang-de" hreflang="de" lang="de">Deutsch</a></li>
+              <li><a href="#lang-fr" hreflang="fr" lang="fr">Fran&ccedil;ais</a></li>
+              <li><a href="#lang-es" hreflang="es" lang="es">Espa&ntilde;ol</a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-19">
+        <div class="itemContent">
+          <h2>ARIA links in a navigation region with names</h2>
+          <div role="navigation" aria-label="Results pages" class="bar">
+            <span role="link" tabindex="0" data-href="#results-previous" aria-label="Previous results"><i class="bg-icon bg-prev"></i></span>
+            <span role="link" tabindex="0" data-href="#results-next" aria-label="Next results"><i class="bg-icon bg-next"></i></span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="navigation-discernible-success-20">
+        <div class="itemContent">
+          <h2>Step navigation labelled by step number and title</h2>
+          <nav aria-label="Checkout steps">
+            <ul>
+              <li><a href="#step-delivery" aria-labelledby="step-delivery-number-20 step-delivery-title-20"><span id="step-delivery-number-20">Step 1:</span> <span id="step-delivery-title-20">Delivery</span></a></li>
+              <li><a href="#step-payment" aria-labelledby="step-payment-number-20 step-payment-title-20" aria-current="step"><span id="step-payment-number-20">Step 2:</span> <span id="step-payment-title-20">Payment</span></a></li>
+              <li><a href="#step-review" aria-labelledby="step-review-number-20 step-review-title-20"><span id="step-review-number-20">Step 3:</span> <span id="step-review-title-20">Review</span></a></li>
+            </ul>
+          </nav>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("[data-menu-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!expanded));
+        document.getElementById(button.getAttribute("aria-controls")).hidden = expanded;
+      });
+    });
+
+    document.querySelectorAll('[role="link"][data-href]').forEach((link) => {
+      const go = () => {
+        window.location.hash = link.dataset.href;
+      };
+      link.addEventListener("click", go);
+      link.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          go();
+        }
+      });
+    });
+
+    document.querySelectorAll('[role="menubar"]').forEach((menubar) => {
+      const items = Array.from(menubar.querySelectorAll('[role="menuitem"]'));
+      menubar.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") {
+          return;
+        }
+        event.preventDefault();
+        const index = items.indexOf(document.activeElement);
+        const next = items[(index + (event.key === "ArrowRight" ? 1 : items.length - 1)) % items.length];
+        items.forEach((item) => {
+          item.tabIndex = item === next ? 0 : -1;
+        });
+        next.focus();
+      });
+    });
+  </script>
+</body>
+</html>

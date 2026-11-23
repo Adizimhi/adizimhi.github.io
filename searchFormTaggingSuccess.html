@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Form Tagging Success</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .search-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    input[type="search"],
+    input[type="text"],
+    select {
+      padding: 8px 10px;
+      font: inherit;
+      border: 1px solid #777777;
+      border-radius: 4px;
+      min-width: 220px;
+    }
+
+    button {
+      padding: 8px 14px;
+      font: inherit;
+      border-radius: 4px;
+      border: 1px solid #1a5fb4;
+      background: #1a5fb4;
+      color: #ffffff;
+      cursor: pointer;
+    }
+
+    .site-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 12px 16px;
+      background: #f2f2f2;
+      border-radius: 6px;
+    }
+
+    .brand {
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .icon-search {
+      width: 40px;
+      padding: 8px 0;
+    }
+
+    .suggestions {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      border: 1px solid #777777;
+      width: 260px;
+    }
+
+    .suggestions li {
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    .suggestions li:hover {
+      background: #e8f0fb;
+    }
+
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding: 8px 12px;
+      background: #f7f7f7;
+      border: 1px solid #dddddd;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 560px;
+    }
+
+    th,
+    td {
+      border: 1px solid #cccccc;
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    .main-nav {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .two-searches {
+      display: grid;
+      gap: 16px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Search Form Tagging Success</h1>
+
+    <ul class="list">
+      <li class="list-item" id="search-form-tagging-success-1">
+        <div class="itemContent">
+          <h2>Site header search form with role search</h2>
+          <header class="site-header">
+            <span class="brand">Bookhaven</span>
+            <form action="#results" role="search" aria-label="Books" class="search-row">
+              <label for="sft-s1-q">Search books</label>
+              <input id="sft-s1-q" type="search" name="q" placeholder="Title, author or ISBN">
+              <button type="submit">Search</button>
+            </form>
+          </header>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-2">
+        <div class="itemContent">
+          <h2>Search element wrapping a form</h2>
+          <search>
+            <form action="#results" class="search-row">
+              <label for="sft-s2-q">Search recipes</label>
+              <input id="sft-s2-q" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+          </search>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-3">
+        <div class="itemContent">
+          <h2>Search div with labelled field and magnifier button</h2>
+          <div role="search" aria-label="Site" class="search-row">
+            <input id="sft-s3-q" type="search" aria-label="Search the site" placeholder="Search…">
+            <button type="button" class="icon-search" aria-label="Submit search">🔍</button>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-4">
+        <div class="itemContent">
+          <h2>Store search with category filter inside role search</h2>
+          <form action="#results" role="search" aria-label="Products" class="search-row">
+            <label for="sft-s4-category">Department</label>
+            <select id="sft-s4-category" name="category">
+              <option>All departments</option>
+              <option>Electronics</option>
+              <option>Garden</option>
+              <option>Toys</option>
+            </select>
+            <label for="sft-s4-q">Search products</label>
+            <input id="sft-s4-q" type="search" name="q">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-5">
+        <div class="itemContent">
+          <h2>Autocomplete search combobox inside role search</h2>
+          <form action="#results" role="search" aria-label="Destinations">
+            <label for="sft-s5-q">Search destinations</label>
+            <div class="search-row">
+              <input id="sft-s5-q" type="search" name="q" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="sft-s5-list" autocomplete="off">
+              <button type="submit">Search</button>
+            </div>
+            <ul class="suggestions" id="sft-s5-list" role="listbox" aria-label="Suggested destinations" hidden>
+              <li role="option" id="sft-s5-opt-1">Paris, France</li>
+              <li role="option" id="sft-s5-opt-2">Porto, Portugal</li>
+              <li role="option" id="sft-s5-opt-3">Prague, Czech Republic</li>
+            </ul>
+          </form>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-6">
+        <div class="itemContent">
+          <h2>Two search landmarks with distinct labels</h2>
+          <div class="two-searches">
+            <form action="#results" role="search" aria-label="Whole site" class="search-row">
+              <label for="sft-s6-site">Search the whole site</label>
+              <input id="sft-s6-site" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+            <form action="#forum-results" role="search" aria-label="Forum posts" class="search-row">
+              <label for="sft-s6-forum">Search forum posts</label>
+              <input id="sft-s6-forum" type="search" name="q">
+              <button type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-7">
+        <div class="itemContent">
+          <h2>Search form with role search nested in navigation</h2>
+          <nav aria-label="Main" class="main-nav">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#support">Support</a>
+            <form action="#results" role="search" class="search-row">
+              <label for="sft-s7-q">Search</label>
+              <input id="sft-s7-q" type="search" name="q">
+              <button type="submit">Go</button>
+            </form>
+          </nav>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-8">
+        <div class="itemContent">
+          <h2>Table toolbar filter search with role search</h2>
+          <div class="toolbar">
+            <strong id="sft-s8-title">Employees</strong>
+            <div role="search" aria-label="Employees" class="search-row">
+              <label for="sft-s8-q">Search employees</label>
+              <input id="sft-s8-q" type="search" placeholder="Name or department" aria-controls="sft-s8-rows">
+            </div>
+          </div>
+          <table aria-labelledby="sft-s8-title">
+            <thead>
+              <tr><th>Name</th><th>Department</th></tr>
+            </thead>
+            <tbody id="sft-s8-rows">
+              <tr><td>Ana Ruiz</td><td>Finance</td></tr>
+              <tr><td>Ben Okafor</td><td>Engineering</td></tr>
+              <tr><td>Chloe Martin</td><td>Marketing</td></tr>
+              <tr><td>Daniel Kim</td><td>Engineering</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-9">
+        <div class="itemContent">
+          <h2>Search element labelled by a visible heading</h2>
+          <search aria-labelledby="sft-s9-heading">
+            <h3 id="sft-s9-heading">Find a store</h3>
+            <form action="#stores" class="search-row">
+              <label for="sft-s9-q">City or postcode</label>
+              <input id="sft-s9-q" type="search" name="q">
+              <button type="submit">Find stores</button>
+            </form>
+          </search>
+        </div>
+      </li>
+
+      <li class="list-item" id="search-form-tagging-success-10">
+        <div class="itemContent">
+          <h2>Help article search form with role search</h2>
+          <form action="#results" role="search" aria-label="Help articles" class="search-row">
+            <label for="sft-s10-q">Search help articles</label>
+            <input id="sft-s10-q" type="search" name="q">
+            <button type="submit">Search</button>
+          </form>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    document.querySelectorAll("form").forEach((form) => {
+      form.addEventListener("submit", (event) => event.preventDefault());
+    });
+
+    const destinationInput = document.getElementById("sft-s5-q");
+    const destinationList = document.getElementById("sft-s5-list");
+    destinationInput.addEventListener("input", () => {
+      const term = destinationInput.value.trim().toLowerCase();
+      let visible = 0;
+      destinationList.querySelectorAll("li").forEach((option) => {
+        const match = term && option.textContent.toLowerCase().includes(term);
+        option.hidden = !match;
+        if (match) visible += 1;
+      });
+      destinationList.hidden = visible === 0;
+      destinationInput.setAttribute("aria-expanded", String(visible > 0));
+    });
+    destinationList.querySelectorAll("li").forEach((option) => {
+      option.addEventListener("click", () => {
+        destinationInput.value = option.textContent;
+        destinationList.hidden = true;
+        destinationInput.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("sft-s8-q").addEventListener("input", (event) => {
+      const term = event.target.value.trim().toLowerCase();
+      document.querySelectorAll("#sft-s8-rows tr").forEach((row) => {
+        row.hidden = term !== "" && !row.textContent.toLowerCase().includes(term);
+      });
+    });
+  </script>
+</body>
+</html>

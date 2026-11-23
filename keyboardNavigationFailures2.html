@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Keyboard Navigation Failures 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status {
+      color: #333333;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .stars {
+      display: flex;
+      gap: 4px;
+      font-size: 28px;
+      color: #bbbbbb;
+      cursor: pointer;
+    }
+
+    .stars span.on {
+      color: #e5a50a;
+    }
+
+    .switch {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .switch .track {
+      width: 44px;
+      height: 24px;
+      background: #999999;
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .switch .knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      background: #ffffff;
+      border-radius: 50%;
+      transition: left 0.2s;
+    }
+
+    .switch.on .track {
+      background: #2ec27e;
+    }
+
+    .switch.on .knob {
+      left: 23px;
+    }
+
+    .dropdown {
+      position: relative;
+      width: 220px;
+    }
+
+    .dropdown-trigger {
+      border: 1px solid #777777;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      background: #ffffff;
+    }
+
+    .dropdown-options {
+      border: 1px solid #777777;
+      border-top: none;
+      background: #ffffff;
+    }
+
+    .dropdown-options div {
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .dropdown-options div:hover {
+      background: #e8f0fb;
+    }
+
+    .modal {
+      border: 1px solid #555555;
+      border-radius: 8px;
+      padding: 16px;
+      width: 300px;
+      position: relative;
+      background: #fafafa;
+    }
+
+    .modal .close {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    th,
+    td {
+      border: 1px solid #cccccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    tr.clickable-row {
+      cursor: pointer;
+    }
+
+    tr.clickable-row:hover {
+      background: #e8f0fb;
+    }
+
+    .file-row {
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      padding: 10px 14px;
+      width: fit-content;
+      user-select: none;
+    }
+
+    .context-menu {
+      border: 1px solid #777777;
+      background: #ffffff;
+      width: 160px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .context-menu div {
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .card {
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      padding: 16px;
+      width: 280px;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .editable {
+      border: 1px dashed #999999;
+      padding: 6px 10px;
+      width: fit-content;
+      cursor: text;
+    }
+
+    .carousel {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .carousel .slide {
+      width: 260px;
+      height: 120px;
+      border-radius: 6px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .carousel .arrow {
+      font-size: 28px;
+      cursor: pointer;
+      user-select: none;
+      padding: 4px 10px;
+      background: #eeeeee;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Keyboard Navigation Failures 2</h1>
+
+    <ul class="list">
+      <li class="list-item" id="keyboard-navigation-failure-11">
+        <div class="itemContent">
+          <h2>Star rating made of clickable spans</h2>
+          <p>Rate this recipe:</p>
+          <div class="stars" id="kn-f11-stars">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+          <p class="status" id="kn-f11-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-12">
+        <div class="itemContent">
+          <h2>Dark mode toggle switch driven by mousedown</h2>
+          <div class="switch" id="kn-f12-switch">
+            <div class="track"><div class="knob"></div></div>
+            <span>Dark mode</span>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-13">
+        <div class="itemContent">
+          <h2>Custom country dropdown built from divs</h2>
+          <div class="dropdown">
+            <div class="dropdown-trigger" id="kn-f13-trigger">Select a country ▾</div>
+            <div class="dropdown-options hidden" id="kn-f13-options">
+              <div>Canada</div>
+              <div>Germany</div>
+              <div>Japan</div>
+              <div>Mexico</div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-14">
+        <div class="itemContent">
+          <h2>Cookie notice closed by a clickable × span</h2>
+          <div class="modal" id="kn-f14-modal">
+            <span class="close" id="kn-f14-close">×</span>
+            <p>We use cookies to improve your experience on our site.</p>
+          </div>
+          <p class="status" id="kn-f14-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-15">
+        <div class="itemContent">
+          <h2>Order table where rows open details on click</h2>
+          <table>
+            <thead>
+              <tr><th>Order</th><th>Date</th><th>Total</th></tr>
+            </thead>
+            <tbody>
+              <tr class="clickable-row" data-order="#10421"><td>#10421</td><td>12 Oct 2026</td><td>$58.20</td></tr>
+              <tr class="clickable-row" data-order="#10398"><td>#10398</td><td>2 Oct 2026</td><td>$112.00</td></tr>
+              <tr class="clickable-row" data-order="#10355"><td>#10355</td><td>19 Sep 2026</td><td>$23.75</td></tr>
+            </tbody>
+          </table>
+          <p class="status" id="kn-f15-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-16">
+        <div class="itemContent">
+          <h2>File actions available only from a right-click menu</h2>
+          <div class="file-row" id="kn-f16-file">📄 budget-2027.xlsx</div>
+          <div class="context-menu hidden" id="kn-f16-menu">
+            <div data-action="Renamed">Rename</div>
+            <div data-action="Duplicated">Duplicate</div>
+            <div data-action="Deleted">Delete</div>
+          </div>
+          <p class="status" id="kn-f16-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-17">
+        <div class="itemContent">
+          <h2>Focusable role link card that only responds to clicks</h2>
+          <div class="card" role="link" tabindex="0" id="kn-f17-card">
+            <strong>Weekend in Lisbon</strong>
+            <p>Three-day itinerary with food tours and day trips.</p>
+          </div>
+          <p class="status" id="kn-f17-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-18">
+        <div class="itemContent">
+          <h2>Project name editable only by double-clicking</h2>
+          <div class="editable" id="kn-f18-name">Website redesign</div>
+          <input class="hidden" id="kn-f18-input" type="text" aria-label="Project name">
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-19">
+        <div class="itemContent">
+          <h2>Forgot password link removed from tab order</h2>
+          <label for="kn-f19-user">Username</label>
+          <input id="kn-f19-user" type="text" autocomplete="username">
+          <label for="kn-f19-pass">Password</label>
+          <input id="kn-f19-pass" type="password" autocomplete="current-password">
+          <a href="#forgot-password" tabindex="-1" id="kn-f19-link">Forgot password?</a>
+          <p class="status" id="kn-f19-status"></p>
+        </div>
+      </li>
+
+      <li class="list-item" id="keyboard-navigation-failure-20">
+        <div class="itemContent">
+          <h2>Carousel with clickable div arrows</h2>
+          <div class="carousel">
+            <div class="arrow" id="kn-f20-prev">‹</div>
+            <div class="slide" id="kn-f20-slide" style="background: #1a5fb4;">New arrivals</div>
+            <div class="arrow" id="kn-f20-next">›</div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    const stars = document.querySelectorAll("#kn-f11-stars span");
+    stars.forEach((star) => {
+      star.addEventListener("click", () => {
+        const value = Number(star.dataset.value);
+        stars.forEach((other) => other.classList.toggle("on", Number(other.dataset.value) <= value));
+        document.getElementById("kn-f11-status").textContent = `You rated this recipe ${value} out of 5.`;
+      });
+    });
+
+    document.getElementById("kn-f12-switch").addEventListener("mousedown", (event) => {
+      event.currentTarget.classList.toggle("on");
+    });
+
+    document.getElementById("kn-f13-trigger").addEventListener("click", () => {
+      document.getElementById("kn-f13-options").classList.toggle("hidden");
+    });
+    document.querySelectorAll("#kn-f13-options div").forEach((option) => {
+      option.addEventListener("click", () => {
+        document.getElementById("kn-f13-trigger").textContent = `${option.textContent} ▾`;
+        document.getElementById("kn-f13-options").classList.add("hidden");
+      });
+    });
+
+    document.getElementById("kn-f14-close").addEventListener("click", () => {
+      document.getElementById("kn-f14-modal").classList.add("hidden");
+      document.getElementById("kn-f14-status").textContent = "Cookie notice dismissed.";
+    });
+
+    document.querySelectorAll(".clickable-row").forEach((row) => {
+      row.addEventListener("click", () => {
+        document.getElementById("kn-f15-status").textContent = `Showing details for order ${row.dataset.order}.`;
+      });
+    });
+
+    const fileRow = document.getElementById("kn-f16-file");
+    const contextMenu = document.getElementById("kn-f16-menu");
+    fileRow.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+      contextMenu.classList.remove("hidden");
+    });
+    contextMenu.querySelectorAll("div").forEach((item) => {
+      item.addEventListener("click", () => {
+        document.getElementById("kn-f16-status").textContent = `${item.dataset.action} budget-2027.xlsx.`;
+        contextMenu.classList.add("hidden");
+      });
+    });
+
+    document.getElementById("kn-f17-card").addEventListener("click", () => {
+      document.getElementById("kn-f17-status").textContent = "Opening: Weekend in Lisbon itinerary…";
+      window.location.hash = "lisbon-itinerary";
+    });
+
+    const projectName = document.getElementById("kn-f18-name");
+    const projectInput = document.getElementById("kn-f18-input");
+    projectName.addEventListener("dblclick", () => {
+      projectInput.value = projectName.textContent;
+      projectName.classList.add("hidden");
+      projectInput.classList.remove("hidden");
+      projectInput.focus();
+    });
+    projectInput.addEventListener("blur", () => {
+      projectName.textContent = projectInput.value || "Untitled project";
+      projectInput.classList.add("hidden");
+      projectName.classList.remove("hidden");
+    });
+
+    document.getElementById("kn-f19-link").addEventListener("click", (event) => {
+      event.preventDefault();
+      document.getElementById("kn-f19-status").textContent = "A password reset link has been sent to your email.";
+    });
+
+    const slides = [
+      { text: "New arrivals", color: "#1a5fb4" },
+      { text: "Winter sale", color: "#c01c28" },
+      { text: "Free shipping", color: "#26a269" }
+    ];
+    let slideIndex = 0;
+    function showSlide() {
+      const slide = document.getElementById("kn-f20-slide");
+      slide.textContent = slides[slideIndex].text;
+      slide.style.background = slides[slideIndex].color;
+    }
+    document.getElementById("kn-f20-prev").addEventListener("click", () => {
+      slideIndex = (slideIndex + slides.length - 1) % slides.length;
+      showSlide();
+    });
+    document.getElementById("kn-f20-next").addEventListener("click", () => {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carousel Dragging Movements Failures</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 24px;
+    }
+
+    .list {
+      display: grid;
+      gap: 24px;
+      padding: 0;
+      list-style: none;
+    }
+
+    .list-item {
+      padding: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+    }
+
+    .itemContent {
+      display: grid;
+      gap: 12px;
+    }
+
+    .carousel {
+      position: relative;
+      max-width: 640px;
+    }
+
+    .carousel-viewport {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    [data-draggable] .carousel-viewport {
+      cursor: grab;
+      touch-action: pan-y;
+    }
+
+    [data-draggable][data-orientation="vertical"] .carousel-viewport {
+      touch-action: pan-x;
+    }
+
+    [data-draggable] .carousel-viewport.is-dragging {
+      cursor: grabbing;
+    }
+
+    .carousel-track {
+      position: relative;
+      display: flex;
+      gap: 16px;
+      will-change: transform;
+    }
+
+    [data-orientation="vertical"] .carousel-track {
+      flex-direction: column;
+    }
+
+    .carousel-slide {
+      flex: 0 0 100%;
+      box-sizing: border-box;
+    }
+
+    .slide-art {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 220px;
+      padding: 16px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      color: #ffffff;
+      text-align: center;
+      font-size: 18px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+    }
+
+    .slide-art .emoji {
+      font-size: 48px;
+      text-shadow: none;
+    }
+
+    .slide-art p {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .g1 { background: linear-gradient(135deg, #ff9a9e, #c0392b); }
+    .g2 { background: linear-gradient(135deg, #6a11cb, #2575fc); }
+    .g3 { background: linear-gradient(135deg, #11998e, #0b6e4f); }
+    .g4 { background: linear-gradient(135deg, #f7971e, #b35c00); }
+    .g5 { background: linear-gradient(135deg, #485563, #29323c); }
+    .g6 { background: linear-gradient(135deg, #c471f5, #7b2ff7); }
+
+    .card {
+      height: 100%;
+      padding: 16px;
+      box-sizing: border-box;
+      border: 1px solid #cccccc;
+      border-radius: 8px;
+      background: #ffffff;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 14px;
+      color: #444444;
+    }
+
+    .card .thumb {
+      height: 90px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+    }
+
+    .quote {
+      margin: 0;
+      padding: 24px;
+      border-radius: 8px;
+      background: #f3f4f8;
+      font-size: 17px;
+      line-height: 1.5;
+    }
+
+    .quote footer {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #555555;
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .carousel-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      height: 44px;
+      padding: 0 12px;
+      border: 1px solid #666666;
+      border-radius: 22px;
+      background: #ffffff;
+      color: #222222;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .carousel-btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    .overlay-btn {
+      position: absolute;
+      top: 50%;
+      z-index: 2;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .overlay-btn.prev { left: 8px; }
+    .overlay-btn.next { right: 8px; }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      margin-top: 8px;
+    }
+
+    .dots [data-goto] {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    .dots [data-goto]::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #aaaaaa;
+    }
+
+    .dots [data-goto][aria-current="true"]::before,
+    .dots [data-goto][aria-selected="true"]::before {
+      background: #222222;
+    }
+
+    .indicators {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .indicators span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #bbbbbb;
+    }
+
+    .indicators span.is-active {
+      background: #222222;
+    }
+
+    .counter {
+      font-size: 14px;
+      color: #444444;
+    }
+
+    .hint {
+      font-size: 13px;
+      color: #666666;
+    }
+
+    .multi-3 .carousel-slide { flex: 0 0 calc((100% - 32px) / 3); }
+    .multi-2 .carousel-slide { flex: 0 0 calc((100% - 16px) / 2); }
+    .auto-width .carousel-slide { flex: 0 0 auto; }
+    .peek .carousel-slide { flex: 0 0 80%; }
+
+    .vertical .carousel-viewport { height: 120px; }
+    .vertical .carousel-slide { flex: 0 0 120px; }
+    .vertical .row-slide {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 120px;
+      padding: 16px;
+      box-sizing: border-box;
+      border-radius: 8px;
+      background: #eef3fb;
+    }
+    .vertical .row-slide .emoji { font-size: 40px; }
+    .vertical .row-slide p { margin: 4px 0 0; font-size: 14px; color: #444444; }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: #f0f0f0;
+      white-space: nowrap;
+      font-size: 15px;
+    }
+
+    .logo-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 80px;
+      padding: 0 24px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      color: #444444;
+      white-space: nowrap;
+    }
+
+    .plan {
+      padding: 20px;
+      border: 2px solid #dddddd;
+      border-radius: 10px;
+      text-align: center;
+    }
+    .plan .price { font-size: 28px; font-weight: bold; margin: 8px 0; }
+    .plan ul { padding: 0; margin: 0; list-style: none; font-size: 14px; color: #444444; }
+
+    .story .carousel-viewport { border-radius: 14px; }
+    .story .slide-art { height: 300px; }
+    .story-progress {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      right: 8px;
+      z-index: 2;
+      display: flex;
+      gap: 4px;
+    }
+    .story-progress span,
+    .story-progress [data-goto] {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+    .story-progress span.is-active { background: #ffffff; }
+
+    .coverflow .carousel-slide { flex: 0 0 60%; transition: transform 0.3s ease, opacity 0.3s ease; transform: scale(0.85); opacity: 0.6; }
+    .slide-select { display: block; width: 100%; padding: 0; border: none; background: none; font: inherit; cursor: pointer; }
+    .coverflow .carousel-slide.is-current { transform: scale(1); opacity: 1; }
+
+    .phone-shot {
+      height: 260px;
+      border: 6px solid #222222;
+      border-radius: 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #fafafa;
+      font-size: 15px;
+    }
+    .phone-shot .emoji { font-size: 44px; }
+    .phones .carousel-slide { flex: 0 0 150px; }
+
+    .person {
+      text-align: center;
+      padding: 16px;
+      border: 1px solid #dddddd;
+      border-radius: 8px;
+    }
+    .person .avatar {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 8px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+    }
+    .person p { margin: 4px 0 0; font-size: 14px; color: #555555; }
+
+    .sidebar-carousel { max-width: 260px; }
+    .sidebar-carousel .card .thumb { height: 70px; }
+
+    .video-tile {
+      position: relative;
+      height: 160px;
+      border-radius: 8px;
+      display: flex;
+      align-items: flex-end;
+      padding: 10px;
+      box-sizing: border-box;
+      color: #ffffff;
+      font-size: 14px;
+    }
+    .video-tile::after {
+      content: "\25B6";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 32px;
+      opacity: 0.85;
+    }
+    .video-tile .duration {
+      margin-left: auto;
+      padding: 2px 6px;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    .listing {
+      max-width: 360px;
+      border: 1px solid #cccccc;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .listing .carousel-viewport { border-radius: 0; }
+    .listing .slide-art { height: 200px; border-radius: 0; }
+    .listing .listing-body { padding: 12px 16px; }
+    .listing .listing-body p { margin: 4px 0 0; color: #555555; font-size: 14px; }
+
+    .thumbs {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .thumbs [data-goto] {
+      width: 64px;
+      height: 48px;
+      padding: 0;
+      border: 2px solid transparent;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .thumbs [data-goto][aria-current="true"] { border-color: #222222; }
+    .thumbs span {
+      width: 64px;
+      height: 48px;
+      border-radius: 6px;
+      opacity: 0.6;
+    }
+
+    .tablist {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .tablist [role="tab"] {
+      min-height: 40px;
+      padding: 0 16px;
+      border: 1px solid #888888;
+      border-radius: 20px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    .tablist [role="tab"][aria-selected="true"] {
+      background: #222222;
+      color: #ffffff;
+    }
+
+    .numbered {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .numbered [data-goto] {
+      width: 40px;
+      height: 40px;
+      border: 1px solid #888888;
+      border-radius: 6px;
+      background: #ffffff;
+      cursor: pointer;
+    }
+    .numbered [data-goto][aria-current="true"] {
+      background: #222222;
+      color: #ffffff;
+    }
+
+    .story-zone {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      width: 35%;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    .story-zone.prev { left: 0; }
+    .story-zone.next { right: 0; }
+
+    .playlist {
+      display: grid;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 0;
+      list-style: none;
+    }
+    .playlist [data-goto] {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      min-height: 44px;
+      padding: 4px 8px;
+      border: 1px solid #dddddd;
+      border-radius: 6px;
+      background: #ffffff;
+      text-align: left;
+      cursor: pointer;
+    }
+    .playlist [data-goto][aria-current="true"] { border-color: #222222; font-weight: bold; }
+    .playlist .mini { width: 48px; height: 30px; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Carousel Dragging Movements Failures</h1>
+
+    <ul class="list">
+      <li class="list-item" id="carousel-dragging-movements-failure-1">
+        <div class="itemContent">
+          <h2>Swipe-only hero banner</h2>
+          <section class="carousel" aria-roledescription="carousel" aria-label="Promotions" data-carousel data-draggable>
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <div class="slide-art g1"><span class="emoji" aria-hidden="true">&#x1F525;</span><strong>Winter sale</strong><p>Up to 50% off outerwear</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                  <div class="slide-art g2"><span class="emoji" aria-hidden="true">&#x1F4BB;</span><strong>New laptops</strong><p>Thin, light and fast</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                  <div class="slide-art g3"><span class="emoji" aria-hidden="true">&#x1F33F;</span><strong>Eco range</strong><p>Sustainable home goods</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                  <div class="slide-art g4"><span class="emoji" aria-hidden="true">&#x1F381;</span><strong>Gift guide</strong><p>Ideas for everyone</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-2">
+        <div class="itemContent">
+          <h2>Product gallery with static image counter</h2>
+          <section class="carousel" aria-roledescription="carousel" aria-label="Product images" data-carousel data-draggable style="max-width:420px">
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <div class="slide-art g5"><span class="emoji" aria-hidden="true">&#x1F45F;</span><strong>Trainer &ndash; side view</strong></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                  <div class="slide-art g6"><span class="emoji" aria-hidden="true">&#x1F45F;</span><strong>Trainer &ndash; top view</strong></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                  <div class="slide-art g2"><span class="emoji" aria-hidden="true">&#x1F45F;</span><strong>Trainer &ndash; sole</strong></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                  <div class="slide-art g3"><span class="emoji" aria-hidden="true">&#x1F45F;</span><strong>Trainer &ndash; on foot</strong></div>
+                </div>
+              </div>
+            </div>
+            <span class="counter" data-counter></span>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-3">
+        <div class="itemContent">
+          <h2>Swipe-only testimonials</h2>
+          <section class="carousel" aria-roledescription="carousel" aria-label="Customer testimonials" data-carousel data-draggable>
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                  <blockquote class="quote"><p style="margin:0">&ldquo;The checkout was quick and the delivery arrived a day early.&rdquo;</p><footer>&mdash; Priya, Leeds</footer></blockquote>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                  <blockquote class="quote"><p style="margin:0">&ldquo;Support answered my question within minutes. Brilliant service.&rdquo;</p><footer>&mdash; Marco, Turin</footer></blockquote>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                  <blockquote class="quote"><p style="margin:0">&ldquo;I have recommended this shop to all of my friends.&rdquo;</p><footer>&mdash; Dana, Austin</footer></blockquote>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-4">
+        <div class="itemContent">
+          <h2>Recipe card row showing three cards</h2>
+          <section class="carousel multi-3" aria-roledescription="carousel" aria-label="Popular recipes" data-carousel data-draggable>
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+                  <div class="card"><div class="thumb g1" aria-hidden="true"></div><h3>Spicy noodles</h3><p>20 minutes &middot; Easy</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+                  <div class="card"><div class="thumb g2" aria-hidden="true"></div><h3>Berry smoothie</h3><p>5 minutes &middot; Easy</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+                  <div class="card"><div class="thumb g3" aria-hidden="true"></div><h3>Green curry</h3><p>35 minutes &middot; Medium</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+                  <div class="card"><div class="thumb g4" aria-hidden="true"></div><h3>Pumpkin soup</h3><p>40 minutes &middot; Easy</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+                  <div class="card"><div class="thumb g5" aria-hidden="true"></div><h3>Mushroom risotto</h3><p>45 minutes &middot; Medium</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+                  <div class="card"><div class="thumb g6" aria-hidden="true"></div><h3>Fruit tart</h3><p>60 minutes &middot; Hard</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-5">
+        <div class="itemContent">
+          <h2>Vertical news ticker</h2>
+          <section class="carousel vertical" aria-roledescription="carousel" aria-label="Top stories" data-carousel data-draggable data-orientation="vertical">
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <div class="row-slide"><span class="emoji" aria-hidden="true">&#x1F4F0;</span><div><strong>City council approves new park</strong><p>Construction begins in spring.</p></div></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                  <div class="row-slide"><span class="emoji" aria-hidden="true">&#x26BD;</span><div><strong>Local team reaches the final</strong><p>Kick-off is on Saturday at 3pm.</p></div></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                  <div class="row-slide"><span class="emoji" aria-hidden="true">&#x1F326;&#xFE0F;</span><div><strong>Showers expected this weekend</strong><p>Bring an umbrella if heading out.</p></div></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                  <div class="row-slide"><span class="emoji" aria-hidden="true">&#x1F3B5;</span><div><strong>Summer festival line-up announced</strong><p>Tickets go on sale Friday.</p></div></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-6">
+        <div class="itemContent">
+          <h2>Category pill strip with automatic widths</h2>
+          <section class="carousel auto-width" aria-roledescription="carousel" aria-label="Shop by category" data-carousel data-draggable>
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F455;</span>Tops</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F456;</span>Jeans</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F45F;</span>Shoes</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F45C;</span>Bags</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x231A;</span>Watches</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F9E3;</span>Scarves and gloves</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="7 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F576;&#xFE0F;</span>Sunglasses</span>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="8 of 8">
+                  <span class="category-pill"><span aria-hidden="true">&#x1F452;</span>Hats</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-7">
+        <div class="itemContent">
+          <h2>Onboarding steps with decorative indicators</h2>
+          <section class="carousel" aria-roledescription="carousel" aria-label="Getting started" data-carousel data-draggable>
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                  <div class="slide-art g2"><span class="emoji" aria-hidden="true">&#x1F44B;</span><strong>Welcome</strong><p>Track your habits in one place</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                  <div class="slide-art g3"><span class="emoji" aria-hidden="true">&#x1F4C5;</span><strong>Plan your week</strong><p>Set goals for each day</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                  <div class="slide-art g4"><span class="emoji" aria-hidden="true">&#x1F3C6;</span><strong>Earn streaks</strong><p>Stay motivated with rewards</p></div>
+                </div>
+              </div>
+            </div>
+            <div class="indicators" aria-hidden="true"><span data-indicator></span><span data-indicator></span><span data-indicator></span></div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-8">
+        <div class="itemContent">
+          <h2>Pricing plans</h2>
+          <section class="carousel" aria-roledescription="carousel" aria-label="Pricing plans" data-carousel data-draggable style="max-width:360px">
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 3">
+                  <div class="plan"><strong>Basic</strong><div class="price">$5/mo</div><ul><li>1 user</li><li>10 GB storage</li></ul></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 3">
+                  <div class="plan"><strong>Team</strong><div class="price">$15/mo</div><ul><li>5 users</li><li>100 GB storage</li></ul></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 3">
+                  <div class="plan"><strong>Business</strong><div class="price">$40/mo</div><ul><li>Unlimited users</li><li>1 TB storage</li></ul></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-9">
+        <div class="itemContent">
+          <h2>Story viewer with progress bars</h2>
+          <section class="carousel story" aria-roledescription="carousel" aria-label="Travel story" data-carousel data-draggable style="max-width:300px">
+            <div class="carousel-viewport">
+              <div class="story-progress" aria-hidden="true"><span data-indicator></span><span data-indicator></span><span data-indicator></span><span data-indicator></span></div>
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <div class="slide-art g6"><span class="emoji" aria-hidden="true">&#x1F3D6;&#xFE0F;</span><strong>Day 1: The beach</strong></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                  <div class="slide-art g1"><span class="emoji" aria-hidden="true">&#x1F30B;</span><strong>Day 2: Volcano hike</strong></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                  <div class="slide-art g3"><span class="emoji" aria-hidden="true">&#x1F334;</span><strong>Day 3: Jungle trail</strong></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                  <div class="slide-art g2"><span class="emoji" aria-hidden="true">&#x1F305;</span><strong>Day 4: Sunset cruise</strong></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+
+      <li class="list-item" id="carousel-dragging-movements-failure-10">
+        <div class="itemContent">
+          <h2>Recipe cards with peek of next slide</h2>
+          <section class="carousel peek" aria-roledescription="carousel" aria-label="Weekly meal plan" data-carousel data-draggable>
+            <div class="carousel-viewport">
+              <div class="carousel-track" aria-live="polite">
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 4">
+                  <div class="card"><div class="thumb g1" aria-hidden="true"></div><h3>Spicy noodles</h3><p>20 minutes &middot; Easy</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 4">
+                  <div class="card"><div class="thumb g2" aria-hidden="true"></div><h3>Berry smoothie</h3><p>5 minutes &middot; Easy</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 4">
+                  <div class="card"><div class="thumb g3" aria-hidden="true"></div><h3>Green curry</h3><p>35 minutes &middot; Medium</p></div>
+                </div>
+                <div class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 4">
+                  <div class="card"><div class="thumb g4" aria-hidden="true"></div><h3>Pumpkin soup</h3><p>40 minutes &middot; Easy</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </li>
+    </ul>
+  </main>
+
+  <script>
+    const initCarousel = (root) => {
+      const viewport = root.querySelector(".carousel-viewport");
+      const track = root.querySelector(".carousel-track");
+      const slides = Array.from(track.querySelectorAll(":scope > .carousel-slide"));
+      const vertical = root.dataset.orientation === "vertical";
+      const centered = root.dataset.align === "center";
+      let index = Number(root.dataset.start || 0);
+
+      const viewportSize = () => (vertical ? viewport.clientHeight : viewport.clientWidth);
+      const slideStart = (slide) => (vertical ? slide.offsetTop : slide.offsetLeft);
+      const slideSize = (slide) => (vertical ? slide.offsetHeight : slide.offsetWidth);
+      const contentSize = () => {
+        const last = slides[slides.length - 1];
+        return slideStart(last) + slideSize(last);
+      };
+
+      const positionFor = (i) => {
+        const slide = slides[i];
+        if (centered) {
+          return slideStart(slide) - (viewportSize() - slideSize(slide)) / 2;
+        }
+        return Math.min(slideStart(slide), Math.max(0, contentSize() - viewportSize()));
+      };
+
+      const lastIndex = () => {
+        if (centered) {
+          return slides.length - 1;
+        }
+        const limit = Math.max(0, contentSize() - viewportSize());
+        const found = slides.findIndex((slide) => slideStart(slide) >= limit - 1);
+        return found === -1 ? slides.length - 1 : found;
+      };
+
+      const apply = (offset, animate) => {
+        track.style.transition = animate ? "transform 0.35s ease" : "none";
+        track.style.transform = vertical ? `translateY(${-offset}px)` : `translateX(${-offset}px)`;
+      };
+
+      const update = () => {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("is-current", i === index);
+        });
+        root.querySelectorAll("[data-goto]").forEach((control) => {
+          const active = Number(control.dataset.goto) === index;
+          if (control.getAttribute("role") === "tab") {
+            control.setAttribute("aria-selected", String(active));
+            control.tabIndex = active ? 0 : -1;
+          } else {
+            control.setAttribute("aria-current", String(active));
+          }
+        });
+        root.querySelectorAll("[data-indicator]").forEach((indicator, i) => {
+          indicator.classList.toggle("is-active", i === index);
+        });
+        root.querySelectorAll("[data-counter]").forEach((counter) => {
+          counter.textContent = `${index + 1} of ${slides.length}`;
+        });
+        root.querySelectorAll("[data-prev]").forEach((button) => {
+          if (!root.hasAttribute("data-loop")) {
+            button.disabled = index === 0;
+          }
+        });
+        root.querySelectorAll("[data-next]").forEach((button) => {
+          if (!root.hasAttribute("data-loop")) {
+            button.disabled = index >= lastIndex();
+          }
+        });
+      };
+
+      const goTo = (i, animate = true) => {
+        const last = lastIndex();
+        if (root.hasAttribute("data-loop")) {
+          index = i > last ? 0 : i < 0 ? last : i;
+        } else {
+          index = Math.min(last, Math.max(0, i));
+        }
+        apply(positionFor(index), animate);
+        update();
+      };
+
+      root.querySelectorAll("[data-prev]").forEach((button) => {
+        button.addEventListener("click", () => goTo(index - 1));
+      });
+      root.querySelectorAll("[data-next]").forEach((button) => {
+        button.addEventListener("click", () => goTo(index + 1));
+      });
+      root.querySelectorAll("[data-goto]").forEach((control) => {
+        control.addEventListener("click", () => goTo(Number(control.dataset.goto)));
+      });
+
+      if (root.hasAttribute("data-keyboard")) {
+        root.addEventListener("keydown", (event) => {
+          const back = vertical ? "ArrowUp" : "ArrowLeft";
+          const forward = vertical ? "ArrowDown" : "ArrowRight";
+          if (event.key === back) {
+            event.preventDefault();
+            goTo(index - 1);
+          } else if (event.key === forward) {
+            event.preventDefault();
+            goTo(index + 1);
+          }
+        });
+      }
+
+      if (root.hasAttribute("data-draggable")) {
+        let dragging = false;
+        let startPoint = 0;
+        let startOffset = 0;
+        let delta = 0;
+
+        viewport.addEventListener("dragstart", (event) => event.preventDefault());
+
+        viewport.addEventListener("pointerdown", (event) => {
+          delta = 0;
+          if (event.target.closest("[data-prev], [data-next], .story-progress")) {
+            return;
+          }
+          dragging = true;
+          startPoint = vertical ? event.clientY : event.clientX;
+          startOffset = positionFor(index);
+          viewport.classList.add("is-dragging");
+          viewport.setPointerCapture(event.pointerId);
+        });
+
+        viewport.addEventListener("pointermove", (event) => {
+          if (!dragging) {
+            return;
+          }
+          delta = (vertical ? event.clientY : event.clientX) - startPoint;
+          apply(startOffset - delta, false);
+        });
+
+        const endDrag = (event) => {
+          if (!dragging) {
+            return;
+          }
+          dragging = false;
+          viewport.classList.remove("is-dragging");
+          if (viewport.hasPointerCapture(event.pointerId)) {
+            viewport.releasePointerCapture(event.pointerId);
+          }
+          if (Math.abs(delta) > 40) {
+            const steps = Math.max(1, Math.round(Math.abs(delta) / Math.max(1, slideSize(slides[index]))));
+            goTo(index + (delta < 0 ? steps : -steps));
+          } else {
+            goTo(index);
+          }
+        };
+
+        viewport.addEventListener("pointerup", endDrag);
+        viewport.addEventListener("pointercancel", endDrag);
+
+        viewport.addEventListener("click", (event) => {
+          if (Math.abs(delta) > 5) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }, true);
+      }
+
+      window.addEventListener("resize", () => goTo(index, false));
+      goTo(index, false);
+    };
+
+    document.querySelectorAll("[data-carousel]").forEach(initCarousel);
+
+    document.querySelectorAll("a[href='#']").forEach((link) => {
+      link.addEventListener("click", (event) => event.preventDefault());
+    });
+  </script>
+</body>
+</html>
