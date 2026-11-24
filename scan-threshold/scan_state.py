@@ -68,6 +68,19 @@ NONLICENSED = """<!DOCTYPE html>
 </html>
 """
 
+# Passes the crawl (desktop browser, 1366px) but hangs in the page scan's mobile pass (390px),
+# so the page is queued and then fails with a time-out. Only page-scan failures lower coverage:
+# crawl failures (404, 5xx…) are not counted in the AC-2997 success rate.
+MOBILEHANG = """<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile hang page</title>
+<script>if (window.innerWidth < 700) { while (true) {} }</script>
+</head>
+<body><main><h1>Loads on desktop, hangs on mobile</h1><p>AC-2997 page-scan failure.</p></main></body>
+</html>
+"""
+
 # Empty content is only a failure when the aflwScannerEmptyContentFailure flag is on.
 EMPTY = """<!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><title></title></head><body></body></html>
@@ -108,7 +121,7 @@ def baseline():
     print(f"Baseline: all {CHILDREN + 1} pool pages load. Push, then run an audit.")
 
 
-def brk(total, rate, timeout, nonlicensed, empty):
+def brk(total, rate, timeout, nonlicensed, empty, kind):
     success = round(total * rate / 100)
     fail = total - success
     special = timeout + nonlicensed + empty
@@ -118,16 +131,17 @@ def brk(total, rate, timeout, nonlicensed, empty):
         raise SystemExit(f"--timeout/--nonlicensed/--empty add up to {special}, more than the {fail} failed pages.")
     baseline_quiet()
     kinds = ["timeout"] * timeout + ["nonlicensed"] * nonlicensed + ["empty"] * empty
-    kinds += ["notfound"] * (fail - special)
+    kinds += [kind] * (fail - special)
     # Break from the end of the pool so page-001… stay good.
     for n, kind in zip(range(CHILDREN, 0, -1), kinds):
         if kind == "notfound":
             os.remove(page_path(n))
         else:
-            write(page_path(n), {"timeout": TIMEOUT, "nonlicensed": NONLICENSED, "empty": EMPTY}[kind])
+            write(page_path(n), {"timeout": TIMEOUT, "nonlicensed": NONLICENSED, "empty": EMPTY,
+                                 "mobilehang": MOBILEHANG}[kind])
     tier = "Full" if rate >= 80 else "Partial" if rate >= 50 else "Failed"
     print(f"Break: {fail} of {total} pages fail -> {success}/{total} = {success / total:.2%} -> expected {tier}.")
-    print(f"  404: {fail - special}, time-out: {timeout}, non-licensed: {nonlicensed}, empty: {empty}")
+    print(f"  {kind}: {fail - special}, time-out: {timeout}, non-licensed: {nonlicensed}, empty: {empty}")
     print("Push, then run the audit again.")
 
 
@@ -139,14 +153,15 @@ def baseline_quiet():
 
 
 def status():
-    counts = {"good": 0, "notfound": 0, "timeout": 0, "nonlicensed": 0, "empty": 0}
+    counts = {"good": 0, "notfound": 0, "mobilehang": 0, "timeout": 0, "nonlicensed": 0, "empty": 0}
     for n in range(1, CHILDREN + 1):
         p = page_path(n)
         if not os.path.exists(p):
             counts["notfound"] += 1
             continue
         body = open(p).read()
-        kind = ("timeout" if body == TIMEOUT else "nonlicensed" if body == NONLICENSED
+        kind = ("timeout" if body == TIMEOUT else "mobilehang" if body == MOBILEHANG
+                else "nonlicensed" if body == NONLICENSED
                 else "empty" if body == EMPTY else "good")
         counts[kind] += 1
     print(counts)
@@ -163,10 +178,12 @@ if __name__ == "__main__":
     b.add_argument("--timeout", type=int, default=0)
     b.add_argument("--nonlicensed", type=int, default=0)
     b.add_argument("--empty", type=int, default=0)
+    b.add_argument("--kind", choices=["mobilehang", "notfound"], default="mobilehang",
+                   help="how the bulk of pages fail; mobilehang counts in the success rate, notfound does not")
     a = ap.parse_args()
     if a.cmd == "baseline":
         baseline()
     elif a.cmd == "status":
         status()
     else:
-        brk(a.total, a.rate, a.timeout, a.nonlicensed, a.empty)
+        brk(a.total, a.rate, a.timeout, a.nonlicensed, a.empty, a.kind)

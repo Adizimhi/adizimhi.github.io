@@ -21,7 +21,10 @@ A URL that fails the first time the crawler sees it is dropped (that's why the `
 | Failed, just under 50% | `break --total 400 --rate 49.75` (201 fail) | Failed |
 | Failed with reasons | `break --total 400 --rate 40 --timeout 5 --nonlicensed 5 --empty 5` | Failed + reason list |
 
-Broken pages are 404 by default (most reliable). Extra reasons:
+Broken pages are **mobilehang** by default: they load for the crawler (desktop, 1366px) and hang in the
+page scan's mobile pass (390px) -> time-out. Only page-scan failures lower the AC-2997 success rate;
+crawl failures such as 404/5xx are excluded (`finalize.ts`: "a crawl failure ... costs no coverage").
+Use `--kind notfound` for 404s instead (they show in Errors detected but don't change the rate). Extra reasons:
 - `--timeout`: page never finishes loading (each one costs about 60s of audit time).
 - `--nonlicensed`: page redirects to example.com.
 - `--empty`: only counted when the `aflwScannerEmptyContentFailure` flag is on.
