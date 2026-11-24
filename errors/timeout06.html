@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timeout 06</title>
+</head>
+<body>
+<h1>Timeout</h1>
+<script>
+var start = Date.now();
+while (Date.now() - start < 600000) { Math.sqrt(Math.random()); }
+</script>
+</body>
+</html>
