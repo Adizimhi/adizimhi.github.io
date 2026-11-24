@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scan Error Scenarios</title>
+<style>body{font-family:Arial,sans-serif;margin:24px}section{margin-bottom:24px}</style>
+</head>
+<body>
+<main>
+  <h1>Scan Error Scenarios</h1>
+  <p><a href="../index.html">Back to Rule Library</a></p>
+  <p>60 pages that should fail to scan, used to test partial-scan thresholds.</p>
+  <section>
+    <h2>404 - Page not found (16)</h2>
+    <p>Links to pages that do not exist on the server. GitHub Pages answers with a real HTTP 404.</p>
+    <ul>
+      <li><a href="notFound01.html">Missing page 01</a></li>
+      <li><a href="notFound02.html">Missing page 02</a></li>
+      <li><a href="notFound03.html">Missing page 03</a></li>
+      <li><a href="notFound04.html">Missing page 04</a></li>
+      <li><a href="notFound05.html">Missing page 05</a></li>
+      <li><a href="notFound06.html">Missing page 06</a></li>
+      <li><a href="notFound07.html">Missing page 07</a></li>
+      <li><a href="notFound08.html">Missing page 08</a></li>
+      <li><a href="notFound09.html">Missing page 09</a></li>
+      <li><a href="notFound10.html">Missing page 10</a></li>
+      <li><a href="notFound11.html">Missing page 11</a></li>
+      <li><a href="notFound12.html">Missing page 12</a></li>
+      <li><a href="notFound13.html">Missing page 13</a></li>
+      <li><a href="notFound14.html">Missing page 14</a></li>
+      <li><a href="notFound15.html">Missing page 15</a></li>
+      <li><a href="notFound16.html">Missing page 16</a></li>
+    </ul>
+  </section>
+  <section>
+    <h2>Empty content (10)</h2>
+    <p>Pages that return HTTP 200 with no content: zero-byte files and documents with an empty body.</p>
+    <ul>
+      <li><a href="emptyFile01.html">Zero-byte file 01</a></li>
+      <li><a href="emptyFile02.html">Zero-byte file 02</a></li>
+      <li><a href="emptyFile03.html">Zero-byte file 03</a></li>
+      <li><a href="emptyFile04.html">Zero-byte file 04</a></li>
+      <li><a href="emptyFile05.html">Zero-byte file 05</a></li>
+      <li><a href="emptyBody01.html">Empty body 01</a></li>
+      <li><a href="emptyBody02.html">Empty body 02</a></li>
+      <li><a href="emptyBody03.html">Empty body 03</a></li>
+      <li><a href="emptyBody04.html">Empty body 04</a></li>
+      <li><a href="emptyBody05.html">Empty body 05</a></li>
+    </ul>
+  </section>
+  <section>
+    <h2>Redirect inside the page (8)</h2>
+    <p>Pages that send the browser to another page of this site with a meta refresh or JavaScript, not a server redirect.</p>
+    <ul>
+      <li><a href="redirectInternal01.html">In-page redirect 01 (meta)</a></li>
+      <li><a href="redirectInternal02.html">In-page redirect 02 (js-replace)</a></li>
+      <li><a href="redirectInternal03.html">In-page redirect 03 (js-href)</a></li>
+      <li><a href="redirectInternal04.html">In-page redirect 04 (meta-delay)</a></li>
+      <li><a href="redirectInternal05.html">In-page redirect 05 (js-assign)</a></li>
+      <li><a href="redirectInternal06.html">In-page redirect 06 (js-delay)</a></li>
+      <li><a href="redirectInternal07.html">In-page redirect 07 (meta)</a></li>
+      <li><a href="redirectInternal08.html">In-page redirect 08 (js-replace)</a></li>
+    </ul>
+  </section>
+  <section>
+    <h2>Non-licensed domain (10)</h2>
+    <p>Pages that redirect (meta refresh or JavaScript) to a different domain that is not licensed for scanning.</p>
+    <ul>
+      <li><a href="nonLicensedDomain01.html">Redirect to other domain 01</a></li>
+      <li><a href="nonLicensedDomain02.html">Redirect to other domain 02</a></li>
+      <li><a href="nonLicensedDomain03.html">Redirect to other domain 03</a></li>
+      <li><a href="nonLicensedDomain04.html">Redirect to other domain 04</a></li>
+      <li><a href="nonLicensedDomain05.html">Redirect to other domain 05</a></li>
+      <li><a href="nonLicensedDomain06.html">Redirect to other domain 06</a></li>
+      <li><a href="nonLicensedDomain07.html">Redirect to other domain 07</a></li>
+      <li><a href="nonLicensedDomain08.html">Redirect to other domain 08</a></li>
+      <li><a href="nonLicensedDomain09.html">Redirect to other domain 09</a></li>
+      <li><a href="nonLicensedDomain10.html">Redirect to other domain 10</a></li>
+    </ul>
+  </section>
+  <section>
+    <h2>Invalid domain (10)</h2>
+    <p>Pages that redirect to domains that can never resolve in DNS (the reserved .invalid top-level domain).</p>
+    <ul>
+      <li><a href="invalidDomain01.html">Redirect to unresolvable domain 01</a></li>
+      <li><a href="invalidDomain02.html">Redirect to unresolvable domain 02</a></li>
+      <li><a href="invalidDomain03.html">Redirect to unresolvable domain 03</a></li>
+      <li><a href="invalidDomain04.html">Redirect to unresolvable domain 04</a></li>
+      <li><a href="invalidDomain05.html">Redirect to unresolvable domain 05</a></li>
+      <li><a href="invalidDomain06.html">Redirect to unresolvable domain 06</a></li>
+      <li><a href="invalidDomain07.html">Redirect to unresolvable domain 07</a></li>
+      <li><a href="invalidDomain08.html">Redirect to unresolvable domain 08</a></li>
+      <li><a href="invalidDomain09.html">Redirect to unresolvable domain 09</a></li>
+      <li><a href="invalidDomain10.html">Redirect to unresolvable domain 10</a></li>
+    </ul>
+  </section>
+  <section>
+    <h2>Time-out (6)</h2>
+    <p>Pages that never finish loading: blocked main thread or requests to an address that never answers.</p>
+    <ul>
+      <li><a href="timeout01.html">Timeout 01: Infinite loop in head</a></li>
+      <li><a href="timeout02.html">Timeout 02: Infinite loop after load</a></li>
+      <li><a href="timeout03.html">Timeout 03: Blocking script from unreachable host</a></li>
+      <li><a href="timeout04.html">Timeout 04: Stylesheet from unreachable host</a></li>
+      <li><a href="timeout05.html">Timeout 05: Endless network requests</a></li>
+      <li><a href="timeout06.html">Timeout 06: Endless synchronous work</a></li>
+    </ul>
+  </section>
+</main>
+</body>
+</html>
