@@ -6,10 +6,10 @@
 <title>Timeout 05</title>
 </head>
 <body>
-<h1>Timeout</h1>
-<script>
-function poll() { fetch("https://10.255.255.1/poll?" + Date.now()).catch(function () {}).finally(function () { setTimeout(poll, 50); }); }
-for (var i = 0; i < 6; i++) { poll(); }
-</script>
+<main>
+<h1>Timeout 05</h1>
+<p>This page is part of the scan error scenario set. It currently loads normally.</p>
+<p><a href="index.html">Back to Scan Error Scenarios</a></p>
+</main>
 </body>
 </html>
